@@ -1,4 +1,4 @@
-package com.codeHub;
+package com.codeHub.configs;
 
 import javax.jms.ConnectionFactory;
 

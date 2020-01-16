@@ -1,4 +1,4 @@
-package com.codeHub;
+package com.codeHub.configs;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

@@ -1,7 +1,8 @@
-package com.codeHub.configuration;
+package com.codeHub.configs;
 
 //import com.rabbitmq.client.ConnectionFactory;
 
+import com.codeHub.service.AOConsumer;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -101,10 +102,10 @@ public class RabbitMqConfig {
         return aoContainer;
     }
 
-//    @Bean
-//    MessageListenerAdapter aoListenerAdapter(AOConsumer aoConsumer) {
-//        return new MessageListenerAdapter(aoConsumer, "processAO");
-//    }
+    @Bean
+    MessageListenerAdapter aoListenerAdapter(AOConsumer aoConsumer) {
+        return new MessageListenerAdapter(aoConsumer, "processAO");
+    }
 //
 //    @Bean
 //    MessageListenerAdapter incentivesListenerAdapter(IncentivesConsumerWorker incentivesConsumer) {

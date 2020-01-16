@@ -1,4 +1,4 @@
-package com.codeHub.configuration;
+package com.codeHub.configs;
 
 import java.io.File;
 import java.io.FileWriter;

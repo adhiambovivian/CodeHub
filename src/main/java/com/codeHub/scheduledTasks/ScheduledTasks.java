@@ -1,6 +1,6 @@
 package com.codeHub.scheduledTasks;
 
-import com.codeHub.IncentiveAccount;
+import com.codeHub.models.IncentiveAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

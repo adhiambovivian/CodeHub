@@ -1,6 +1,7 @@
-package com.codeHub;
+package com.codeHub.configuration;
 
 //import com.rabbitmq.client.ConnectionFactory;
+
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -41,10 +42,11 @@ public class RabbitMqConfig {
 
     @Bean
     Queue aoQueue() {
-        Map<String,Object> args = new HashMap<>();
-        args.put("x-max-priority",10);
-        return new Queue(queueName,true,false,false,args);
+        Map<String, Object> args = new HashMap<>();
+        args.put("x-max-priority", 10);
+        return new Queue(queueName, true, false, false, args);
     }
+
     @Bean
     TopicExchange aoExchange() {
         return new TopicExchange(queueName);
@@ -54,7 +56,8 @@ public class RabbitMqConfig {
     Binding aoBinding(Queue aoQueue, TopicExchange aoExchange) {
         return BindingBuilder.bind(aoQueue).to(aoExchange).with(queueName);
     }
-//    @Bean
+
+    //    @Bean
 //    public ConnectionFactory rabbitConnectionFactory() {
 //        CachingConnectionFactory cachingConnectionFactory = new CachingConnectionFactory(host);
 //        cachingConnectionFactory.setUsername(username);
@@ -73,7 +76,7 @@ public class RabbitMqConfig {
         return cachingConnectionFactory;
     }
 
-//    @Bean
+    //    @Bean
 //    SimpleMessageListenerContainer incentivesContainer(ConnectionFactory connectionFactory,
 //                                                       MessageListenerAdapter incentivesListenerAdapter) {
 //        SimpleMessageListenerContainer incentivesContainer = new SimpleMessageListenerContainer();
@@ -87,7 +90,7 @@ public class RabbitMqConfig {
 //    }
     @Bean
     SimpleMessageListenerContainer aoContainer(ConnectionFactory connectionFactory,
-                                                       MessageListenerAdapter aoListenerAdapter) {
+                                               MessageListenerAdapter aoListenerAdapter) {
         SimpleMessageListenerContainer aoContainer = new SimpleMessageListenerContainer();
         aoContainer.setConnectionFactory(connectionFactory);
         aoContainer.setQueueNames(queueName);
@@ -97,10 +100,11 @@ public class RabbitMqConfig {
         aoContainer.setAcknowledgeMode(AcknowledgeMode.AUTO);
         return aoContainer;
     }
-    @Bean
-    MessageListenerAdapter aoListenerAdapter(AOConsumer aoConsumer) {
-        return new MessageListenerAdapter(aoConsumer, "processAO");
-    }
+
+//    @Bean
+//    MessageListenerAdapter aoListenerAdapter(AOConsumer aoConsumer) {
+//        return new MessageListenerAdapter(aoConsumer, "processAO");
+//    }
 //
 //    @Bean
 //    MessageListenerAdapter incentivesListenerAdapter(IncentivesConsumerWorker incentivesConsumer) {

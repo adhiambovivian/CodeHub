@@ -1,4 +1,4 @@
-package com.codeHub;
+package com.codeHub.service;
 
 
     import java.net.HttpURLConnection;

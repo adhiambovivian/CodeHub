@@ -1,4 +1,4 @@
-package com.codeHub;
+package com.codeHub.models;
 
 
         import java.io.Serializable;

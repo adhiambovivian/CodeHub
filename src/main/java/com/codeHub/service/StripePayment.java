@@ -1,4 +1,4 @@
-package com.codeHub;
+package com.codeHub.service;
 
 import com.stripe.Stripe;
 import com.stripe.exception.*;
@@ -18,7 +18,7 @@ public class StripePayment {
         Map<String, Object> chargeParams = new HashMap<String, Object>();
         chargeParams.put("amount", 25000);//convert dollars to cents
         chargeParams.put("currency", "usd");
-        chargeParams.put("description", "adhiambo.vivian@gmail.com");//users email
+        chargeParams.put("description", "balkari@gmail.com");//users email
         chargeParams.put("source", token);
         Charge charge = Charge.create(chargeParams, requestOptions);
         System.out.println("Stripe" + charge);
@@ -34,10 +34,10 @@ public class StripePayment {
             cardParams.put("exp_month", 9);
             cardParams.put("exp_year", 2018);
             cardParams.put("cvc", "314");
-            cardParams.put("name","Adhiambo Vivian");
+            cardParams.put("name","Smith Balkari");
             cardParams.put("address_city","Nairobi");
             cardParams.put("address_country","Kenya");
-            cardParams.put("address_line1","707 Muchai Drive");
+            cardParams.put("address_line1","9992 NRB");
             tokenParams.put("card", cardParams);
 
 

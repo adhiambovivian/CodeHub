@@ -1,4 +1,6 @@
-package com.codeHub;
+package com.codeHub.models;
+
+import com.codeHub.Meta;
 
 public class Participant {
     private String commId;

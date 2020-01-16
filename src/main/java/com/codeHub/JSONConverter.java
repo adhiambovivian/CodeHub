@@ -5,7 +5,8 @@ import java.lang.reflect.Type;
         import java.util.stream.Collectors;
         import java.util.stream.Stream;
 
-        import com.google.gson.Gson;
+import com.codeHub.models.Person;
+import com.google.gson.Gson;
         import com.google.gson.GsonBuilder;
         import com.google.gson.reflect.TypeToken;
 

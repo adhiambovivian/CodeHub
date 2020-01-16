@@ -1,5 +1,6 @@
 package com.codeHub;
 
+import com.codeHub.models.Blacklist;
 import org.boon.json.JsonFactory;
 import org.boon.json.ObjectMapper;
 

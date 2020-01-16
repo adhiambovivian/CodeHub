@@ -1,4 +1,4 @@
-package com.codeHub;
+package com.codeHub.service;
 
 import com.sun.mail.gimap.GmailFolder;
 import com.sun.mail.gimap.GmailRawSearchTerm;

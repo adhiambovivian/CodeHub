@@ -1,5 +1,6 @@
 package com.codeHub;
 
+import com.codeHub.models.Participant;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;

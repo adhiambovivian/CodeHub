@@ -21,7 +21,7 @@ import java.util.HashMap;
 
 @RestController
 @RequestMapping("/v1")
-public class Controller {
+public class DownloadController {
 
 
     @RequestMapping(path="/download",method = RequestMethod.GET)

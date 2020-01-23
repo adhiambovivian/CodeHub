@@ -1,4 +1,4 @@
-package com.codeHub;
+package com.codeHub.utils;
 
 import java.util.Date;
 

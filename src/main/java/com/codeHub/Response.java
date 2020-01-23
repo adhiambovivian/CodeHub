@@ -1,5 +1,7 @@
 package com.codeHub;
 
+import com.codeHub.utils.Metadata;
+
 public class Response {
 private Data data;
 private Metadata metadata;

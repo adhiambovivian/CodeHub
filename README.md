@@ -1,5 +1,5 @@
 # CodeHub
-<<<<<<< HEAD
+
 export PATH=$PATH:/opt/apache-maven/bin
 
 Pre-requisites

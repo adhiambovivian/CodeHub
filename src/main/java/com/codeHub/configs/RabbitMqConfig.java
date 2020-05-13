@@ -8,6 +8,7 @@ import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,12 +20,13 @@ import java.util.Map;
 @EnableAutoConfiguration
 public class RabbitMqConfig {
 
-    private static final String queueName = "AO";
-    private static final String username = "vivian";
-    private static final String password = "vivian2020";
-    private static final String virtualHost = "/";
-    private static final int port = 5672;
-    private static final String host = "127.0.0.1";
+
+    private   @Value("${rabbitmq.queue}") String queueName;
+    private static  @Value("${rabbitmq.username}") String username;
+    private static  @Value("${rabbitmq.password}") String password;
+    private static  @Value("${rabbitmq.virtual-host}") String virtualHost;
+    private static  @Value("${rabbitmq.port}") int port;
+    private static  @Value("${rabbitmq.host}") String host;
 
 //    @Bean
 //    Queue incentivesQueue() {

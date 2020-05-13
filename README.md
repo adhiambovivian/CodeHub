@@ -15,3 +15,5 @@ docker run -d --hostname my-rabbit --name rammitmq -p 15672:15672 -p 5672:5672 r
 
 #install solr
 docker run -p 8983:8983 -t solr
+
+docker exec -it --user=solr <container-id> bin/solr create_core -c participants

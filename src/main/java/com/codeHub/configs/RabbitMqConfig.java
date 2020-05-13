@@ -22,11 +22,11 @@ public class RabbitMqConfig {
 
 
     private   @Value("${rabbitmq.queue}") String queueName;
-    private static  @Value("${rabbitmq.username}") String username;
-    private static  @Value("${rabbitmq.password}") String password;
-    private static  @Value("${rabbitmq.virtual-host}") String virtualHost;
-    private static  @Value("${rabbitmq.port}") int port;
-    private static  @Value("${rabbitmq.host}") String host;
+    private   @Value("${rabbitmq.username}") String username;
+    private   @Value("${rabbitmq.password}") String password;
+    private   @Value("${rabbitmq.virtual-host}") String virtualHost;
+    private   @Value("${rabbitmq.port}") int port;
+    private   @Value("${rabbitmq.host}") String host;
 
 //    @Bean
 //    Queue incentivesQueue() {

@@ -1,7 +1,9 @@
 package com.codeHub.service;
 
-class Coder{
-    public static void minor(String args[]){
+import java.sql.SQLSyntaxErrorException;
+
+public class Coder{
+    public static void minor(){
 
         Class c=Coder.class;
         System.out.println(c.getClassLoader());
@@ -10,7 +12,6 @@ class Coder{
  */
         System.out.println(11>>3);//11/2^3=11/8=1
         System.out.println(20>>2);//20/4=5
-        System.out.println("####\t"+args[0]);
 
 //Left Shift operator
         System.out.println(15<<4);//15*2^4=15/16=240
@@ -36,6 +37,8 @@ class Coder{
 
 //StringBuffer
 
+        StringBuffer sb=new StringBuffer("wow such a sunny");
+        System.out.println(sb.append(" morning"));
 
 
     }

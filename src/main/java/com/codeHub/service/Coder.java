@@ -1,6 +1,10 @@
 package com.codeHub.service;
 
+import org.boon.Str;
+import org.boon.core.Sys;
+
 import java.sql.SQLSyntaxErrorException;
+import java.util.StringTokenizer;
 
 public class Coder{
     public static void minor(){
@@ -37,9 +41,77 @@ public class Coder{
 
 //StringBuffer
 
-        StringBuffer sb=new StringBuffer("wow such a sunny");
-        System.out.println(sb.append(" morning"));
+        StringBuffer sb=new StringBuffer("wow");
+        System.out.println(sb.append(""));
+
+    //insert()
+//        sb.insert(1,"wow ");
+//        sb.replace(1,3,"Nice");
+//        sb.delete(1,3);
+        sb.reverse();
+
+        System.out.println(sb);
+        Coder.compareStringConcatPerformance();
+        stringTokenizing();
+        stringBytes();
+
+        String schinese="ni3好你好";
+                //"hao3,  你好,  感feeling,  愛,  子hao, shànghǎi,  ni3好";
+        System.out.println("No xters in chinese word: "+schinese+" "+schinese.length());
 
 
+
+    }
+
+    public static String concatWithString(){
+        String st="vivian";
+        for(int i=0;i<10000;i++){
+            st=st+"Adhiambo9";
+        }
+        return st;
+    }
+
+    public static String concatWithStringBuffer(){
+        StringBuffer sb=new StringBuffer("vivian");
+        for(int i=0;i<10000;i++){
+            sb.append("Adhiambo6");
+        }
+        return sb.toString();
+    }
+
+    public static String concatWithStringBuilder(){
+        StringBuilder sb=new StringBuilder("vivian");
+        for(int i=0;i<10000;i++){
+            sb.append("Adhiambo7");
+        }
+        return sb.toString();
+    }
+
+    public static void compareStringConcatPerformance(){
+        long startTime=System.currentTimeMillis();
+        concatWithString();
+        System.out.println("TT by concat with String: "+(System.currentTimeMillis()-startTime));
+
+        startTime=System.currentTimeMillis();
+        concatWithStringBuffer();
+        System.out.println("TT by concat with StringBuffer: "+(System.currentTimeMillis()-startTime));
+
+        startTime=System.currentTimeMillis();
+        concatWithStringBuilder();
+        System.out.println("TT by concat with StringBuilder: "+(System.currentTimeMillis()-startTime));
+
+    }
+
+    public static void stringTokenizing(){
+        StringTokenizer st=new StringTokenizer("my name is ule yule, I can dance"," ");
+        System.out.println("Next token: "+st.nextToken(","));
+
+    }
+
+    public static void stringBytes(){
+        String s1="ABCDEFG01234569";
+        byte[] by=s1.getBytes();
+        for(int i=0;i<by.length;i++)
+            System.out.println(by[i]);
     }
 }

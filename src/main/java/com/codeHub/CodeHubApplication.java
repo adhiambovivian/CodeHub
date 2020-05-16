@@ -1,14 +1,28 @@
 package com.codeHub;
 
+import com.codeHub.configs.JedisEx;
+import com.codeHub.configs.RabbitMqConfig;
+import com.codeHub.service.Coder;
+import com.codeHub.service.EmailAttachment;
+import com.codeHub.service.ExcutorService;
+import com.codeHub.service.StripePayment;
 import com.stripe.exception.*;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.http.*;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.Year;
+import java.util.Calendar;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @SpringBootApplication
@@ -22,120 +36,112 @@ public class CodeHubApplication {
 
 	{
 		SpringApplication.run(CodeHubApplication.class, args);
-		
-		//ExcutorService.listUrls();
 
+		/**
+		 * Threads
+		 */
+/*
+		ExcutorService.listUrls();
 
-		//Get method name using current thread
-		//System.out.println("Method name1 "+Thread.currentThread().getStackTrace()[1].getMethodName());
-		//StackTraceElement stackTraceElement[]=(new Throwable()).getStackTrace();
-		//System.out.println("Method name2 "+stackTraceElement[0].getMethodName());
-		//System.out.println("Method name3 "+new UploadFileApplication(){}.getClass().getEnclosingMethod().getName());
+//		Get method name using current thread
+		System.out.println("Method name1 "+Thread.currentThread().getStackTrace()[1].getMethodName());
+		StackTraceElement stackTraceElement[]=(new Throwable()).getStackTrace();
+		System.out.println("Method name2 "+stackTraceElement[0].getMethodName());
+		System.out.println("Method name3 "+new CodeHubApplication(){}.getClass().getEnclosingMethod().getName());
+
+ */
 
 
 		/**
 		 * Runs this program with Gmail POP3 server
 		 */
 
+/*
+		String userName = "social.impact.acumen@gmail.com";
+		String password = "acumen2016";//
+		String saveDirectory = "/home/adhiambo/";//
+		EmailAttachment receiver = new EmailAttachment();
+		receiver.setSaveDirectory(saveDirectory);
+		receiver.downloadEmailAttachments(userName, password);
 
-//		String userName = "social.impact.acumen@gmail.com";
-//		String password = "acumen2016";//
-//		String saveDirectory = "/home/adhiambo/";//
-//		EmailAttachment receiver = new EmailAttachment();
-//		receiver.setSaveDirectory(saveDirectory);
-//		receiver.downloadEmailAttachments(userName, password);
+ */
 
-		//RandomStringUtils.randomAlphanumeric(20).toUpperCase();
-		//String vivian = Long.toHexString(Double.doubleToLongBits(Math.random()));
-		//System.out.println("vivian "+vivian);
-		//UUID uniqueKey = UUID.randomUUID();
-		//System.out.println("UUD "+uniqueKey);
-		//System.out.println(randomUUID(9,0,'a'));
-
-		//StripePayment.createCharge(StripePayment.createToken());
-
-		//Object key=233;
-		//long clientId = ((Number) key).longValue();
-		//System.out.println(clientId);
-
-//		int year = Calendar.getInstance().get(Calendar.YEAR);
-//		System.out.println("Cal YEAR::"+year);
-//		System.out.println("Java 8:Year:: "+ Year.now().getValue());
-
-//		String s="Success-Your survey has been scheduled suceessfuly.";
-//				String[] ss=s.split("-");
-//				for(String i:ss){
-//					System.out.println("####"+i);
-//				}
-
-		//LocalDateTime date=LocalDateTime.now();
-		//System.out.println(date.toString());
+		/**
+		 * UUIDs
+		 */
+		/*
+		RandomStringUtils.randomAlphanumeric(20).toUpperCase();
+		String vivian = Long.toHexString(Double.doubleToLongBits(Math.random()));
+		System.out.println("vivian "+vivian);
+		UUID uniqueKey = UUID.randomUUID();
+		System.out.println("UUD "+uniqueKey);
+		System.out.println(UUID.randomUUID(9,0,'a'));
+		*/
 
 
+		/**
+		 * Stripe
+		 */
+//		StripePayment.createCharge(StripePayment.createToken());
+
+		/**
+		 * Type casting
+		 */
+		/*
+		Object key=233;
+		long clientId = ((Number) key).longValue();
+		System.out.println(clientId);
+
+		 */
+
+		/**
+		 * Dates
+		 */
+		/*
+		int year = Calendar.getInstance().get(Calendar.YEAR);
+		System.out.println("Cal YEAR::"+year);
+		System.out.println("Java 8:Year:: "+ Year.now().getValue());
+
+		String s="Success-Your survey has been scheduled suceessfuly.";
+				String[] ss=s.split("-");
+				for(String i:ss){
+					System.out.println("####"+i);
+				}
+
+		LocalDateTime date=LocalDateTime.now();
+		System.out.println(date.toString());
+
+		 */
 
 
 
-
-//		for (int i=0;i<20;i++){
-//			new Thread(new Runnable() {
-//				@Override
-//				public void run() {
-//					synchronized (UploadFileApplication.class) {
-//						data = new Random().nextInt();
-//						System.out.println(Thread.currentThread().getName() + " Gen data: " + data);
-//					}
-//				}
-//			}).start();
-//		}
-//
-//		String [] tasks={"one","two","three","one","two"};
-//		for (int i =0;i< tasks.length;i++) {
-//			if (tasks[i].equalsIgnoreCase("one")) {
-//				System.out.println(Thread.currentThread().getName() + "One");
-//			} else if (tasks[i].equalsIgnoreCase("two")) {
-//				new Thread(() -> {
-//					System.out.println(Thread.currentThread().getName() + "two:: am the sleeping thread");
-//					try {
-//						Thread.sleep(20000);
-//						System.out.println("Done sleeping. "+Thread.currentThread().getName());
-//					}catch (InterruptedException e){
-//						e.getStackTrace();
-//					}
-//				}).start();
-//
-//			} else if (tasks[i].equalsIgnoreCase("three")) {
-//				System.out.println(Thread.currentThread().getName() + "three");
-//			} else {
-//				System.out.println(Thread.currentThread().getName() + "None");
-//			}
-//		}
-//
-
-		//RestConsumer.sendSurvey();
-//		Threads threads=new Threads("Thread1");
-//		threads.start();
-//		Threads threads1=new Threads("Thread2");
-//		threads1.start();
+		/**
+		 * Rabbitmq , jmx, jedis
+		 */
+/*
 		long start = System.currentTimeMillis();
-//JMSProducer.trigger();
-//		EmailAttachment emailAttachment=new EmailAttachment();
-//		emailAttachment.setSaveDirectory("/home/adhiambo/data/businessNumber");
-//		emailAttachment.processEmailSearch();
+		JMSProducer.trigger();
+		EmailAttachment emailAttachment=new EmailAttachment();
+		emailAttachment.setSaveDirectory("/home/adhiambo/data/businessNumber");
+		emailAttachment.processEmailSearch();
 		System.out.println("Finished:: " + (System.currentTimeMillis() - start));
 
 
-		//ApplicationContext ctx = new AnnotationConfigApplicationContext(RabbitMqConfig.class);
-		//RabbitTemplate rabbitTemplate = ctx.getBean(RabbitTemplate.class);
-		//rabbitTemplate.convertAndSend("incentives", "Hello from RabbitMQ!");
+		ApplicationContext ctx = new AnnotationConfigApplicationContext(RabbitMqConfig.class);
+		RabbitTemplate rabbitTemplate = ctx.getBean(RabbitTemplate.class);
+		rabbitTemplate.convertAndSend("incentives", "Hello from RabbitMQ!");
 
-		//JedisEx main = new JedisEx();
-		//main.addSets();
-		//main.addHash();
-		//main.setHash();
+		JedisEx main = new JedisEx();
+		main.addSets();
+		main.addHash();
+		main.setHash();
 
+ */
+/**
+ * Resttemplate
+ */
 
-
-
+/*
 
 		final String url = "http://127.0.0.1:8983/solr/participants/select?fl=commId,surveyId,amountSpent&q=accountId:552&rows=-1&wt=csv";
 
@@ -165,7 +171,9 @@ public class CodeHubApplication {
 		writer.flush();
 		writer.close();
 		System.out.println("Failed count: "+failed);
+*/
 
+		Coder.minor();
 
 
 	}

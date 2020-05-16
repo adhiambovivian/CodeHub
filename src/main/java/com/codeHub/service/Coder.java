@@ -5,6 +5,7 @@ import org.boon.core.Sys;
 
 import java.sql.SQLSyntaxErrorException;
 import java.util.StringTokenizer;
+import java.util.regex.Pattern;
 
 public class Coder{
     public static void minor(){
@@ -58,7 +59,7 @@ public class Coder{
         String schinese="ni3好你好";
                 //"hao3,  你好,  感feeling,  愛,  子hao, shànghǎi,  ni3好";
         System.out.println("No xters in chinese word: "+schinese+" "+schinese.length());
-
+        patternMatching();
 
 
     }
@@ -113,5 +114,40 @@ public class Coder{
         byte[] by=s1.getBytes();
         for(int i=0;i<by.length;i++)
             System.out.println(by[i]);
+    }
+
+    public static void patternMatching(){
+        System.out.println(Pattern.matches("[amn]?","a"));//true (a or m comes one time
+        System.out.println(Pattern.matches("[amn]?","aaazzss"));//false (a comes one time
+        System.out.println(Pattern.matches("[amn]?","am"));//false (a or m or n must come one time
+
+        System.out.println(Pattern.matches("[amn]+","a"));//true (a or m or n once or more
+        System.out.println(Pattern.matches("[amn]+","aaa"));//true (a or m comes one time
+        System.out.println(Pattern.matches("[amn]+","aazzta"));//false (z and t are not matching
+
+        System.out.println(Pattern.matches("[amn]*","ammmmnna"));//true (a or m or n may come zero or more times
+
+        System.out.println(Pattern.matches("\\d", "abc"));//false (non-digit)
+        System.out.println(Pattern.matches("\\d", "1"));//true (digit an comes onces)
+        System.out.println(Pattern.matches("\\d", "4443"));//false (digit but comes more than once))
+        System.out.println(Pattern.matches("\\d", "123"));//false (single digit only)
+
+        System.out.println(Pattern.matches("\\D", "123"));//false (digits)
+        System.out.println(Pattern.matches("\\D*", "mak"));//true (non digit and may come 0 or more times)
+
+        System.out.println(Pattern.matches("[a-zA-Z0-9]{6}", "arun32"));//true
+        System.out.println(Pattern.matches("[a-zA-Z0-9]{6}", "kkvarun32"));//false (more than 6 char)
+
+        System.out.println(Pattern.matches("[789]{1}[0-9]{9}", "9953038949"));//true
+        System.out.println(Pattern.matches("[789][0-9]{9}", "6953038949"));//false (starts from 6)
+        System.out.println(Pattern.matches("[789]{1}\\d{9}", "3853038949"));//false (starts from 3)
+
+
+
+
+
+
+
+
     }
 }

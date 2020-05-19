@@ -3,6 +3,7 @@ package com.codeHub.service;
 import org.boon.Str;
 import org.boon.core.Sys;
 
+import java.io.IOException;
 import java.sql.SQLSyntaxErrorException;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
@@ -59,9 +60,20 @@ public class Coder{
         String schinese="ni3好你好";
                 //"hao3,  你好,  感feeling,  愛,  子hao, shànghǎi,  ni3好";
         System.out.println("No xters in chinese word: "+schinese+" "+schinese.length());
-        patternMatching();
+        //patternMatching();
+        toConsole();
 
 
+    }
+
+    public static void toConsole(){
+        try {
+            int i = System.in.read();//returns ASCII code of first character
+            System.out.println(i);
+            System.out.println((char) i);
+        }catch (IOException e){
+            System.err.println(e.getStackTrace());
+        }
     }
 
     public static String concatWithString(){

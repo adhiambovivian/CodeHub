@@ -4,6 +4,7 @@ import org.boon.Str;
 import org.boon.core.Sys;
 import org.springframework.beans.factory.annotation.Value;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLSyntaxErrorException;
@@ -11,7 +12,7 @@ import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
 public class Coder{
-    private static @Value("${files.location}") String fileLocation;
+    private  @Value("${files.location}") String fileLocation;
 
     public static void minor(){
 
@@ -66,7 +67,8 @@ public class Coder{
         System.out.println("No xters in chinese word: "+schinese+" "+schinese.length());
         //patternMatching();
         //toConsole();
-        writeFileOutputStream();
+        Coder coder=new Coder();
+        coder.writeFileInputOutputStream();
 
 
     }
@@ -165,16 +167,24 @@ public class Coder{
     /**
      * FileOutputStream
      */
-    public static void writeFileOutputStream(){
+    public  void writeFileInputOutputStream(){
         try{
-            String words="This is a very talented person";
-            String fileName=fileLocation+"fostream.txt";
-            FileOutputStream fileOutputStream=new FileOutputStream(fileName);
-            fileOutputStream.write(words.getBytes());
+            String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
+            System.out.println(filePath);
+            FileInputStream fileInputStream=new FileInputStream(filePath+"final.txt");
+            FileOutputStream fileOutputStream=new FileOutputStream(filePath+"ouput.txt");
+
+            int data=0;
+            while((data=fileInputStream.read())!=-1) {
+                fileOutputStream.write(((char)data));
+            }
+            fileInputStream.close();
             fileOutputStream.close();
-            System.out.println("Finito "+fileOutputStream.toString());
+
         }catch (IOException e){
-            System.out.println("sth went wrong\t"+e.getStackTrace());
+            System.out.println("sth went wrong"+e.getMessage()+" "+e.getStackTrace());
+        }finally {
+
         }
     }
 }

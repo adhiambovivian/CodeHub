@@ -2,13 +2,17 @@ package com.codeHub.service;
 
 import org.boon.Str;
 import org.boon.core.Sys;
+import org.springframework.beans.factory.annotation.Value;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLSyntaxErrorException;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
 public class Coder{
+    private static @Value("${files.location}") String fileLocation;
+
     public static void minor(){
 
         Class c=Coder.class;
@@ -61,7 +65,8 @@ public class Coder{
                 //"hao3,  你好,  感feeling,  愛,  子hao, shànghǎi,  ni3好";
         System.out.println("No xters in chinese word: "+schinese+" "+schinese.length());
         //patternMatching();
-        toConsole();
+        //toConsole();
+        writeFileOutputStream();
 
 
     }
@@ -155,11 +160,21 @@ public class Coder{
         System.out.println(Pattern.matches("[789]{1}\\d{9}", "3853038949"));//false (starts from 3)
 
 
+    }
 
-
-
-
-
-
+    /**
+     * FileOutputStream
+     */
+    public static void writeFileOutputStream(){
+        try{
+            String words="This is a very talented person";
+            String fileName=fileLocation+"fostream.txt";
+            FileOutputStream fileOutputStream=new FileOutputStream(fileName);
+            fileOutputStream.write(words.getBytes());
+            fileOutputStream.close();
+            System.out.println("Finito "+fileOutputStream.toString());
+        }catch (IOException e){
+            System.out.println("sth went wrong\t"+e.getStackTrace());
+        }
     }
 }

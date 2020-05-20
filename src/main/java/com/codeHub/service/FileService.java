@@ -1,6 +1,9 @@
 package com.codeHub.service;
 
+import javax.xml.bind.ValidationException;
 import java.io.*;
+import java.util.Enumeration;
+import java.util.Vector;
 
 public class FileService {
 
@@ -10,6 +13,7 @@ public class FileService {
 //        readWriteFileInputOutputStreamWithBufferWriter();
 //        readWriteFileInputOutputStreamBuffer();
         sequenceReader();
+        sequenceReaderVectors();
     }
 
     static String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
@@ -118,5 +122,45 @@ public class FileService {
         }
     }
 
+    public static void sequenceReaderVectors(){
+        try {
+            long start=System.currentTimeMillis();
+
+            FileInputStream fn1 = new FileInputStream(filePath + "test.txt");
+            FileInputStream fn2 = new FileInputStream(filePath + "test copy.txt");
+            FileInputStream fn3 = new FileInputStream(filePath + "test copy 2.txt");
+            FileInputStream fn4 = new FileInputStream(filePath + "test copy 3.txt");
+            FileInputStream fn5 = new FileInputStream(filePath + "test copy 4.txt");
+
+            FileOutputStream fileOutputStream=new FileOutputStream(filePath+"merge.txt");
+
+            //create vector object to all the stream
+            Vector vector=new Vector();
+            vector.add(fn1);
+            vector.add(fn2);
+            vector.add(fn3);
+            vector.add(fn4);
+            vector.add(fn5);
+
+            //create enumeration object by calling the elements method
+            Enumeration elements= vector.elements();
+
+            SequenceInputStream sequenceInputStream=new SequenceInputStream(elements);
+            int data=0;
+            while((data=sequenceInputStream.read())!=-1){
+                fileOutputStream.write(data);
+            }
+            sequenceInputStream.close();
+            fileOutputStream.close();
+            fn1.close();
+            fn2.close();
+            fn3.close();
+            fn4.close();
+            fn5.close();
+            System.out.println("Finitooooo. TT by vectors: "+(System.currentTimeMillis()-start));
+        }catch (IOException e){
+            System.out.println("IO Error: "+e.getMessage());
+        }
+    }
 
 }

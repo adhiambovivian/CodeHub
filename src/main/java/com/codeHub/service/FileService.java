@@ -6,10 +6,13 @@ public class FileService {
 
     public static void fileCommands() {
 
-        readWriteFileInputOutputStream();
-        readWriteFileInputOutputStreamWithBufferWriter();
-        readWriteFileInputOutputStreamBuffer();
+//        readWriteFileInputOutputStream();
+//        readWriteFileInputOutputStreamWithBufferWriter();
+//        readWriteFileInputOutputStreamBuffer();
+        sequenceReader();
     }
+
+    static String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
 
 
 
@@ -92,4 +95,28 @@ public class FileService {
 
         }
     }
+
+    public static void sequenceReader(){
+        try {
+            long start=System.currentTimeMillis();
+            FileInputStream fn1 = new FileInputStream(filePath + "final.txt");
+            FileInputStream fn2 = new FileInputStream(filePath + "ouput.txt");
+
+            FileOutputStream fileOutputStream=new FileOutputStream(filePath+"merge.txt");
+            SequenceInputStream sequenceInputStream=new SequenceInputStream(fn1,fn2);
+            int data=0;
+            while((data=sequenceInputStream.read())!=-1){
+                fileOutputStream.write(data);
+            }
+            sequenceInputStream.close();
+            fileOutputStream.close();
+            fn1.close();
+            fn2.close();
+            System.out.println("Finitooooo. TT: "+(System.currentTimeMillis()-start));
+        }catch (IOException e){
+            System.out.println("IO Error: "+e.getMessage());
+        }
+    }
+
+
 }

@@ -9,6 +9,7 @@ import com.codeHub.service.StripePayment;
 import com.stripe.exception.*;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -29,7 +30,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 @EnableScheduling
 
 public class CodeHubApplication {
-
 
 	public static int data;
 	public static void main(String[] args) throws IOException, InvalidRequestException, AuthenticationException, APIConnectionException, CardException, APIException, Exception

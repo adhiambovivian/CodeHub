@@ -14,6 +14,7 @@ public class FileService {
 //        readWriteFileInputOutputStreamBuffer();
         sequenceReader();
         sequenceReaderVectors();
+        byteArrayOutputStream();
     }
 
     static String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
@@ -162,5 +163,27 @@ public class FileService {
             System.out.println("IO Error: "+e.getMessage());
         }
     }
+
+    public static void byteArrayOutputStream(){
+        try {
+            long start=System.currentTimeMillis();
+            FileOutputStream fn1 = new FileOutputStream(filePath + "template1.txt");
+            FileOutputStream fn2 = new FileOutputStream(filePath + "template2.txt");
+
+            ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
+            byteArrayOutputStream.write("Hello is this what you are looking for?".getBytes());
+            byteArrayOutputStream.writeTo(fn1);
+            byteArrayOutputStream.writeTo(fn2);
+
+            byteArrayOutputStream.flush();
+            byteArrayOutputStream.close();
+            fn1.close();
+            fn2.close();
+            System.out.println("Finitooooo. TT: "+(System.currentTimeMillis()-start));
+        }catch (IOException e){
+            System.out.println("IO Error: "+e.getMessage());
+        }
+    }
+
 
 }

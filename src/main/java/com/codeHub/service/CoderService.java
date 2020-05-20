@@ -1,20 +1,17 @@
 package com.codeHub.service;
 
-import org.boon.Str;
-import org.boon.core.Sys;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.io.*;
-import java.sql.SQLSyntaxErrorException;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
-public class Coder{
+public class CoderService {
     private  @Value("${files.location}") String fileLocation;
 
     public static void minor(){
 
-        Class c=Coder.class;
+        Class c= CoderService.class;
         System.out.println(c.getClassLoader());
 /**
  * Operator shift
@@ -56,7 +53,7 @@ public class Coder{
         sb.reverse();
 
         System.out.println(sb);
-        Coder.compareStringConcatPerformance();
+        CoderService.compareStringConcatPerformance();
         stringTokenizing();
         stringBytes();
 
@@ -65,12 +62,6 @@ public class Coder{
         System.out.println("No xters in chinese word: "+schinese+" "+schinese.length());
         //patternMatching();
         //toConsole();
-        readWriteFileInputOutputStream();
-        readWriteFileInputOutputStreamWithBufferWriter();
-        readWriteFileInputOutputStreamBuffer();
-
-
-
 
     }
 
@@ -165,80 +156,5 @@ public class Coder{
 
     }
 
-    /**
-     * FileOutputStream
-     */
-    public  static void readWriteFileInputOutputStream(){
-        try{
-            long start=System.currentTimeMillis();
-            String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
-            System.out.println(filePath);
-            FileInputStream fileInputStream=new FileInputStream(filePath+"final.txt");
-            FileOutputStream fileOutputStream=new FileOutputStream(filePath+"ouput.txt");
 
-            int data=0;
-            while((data=fileInputStream.read())!=-1) {
-                fileOutputStream.write(((char)data));
-            }
-            fileInputStream.close();
-            fileOutputStream.close();
-        System.out.println("TT without buffer: "+(System.currentTimeMillis()-start));
-        }catch (IOException e){
-            System.out.println("sth went wrong"+e.getMessage()+" "+e.getStackTrace());
-        }finally {
-
-        }
-    }
-
-    public  static void readWriteFileInputOutputStreamWithBufferWriter(){
-        try{
-            long start=System.currentTimeMillis();
-            String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
-            System.out.println(filePath);
-            FileInputStream fileInputStream=new FileInputStream(filePath+"final.txt");
-            FileOutputStream fileOutputStream=new FileOutputStream(filePath+"ouput.txt");
-            BufferedOutputStream bufferedOutputStream=new BufferedOutputStream(fileOutputStream);
-
-            int data=0;
-            while((data=fileInputStream.read())!=-1) {
-                bufferedOutputStream.write(((char)data));
-            }
-            bufferedOutputStream.flush();
-            bufferedOutputStream.close();
-            fileInputStream.close();
-            fileOutputStream.close();
-            System.out.println("TT without buffer: "+(System.currentTimeMillis()-start));
-        }catch (IOException e){
-            System.out.println("sth went wrong"+e.getMessage()+" "+e.getStackTrace());
-        }finally {
-
-        }
-    }
-
-    public  static void readWriteFileInputOutputStreamBuffer(){
-        try{
-            long start=System.currentTimeMillis();
-            String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
-            System.out.println(filePath);
-            FileInputStream fileInputStream=new FileInputStream(filePath+"final.txt");
-            BufferedInputStream bufferedInputStream=new BufferedInputStream(fileInputStream);
-            FileOutputStream fileOutputStream=new FileOutputStream(filePath+"ouput.txt");
-            BufferedOutputStream bufferedOutputStream=new BufferedOutputStream(fileOutputStream);
-
-            int data=0;
-            while((data=bufferedInputStream.read())!=-1) {
-                bufferedOutputStream.write(((char)data));
-            }
-            bufferedInputStream.close();
-            bufferedOutputStream.flush();
-            bufferedOutputStream.close();
-            fileInputStream.close();
-            fileOutputStream.close();
-            System.out.println("TT with buffer: "+(System.currentTimeMillis()-start));
-        }catch (IOException e){
-            System.out.println("sth went wrong"+e.getMessage()+" "+e.getStackTrace());
-        }finally {
-
-        }
-    }
 }

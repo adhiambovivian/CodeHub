@@ -12,9 +12,10 @@ public class FileService {
 //        readWriteFileInputOutputStream();
 //        readWriteFileInputOutputStreamWithBufferWriter();
 //        readWriteFileInputOutputStreamBuffer();
-        sequenceReader();
-        sequenceReaderVectors();
-        byteArrayOutputStream();
+//        sequenceReader();
+//        sequenceReaderVectors();
+//        byteArrayOutputStream();
+        byteArrayOutputStreamFromFile();
     }
 
     static String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
@@ -179,6 +180,32 @@ public class FileService {
             byteArrayOutputStream.close();
             fn1.close();
             fn2.close();
+            System.out.println("Finitooooo. TT: "+(System.currentTimeMillis()-start));
+        }catch (IOException e){
+            System.out.println("IO Error: "+e.getMessage());
+        }
+    }
+
+    public static void byteArrayOutputStreamFromFile(){
+        try {
+            long start=System.currentTimeMillis();
+            FileOutputStream fn1 = new FileOutputStream(filePath + "template1.txt");
+            FileOutputStream fn2 = new FileOutputStream(filePath + "template2.txt");
+
+            ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
+            FileInputStream fileInputStream=new FileInputStream(filePath+"final.txt");
+            BufferedInputStream bufferedInputStream=new BufferedInputStream(fileInputStream);
+            int data=0;
+            while((data=bufferedInputStream.read())!=-1){
+                byteArrayOutputStream.write(data);
+             }
+            byteArrayOutputStream.writeTo(fn1);
+            byteArrayOutputStream.writeTo(fn2);
+            byteArrayOutputStream.flush();
+            byteArrayOutputStream.close();
+            fn1.close();
+            fn2.close();
+            bufferedInputStream.close();
             System.out.println("Finitooooo. TT: "+(System.currentTimeMillis()-start));
         }catch (IOException e){
             System.out.println("IO Error: "+e.getMessage());

@@ -15,7 +15,8 @@ public class FileService {
 //        sequenceReader();
 //        sequenceReaderVectors();
 //        byteArrayOutputStream();
-        byteArrayOutputStreamFromFile();
+//        byteArrayOutputStreamFromFile();
+        byteArrayInputputStreamFromFile();
     }
 
     static String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
@@ -212,5 +213,22 @@ public class FileService {
         }
     }
 
+
+
+    public static void byteArrayInputputStreamFromFile(){
+        try {
+            byte[] buffer={32,45,23,56,78,98,35,36,37,38};
+
+            ByteArrayInputStream byteArrayInputStream=new ByteArrayInputStream(buffer);
+            int data=0;
+            while((data=byteArrayInputStream.read())!=-1){
+                char ch=(char)data;
+                System.out.println("ASCII value of char is: "+data+" the special char is "+ch);
+
+            }
+        }catch (Exception e){
+            System.out.println("IO Error: "+e.getMessage());
+        }
+    }
 
 }

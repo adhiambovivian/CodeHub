@@ -1,20 +1,17 @@
 package com.codeHub.service;
 
-import org.boon.Str;
-import org.boon.core.Sys;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.io.*;
-import java.sql.SQLSyntaxErrorException;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
-public class Coder{
+public class CoderService {
     private  @Value("${files.location}") String fileLocation;
 
     public static void minor(){
 
-        Class c=Coder.class;
+        Class c= CoderService.class;
         System.out.println(c.getClassLoader());
 /**
  * Operator shift
@@ -56,7 +53,7 @@ public class Coder{
         sb.reverse();
 
         System.out.println(sb);
-        Coder.compareStringConcatPerformance();
+        CoderService.compareStringConcatPerformance();
         stringTokenizing();
         stringBytes();
 

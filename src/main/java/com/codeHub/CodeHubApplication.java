@@ -1,30 +1,13 @@
 package com.codeHub;
 
-import com.codeHub.configs.JedisEx;
-import com.codeHub.configs.RabbitMqConfig;
-import com.codeHub.service.Coder;
-import com.codeHub.service.EmailAttachment;
-import com.codeHub.service.ExcutorService;
-import com.codeHub.service.StripePayment;
+import com.codeHub.service.CoderService;
+import com.codeHub.service.FileService;
 import com.stripe.exception.*;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.http.*;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.web.client.RestTemplate;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.Year;
-import java.util.Calendar;
-import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @SpringBootApplication
 @EnableScheduling
@@ -173,7 +156,8 @@ public class CodeHubApplication {
 		System.out.println("Failed count: "+failed);
 */
 
-		Coder.minor();
+		CoderService.minor();
+        FileService.fileCommands();
 
 
 	}

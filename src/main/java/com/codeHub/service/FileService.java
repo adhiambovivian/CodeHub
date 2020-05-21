@@ -33,7 +33,6 @@ public class FileService {
     public  static void readWriteFileInputOutputStream(){
         try{
             long start=System.currentTimeMillis();
-            String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
             System.out.println(filePath);
             FileInputStream fileInputStream=new FileInputStream(filePath+"final.txt");
             FileOutputStream fileOutputStream=new FileOutputStream(filePath+"output.txt");
@@ -58,7 +57,6 @@ public class FileService {
     public  static void readWriteFileInputOutputStreamWithBufferWriter(){
         try{
             long start=System.currentTimeMillis();
-            String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
             System.out.println(filePath);
             FileInputStream fileInputStream=new FileInputStream(filePath+"final.txt");
             FileOutputStream fileOutputStream=new FileOutputStream(filePath+"ouput.txt");
@@ -75,15 +73,12 @@ public class FileService {
             System.out.println("TT without buffer: "+(System.currentTimeMillis()-start));
         }catch (IOException e){
             System.out.println("sth went wrong"+e.getMessage()+" "+e.getStackTrace());
-        }finally {
-
         }
     }
 
     public  static void readWriteFileInputOutputStreamBuffer(){
         try{
             long start=System.currentTimeMillis();
-            String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
             System.out.println(filePath);
             FileInputStream fileInputStream=new FileInputStream(filePath+"final.txt");
             BufferedInputStream bufferedInputStream=new BufferedInputStream(fileInputStream);

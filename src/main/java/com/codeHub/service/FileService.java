@@ -1,5 +1,7 @@
 package com.codeHub.service;
 
+import org.boon.core.Sys;
+
 import javax.xml.bind.ValidationException;
 import java.io.*;
 import java.util.Enumeration;
@@ -9,14 +11,16 @@ public class FileService {
 
     public static void fileCommands() {
 
-//        readWriteFileInputOutputStream();
+        readWriteFileInputOutputStream();
 //        readWriteFileInputOutputStreamWithBufferWriter();
 //        readWriteFileInputOutputStreamBuffer();
 //        sequenceReader();
 //        sequenceReaderVectors();
 //        byteArrayOutputStream();
 //        byteArrayOutputStreamFromFile();
-        byteArrayInputputStreamFromFile();
+//        byteArrayInputputStreamFromFile();
+
+        dataOutputStreamWriter();
     }
 
     static String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
@@ -32,7 +36,7 @@ public class FileService {
             String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
             System.out.println(filePath);
             FileInputStream fileInputStream=new FileInputStream(filePath+"final.txt");
-            FileOutputStream fileOutputStream=new FileOutputStream(filePath+"ouput.txt");
+            FileOutputStream fileOutputStream=new FileOutputStream(filePath+"output.txt");
 
             int data=0;
             while((data=fileInputStream.read())!=-1) {
@@ -226,8 +230,31 @@ public class FileService {
                 System.out.println("ASCII value of char is: "+data+" the special char is "+ch);
 
             }
+            byteArrayInputStream.close();
         }catch (Exception e){
             System.out.println("IO Error: "+e.getMessage());
+        }
+    }
+
+
+    public static void dataOutputStreamWriter(){
+        try {
+            long start=System.currentTimeMillis();
+            FileOutputStream fileOutputStream = new FileOutputStream(filePath + "test.txt");
+            DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream);
+            FileInputStream fileInputStream = new FileInputStream(filePath + "final.txt");
+
+            int data = 0;
+            while ((data = fileInputStream.read()) != -1) {
+                dataOutputStream.write(data);
+
+            }
+            fileInputStream.close();
+            fileOutputStream.close();
+            dataOutputStream.close();
+            System.out.println("dataoutput Finished time: "+(System.currentTimeMillis()-start));
+        }catch (IOException e){
+            System.out.println("sth went wrong. "+e.getMessage());
         }
     }
 

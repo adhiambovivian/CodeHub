@@ -33,3 +33,6 @@ blacklist.json
 simple.json
 mvnw*
 
+.DS_Store
+data/
+

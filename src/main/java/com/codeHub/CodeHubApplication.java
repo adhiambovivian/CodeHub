@@ -14,7 +14,6 @@ import java.io.IOException;
 
 public class CodeHubApplication {
 
-	public static int data;
 	public static void main(String[] args) throws IOException, InvalidRequestException, AuthenticationException, APIConnectionException, CardException, APIException, Exception
 
 	{

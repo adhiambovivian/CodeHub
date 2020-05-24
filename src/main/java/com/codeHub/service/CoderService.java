@@ -7,8 +7,6 @@ import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
 public class CoderService {
-    private  @Value("${files.location}") String fileLocation;
-
     public static void minor(){
 
         Class c= CoderService.class;

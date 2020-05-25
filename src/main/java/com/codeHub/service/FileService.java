@@ -1,9 +1,7 @@
 package com.codeHub.service;
 
-import org.boon.core.Sys;
-
-import javax.xml.bind.ValidationException;
 import java.io.*;
+import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.Vector;
 
@@ -11,7 +9,7 @@ public class FileService {
 
     public static void fileCommands() {
 
-        readWriteFileInputOutputStream();
+//        readWriteFileInputOutputStream();
 //        readWriteFileInputOutputStreamWithBufferWriter();
 //        readWriteFileInputOutputStreamBuffer();
 //        sequenceReader();
@@ -21,8 +19,11 @@ public class FileService {
 //        byteArrayInputputStreamFromFile();
 
 //        dataOutputStreamWriter();
-        filterOutputStreamWriter();
-        filterInputStreamReader();
+//        filterOutputStreamWriter();
+//        filterInputStreamReader();
+        objectStreamClassAction();
+
+
     }
 
     static String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
@@ -303,6 +304,12 @@ public class FileService {
         }
     }
 
-
+    public static void objectStreamClassAction(){
+        ObjectStreamClass objectStreamClass= ObjectStreamClass.lookup(Calendar.class);
+        ObjectStreamField[] list=objectStreamClass.getFields();
+        for(ObjectStreamField obj:list) {
+            System.out.println("Name: " + obj.getName()+" Code: "+obj.getTypeCode());
+        }
+    }
 
 }

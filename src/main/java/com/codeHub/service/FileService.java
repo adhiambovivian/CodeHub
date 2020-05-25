@@ -27,9 +27,10 @@ public class FileService {
 //        filterInputStreamReader();
 //        objectStreamClassAction();
 //        consoleReader();
-        grantFilePermission();
-        writerMethod();
-        readerMethod();
+//        grantFilePermission();
+//        writerMethod();
+//        readerMethod();
+        fileWriterReaderMethod();
 
 
     }
@@ -385,5 +386,24 @@ public class FileService {
             System.out.println("sth went wrong "+e.getMessage());
         }
     }
+
+    public static void fileWriterReaderMethod(){
+        try{
+            long start=System.currentTimeMillis();
+            FileWriter writer=new FileWriter(filePath+"test.txt");
+            FileReader reader =new FileReader(filePath+"output.txt");
+            int data=0;
+            while((data=reader.read())!=-1){
+                writer.write(data);
+            }
+            writer.close();
+            reader.close();
+            System.out.println("TT Filewriter & reader: "+(System.currentTimeMillis()-start));
+        }catch (IOException e){
+            System.out.println("sth went wrong "+e.getMessage());
+        }
+    }
+
+
 
 }

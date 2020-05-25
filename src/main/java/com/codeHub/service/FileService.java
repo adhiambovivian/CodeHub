@@ -1,5 +1,6 @@
 package com.codeHub.service;
 
+import org.boon.IO;
 import org.boon.core.Sys;
 
 import java.io.*;
@@ -27,6 +28,7 @@ public class FileService {
 //        objectStreamClassAction();
 //        consoleReader();
         grantFilePermission();
+        writerMethod();
 
 
     }
@@ -346,6 +348,23 @@ public class FileService {
             System.out.println("Read, write permission is granted for path: "+pathFile);
         }else {
             System.out.println("N read, write permission for path: "+pathFile);
+        }
+    }
+
+    public static void writerMethod(){
+        try{
+            long start=System.currentTimeMillis();
+            Writer writer=new FileWriter(filePath+"test.txt");
+            FileInputStream fileInputStream=new FileInputStream(filePath+"final.txt");
+            int data=0;
+            while((data=fileInputStream.read())!=-1){
+                writer.write(data);
+            }
+            writer.close();
+            fileInputStream.close();
+            System.out.println("TT writer: "+(System.currentTimeMillis()-start));
+        }catch (IOException e){
+            System.out.println("sth went wrong "+e.getMessage());
         }
     }
 

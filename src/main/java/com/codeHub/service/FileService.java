@@ -293,9 +293,16 @@ public class FileService {
             }
             System.out.println("TT buffered FilterInputstream: "+(System.currentTimeMillis()-start));
 
+            bufferedOutputStream.flush();
+            bufferedOutputStream.close();
+            filterInputStream.close();
+            fileInputStream.close();
+            fileOutputStream.close();
         }catch (IOException e){
             System.out.println("sth went wrong "+e.getMessage());
         }
     }
+
+
 
 }

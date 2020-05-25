@@ -1,5 +1,7 @@
 package com.codeHub.service;
 
+import org.boon.core.Sys;
+
 import java.io.*;
 import java.util.Calendar;
 import java.util.Enumeration;
@@ -21,7 +23,8 @@ public class FileService {
 //        dataOutputStreamWriter();
 //        filterOutputStreamWriter();
 //        filterInputStreamReader();
-        objectStreamClassAction();
+//        objectStreamClassAction();
+        consoleReader();
 
 
     }
@@ -310,6 +313,25 @@ public class FileService {
         for(ObjectStreamField obj:list) {
             System.out.println("Name: " + obj.getName()+" Code: "+obj.getTypeCode());
         }
+    }
+
+    public static void consoleReader(){
+        Console console= System.console(); //singleton instance of Console
+        System.out.println("Enter your username: ");
+        String name=console.readLine();
+        System.out.println(name);
+
+        //password
+
+        System.out.println("Enter password: ");
+        char[] passChar=console.readPassword();
+        String password=String.valueOf(passChar);
+
+        System.out.println(password);
+
+
+
+
     }
 
 }

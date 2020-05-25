@@ -20,7 +20,8 @@ public class FileService {
 //        byteArrayOutputStreamFromFile();
 //        byteArrayInputputStreamFromFile();
 
-        dataOutputStreamWriter();
+//        dataOutputStreamWriter();
+        filterOutputStreamWriter();
     }
 
     static String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
@@ -250,6 +251,28 @@ public class FileService {
             System.out.println("dataoutput Finished time: "+(System.currentTimeMillis()-start));
         }catch (IOException e){
             System.out.println("sth went wrong. "+e.getMessage());
+        }
+    }
+
+    public static void filterOutputStreamWriter(){
+        try {
+            long start=System.currentTimeMillis();
+            File file = new File(filePath + "test.txt");
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            FilterOutputStream filterOutputStream=new FilterOutputStream(fileOutputStream);
+
+            FileInputStream filenputStream=new FileInputStream(filePath+"final.txt");
+            int data=0;
+            while((data=filenputStream.read())!=-1){
+                filterOutputStream.write(data);
+            }
+            filterOutputStream.flush();
+            fileOutputStream.close();
+            filenputStream.close();
+            fileOutputStream.close();
+            System.out.println("TT Filteroutputstream: "+(System.currentTimeMillis()-start));
+        }catch (IOException e){
+            System.out.println("sth went wrong "+e.getMessage());
         }
     }
 

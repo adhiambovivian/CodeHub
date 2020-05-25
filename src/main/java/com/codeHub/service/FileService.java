@@ -1,9 +1,11 @@
 package com.codeHub.service;
 
+import org.boon.IO;
 import org.boon.core.Sys;
 
-import javax.xml.bind.ValidationException;
 import java.io.*;
+import java.security.PermissionCollection;
+import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.Vector;
 
@@ -11,7 +13,7 @@ public class FileService {
 
     public static void fileCommands() {
 
-        readWriteFileInputOutputStream();
+//        readWriteFileInputOutputStream();
 //        readWriteFileInputOutputStreamWithBufferWriter();
 //        readWriteFileInputOutputStreamBuffer();
 //        sequenceReader();
@@ -20,7 +22,16 @@ public class FileService {
 //        byteArrayOutputStreamFromFile();
 //        byteArrayInputputStreamFromFile();
 
-        dataOutputStreamWriter();
+//        dataOutputStreamWriter();
+//        filterOutputStreamWriter();
+//        filterInputStreamReader();
+//        objectStreamClassAction();
+//        consoleReader();
+        grantFilePermission();
+        writerMethod();
+        readerMethod();
+
+
     }
 
     static String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
@@ -250,6 +261,128 @@ public class FileService {
             System.out.println("dataoutput Finished time: "+(System.currentTimeMillis()-start));
         }catch (IOException e){
             System.out.println("sth went wrong. "+e.getMessage());
+        }
+    }
+
+    public static void filterOutputStreamWriter(){
+        try {
+            long start=System.currentTimeMillis();
+            File file = new File(filePath + "test.txt");
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            FilterOutputStream filterOutputStream=new FilterOutputStream(fileOutputStream);
+
+            FileInputStream filenputStream=new FileInputStream(filePath+"final.txt");
+            int data=0;
+            while((data=filenputStream.read())!=-1){
+                filterOutputStream.write(data);
+            }
+            filterOutputStream.flush();
+            fileOutputStream.close();
+            filenputStream.close();
+            fileOutputStream.close();
+            System.out.println("TT Filteroutputstream: "+(System.currentTimeMillis()-start));
+        }catch (IOException e){
+            System.out.println("sth went wrong "+e.getMessage());
+        }
+    }
+
+    public static void filterInputStreamReader(){
+        try{
+            long start=System.currentTimeMillis();
+
+            File file=new File(filePath+"final.txt");
+            FileInputStream fileInputStream=new FileInputStream(file);
+            FilterInputStream filterInputStream=new BufferedInputStream(fileInputStream);
+
+            FileOutputStream fileOutputStream=new FileOutputStream(filePath+"test.txt");
+             BufferedOutputStream bufferedOutputStream= new BufferedOutputStream(fileOutputStream);
+            int data=0;
+            while((data=filterInputStream.read())!=-1){
+                bufferedOutputStream.write(data);
+            }
+            System.out.println("TT buffered FilterInputstream: "+(System.currentTimeMillis()-start));
+
+            bufferedOutputStream.flush();
+            bufferedOutputStream.close();
+            filterInputStream.close();
+            fileInputStream.close();
+            fileOutputStream.close();
+        }catch (IOException e){
+            System.out.println("sth went wrong "+e.getMessage());
+        }
+    }
+
+    public static void objectStreamClassAction(){
+        ObjectStreamClass objectStreamClass= ObjectStreamClass.lookup(Calendar.class);
+        ObjectStreamField[] list=objectStreamClass.getFields();
+        for(ObjectStreamField obj:list) {
+            System.out.println("Name: " + obj.getName()+" Code: "+obj.getTypeCode());
+        }
+    }
+
+    public static void consoleReader(){
+        Console console= System.console(); //singleton instance of Console
+        System.out.println("Enter your username: ");
+        String name=console.readLine();
+        System.out.println(name);
+
+        //password
+
+        System.out.println("Enter password: ");
+        char[] passChar=console.readPassword();
+        String password=String.valueOf(passChar);
+
+        System.out.println(password);
+
+    }
+
+    public static void grantFilePermission(){
+        String pathFile=filePath+"test.txt";
+        FilePermission filepermission=new FilePermission(filePath+"-","read");
+        PermissionCollection permissionCollection=filepermission.newPermissionCollection();
+        permissionCollection.add(filepermission);
+
+        FilePermission filePermission2=new FilePermission(pathFile,"Write");
+        permissionCollection.add(filePermission2);
+
+        if(permissionCollection.implies(new FilePermission(pathFile,"read,write"))){
+            System.out.println("Read, write permission is granted for path: "+pathFile);
+        }else {
+            System.out.println("N read, write permission for path: "+pathFile);
+        }
+    }
+
+    public static void writerMethod(){
+        try{
+            long start=System.currentTimeMillis();
+            Writer writer=new FileWriter(filePath+"test.txt");
+            FileInputStream fileInputStream=new FileInputStream(filePath+"final.txt");
+            int data=0;
+            while((data=fileInputStream.read())!=-1){
+                writer.write(data);
+            }
+            writer.close();
+            fileInputStream.close();
+            System.out.println("TT writer: "+(System.currentTimeMillis()-start));
+        }catch (IOException e){
+            System.out.println("sth went wrong "+e.getMessage());
+        }
+    }
+
+    public static void readerMethod(){
+        try{
+            long start=System.currentTimeMillis();
+            Writer writer=new FileWriter(filePath+"test.txt");
+            Reader reader =new FileReader(filePath+"final.txt");
+            int data=0;
+            while((data=reader.read())!=-1){
+                writer.write(data);
+            }
+            writer.close();
+            reader.close();
+            System.out.println("TT writer & reader: "+(System.currentTimeMillis()-start));
+        }catch (IOException e){
+            System.out.println("sth went wrong "+e.getMessage());
         }
     }
 

@@ -3,6 +3,7 @@ package com.codeHub.service;
 import org.boon.core.Sys;
 
 import java.io.*;
+import java.security.PermissionCollection;
 import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.Vector;
@@ -24,7 +25,8 @@ public class FileService {
 //        filterOutputStreamWriter();
 //        filterInputStreamReader();
 //        objectStreamClassAction();
-        consoleReader();
+//        consoleReader();
+        grantFilePermission();
 
 
     }
@@ -329,9 +331,22 @@ public class FileService {
 
         System.out.println(password);
 
+    }
 
+    public static void grantFilePermission(){
+        String pathFile=filePath+"test.txt";
+        FilePermission filepermission=new FilePermission(filePath+"-","read");
+        PermissionCollection permissionCollection=filepermission.newPermissionCollection();
+        permissionCollection.add(filepermission);
 
+        FilePermission filePermission2=new FilePermission(pathFile,"Write");
+        permissionCollection.add(filePermission2);
 
+        if(permissionCollection.implies(new FilePermission(pathFile,"read,write"))){
+            System.out.println("Read, write permission is granted for path: "+pathFile);
+        }else {
+            System.out.println("N read, write permission for path: "+pathFile);
+        }
     }
 
 }

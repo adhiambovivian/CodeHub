@@ -30,8 +30,9 @@ public class FileService {
 //        grantFilePermission();
 //        writerMethod();
 //        readerMethod();
-        fileWriterReaderMethod();
-        fileWriterReaderBufferMethod();
+//        fileWriterReaderMethod();
+//        fileWriterReaderBufferMethod();
+        readConsole();
 
 
     }
@@ -427,6 +428,21 @@ public class FileService {
 
             System.out.println("TT buffered Filewriter & reader: "+(System.currentTimeMillis()-start));
         }catch (IOException e){
+            System.out.println("sth went wrong "+e.getMessage());
+        }
+    }
+
+    public static void readConsole(){
+        try{
+            InputStreamReader inputStreamReader=new InputStreamReader(System.in);
+            BufferedReader bufferedReader=new BufferedReader(inputStreamReader);
+
+            System.out.println("Enter your username - ");
+            String username=bufferedReader.readLine();
+
+            System.out.println("IS this what you typed? "+username);
+
+        }catch(IOException e){
             System.out.println("sth went wrong "+e.getMessage());
         }
     }

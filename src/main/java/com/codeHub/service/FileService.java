@@ -32,7 +32,8 @@ public class FileService {
 //        readerMethod();
 //        fileWriterReaderMethod();
 //        fileWriterReaderBufferMethod();
-        bufferedConsoleReader();
+//        bufferedConsoleReader();
+        charArrayReaderMethod();
 
     }
 
@@ -446,4 +447,19 @@ public class FileService {
         }
     }
 
+    public static void charArrayReaderMethod(){
+        try {
+            char[] array = {'a', 'q', 'w', 'e', 'r', 't', 'g', 'h', 'j', 'c', 'z'};
+            CharArrayReader reader = new CharArrayReader(array);
+
+            int data = 0;
+            while ((data = reader.read()) != -1) {
+                char ch=(char)data;
+                System.out.println(ch+" : "+data);
+
+            }
+        }catch (IOException e){
+            System.out.println("sth went wrong. "+e.getMessage());
+        }
+    }
 }

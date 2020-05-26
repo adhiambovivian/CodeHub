@@ -31,6 +31,7 @@ public class FileService {
 //        writerMethod();
 //        readerMethod();
         fileWriterReaderMethod();
+        fileWriterReaderBufferMethod();
 
 
     }
@@ -405,5 +406,29 @@ public class FileService {
     }
 
 
+    public static void fileWriterReaderBufferMethod(){
+        try{
+            long start=System.currentTimeMillis();
+            FileWriter writer=new FileWriter(filePath+"test.txt");
+            BufferedWriter bufferedWriter=new BufferedWriter(writer);
+
+            FileReader reader =new FileReader(filePath+"output.txt");
+            BufferedReader bufferedReader=new BufferedReader(reader);
+
+            int data=0;
+            while((data=bufferedReader.read())!=-1){
+                bufferedWriter.write(data);
+            }
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            bufferedReader.close();
+            writer.close();
+            reader.close();
+
+            System.out.println("TT buffered Filewriter & reader: "+(System.currentTimeMillis()-start));
+        }catch (IOException e){
+            System.out.println("sth went wrong "+e.getMessage());
+        }
+    }
 
 }

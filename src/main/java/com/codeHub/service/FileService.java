@@ -35,7 +35,8 @@ public class FileService {
 //        bufferedConsoleReader();
 //        charArrayReaderMethod();
 //        charArrayWriterMethod();
-        printStreamMethod();
+//        printStreamMethod();
+        printWriterMethod();
 
     }
 
@@ -505,5 +506,22 @@ public class FileService {
             System.out.println("sth went wrong: "+e.getMessage());
         }
 
+    }
+
+    public static void printWriterMethod(){
+
+        try {
+            PrintWriter printWriter = new PrintWriter(System.out);
+            FileReader fileReader = new FileReader(filePath + "test.txt");
+            int data=0;
+            while((data=fileReader.read())!=-1){
+                printWriter.write(data);
+            }
+            printWriter.flush();
+            printWriter.close();
+            fileReader.close();
+        }catch (IOException e){
+            System.out.println("sth went wrong: "+e.getMessage());
+        }
     }
 }

@@ -34,7 +34,8 @@ public class FileService {
 //        fileWriterReaderBufferMethod();
 //        bufferedConsoleReader();
 //        charArrayReaderMethod();
-        charArrayWriterMethod();
+//        charArrayWriterMethod();
+        printStreamMethod();
 
     }
 
@@ -491,5 +492,18 @@ public class FileService {
         }catch (IOException e){
             System.out.println("sthe went wrong: "+e.getMessage());
         }
+    }
+
+    public static void printStreamMethod(){
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(filePath + "test.txt");
+            PrintStream printStream=new PrintStream(fileOutputStream);
+
+            printStream.println("wow wow wow, am so amazed and excited about life");
+            printStream.printf("%s","Such a beautifule day outside...");
+        }catch (FileNotFoundException e){
+            System.out.println("sth went wrong: "+e.getMessage());
+        }
+
     }
 }

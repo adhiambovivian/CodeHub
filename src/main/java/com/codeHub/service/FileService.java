@@ -36,8 +36,9 @@ public class FileService {
 //        charArrayReaderMethod();
 //        charArrayWriterMethod();
 //        printStreamMethod();
-        printWriterConsole();
-        printWriterFile();
+//        printWriterConsole();
+//        printWriterFile();
+        outputStreamWriterMethod();
 
     }
 
@@ -537,4 +538,19 @@ public class FileService {
             System.out.println("sth went wrong. "+e.getMessage());
         }
     }
+
+    public static void outputStreamWriterMethod() {
+        try {
+            OutputStream outputStream = new FileOutputStream(filePath + "template.txt");
+            Writer writer=new OutputStreamWriter(outputStream);
+
+            writer.write("Working remotely has been a blast... Such an invigorating experience");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 }

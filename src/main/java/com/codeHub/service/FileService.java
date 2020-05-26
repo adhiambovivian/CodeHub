@@ -33,7 +33,8 @@ public class FileService {
 //        fileWriterReaderMethod();
 //        fileWriterReaderBufferMethod();
 //        bufferedConsoleReader();
-        charArrayReaderMethod();
+//        charArrayReaderMethod();
+        charArrayWriterMethod();
 
     }
 
@@ -460,6 +461,35 @@ public class FileService {
             }
         }catch (IOException e){
             System.out.println("sth went wrong. "+e.getMessage());
+        }
+    }
+
+    public static void charArrayWriterMethod(){
+        try{
+            CharArrayWriter writer=new CharArrayWriter();
+            writer.write("Wow, such an amazing day. I ma exhilarated");
+
+            FileWriter fn1 = new FileWriter(filePath + "test.txt");
+            FileWriter fn2 = new FileWriter(filePath + "test copy.txt");
+            FileWriter fn3 = new FileWriter(filePath + "test copy 2.txt");
+            FileWriter fn4 = new FileWriter(filePath + "test copy 3.txt");
+            FileWriter fn5 = new FileWriter(filePath + "test copy 4.txt");
+
+            writer.writeTo(fn1);
+            writer.writeTo(fn2);
+            writer.writeTo(fn3);
+            writer.writeTo(fn4);
+            writer.writeTo(fn5);
+
+            fn1.close();
+            fn2.close();
+            fn3.close();
+            fn4.close();
+            fn5.close();
+
+
+        }catch (IOException e){
+            System.out.println("sthe went wrong: "+e.getMessage());
         }
     }
 }

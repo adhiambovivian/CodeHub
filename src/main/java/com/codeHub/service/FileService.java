@@ -27,10 +27,18 @@ public class FileService {
 //        filterInputStreamReader();
 //        objectStreamClassAction();
 //        consoleReader();
-        grantFilePermission();
-        writerMethod();
-        readerMethod();
-
+//        grantFilePermission();
+//        writerMethod();
+//        readerMethod();
+//        fileWriterReaderMethod();
+//        fileWriterReaderBufferMethod();
+//        bufferedConsoleReader();
+//        charArrayReaderMethod();
+//        charArrayWriterMethod();
+//        printStreamMethod();
+//        printWriterConsole();
+//        printWriterFile();
+        outputStreamWriterMethod();
 
     }
 
@@ -385,5 +393,164 @@ public class FileService {
             System.out.println("sth went wrong "+e.getMessage());
         }
     }
+
+    public static void fileWriterReaderMethod(){
+        try{
+            long start=System.currentTimeMillis();
+            FileWriter writer=new FileWriter(filePath+"test.txt");
+            FileReader reader =new FileReader(filePath+"output.txt");
+            int data=0;
+            while((data=reader.read())!=-1){
+                writer.write(data);
+            }
+            writer.close();
+            reader.close();
+            System.out.println("TT Filewriter & reader: "+(System.currentTimeMillis()-start));
+        }catch (IOException e){
+            System.out.println("sth went wrong "+e.getMessage());
+        }
+    }
+
+
+    public static void fileWriterReaderBufferMethod(){
+        try{
+            long start=System.currentTimeMillis();
+            FileWriter writer=new FileWriter(filePath+"test.txt");
+            BufferedWriter bufferedWriter=new BufferedWriter(writer);
+
+            FileReader reader =new FileReader(filePath+"output.txt");
+            BufferedReader bufferedReader=new BufferedReader(reader);
+
+            int data=0;
+            while((data=bufferedReader.read())!=-1){
+                bufferedWriter.write(data);
+            }
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            bufferedReader.close();
+            writer.close();
+            reader.close();
+
+            System.out.println("TT buffered Filewriter & reader: "+(System.currentTimeMillis()-start));
+        }catch (IOException e){
+            System.out.println("sth went wrong "+e.getMessage());
+        }
+    }
+
+    public static void bufferedConsoleReader(){
+        try{
+            InputStreamReader inputStreamReader=new InputStreamReader(System.in);
+            BufferedReader bufferedReader=new BufferedReader(inputStreamReader);
+
+            System.out.println("Enter your username - ");
+            String username=bufferedReader.readLine();
+
+            System.out.println("IS this what you typed? "+username);
+
+        }catch(IOException e){
+            System.out.println("sth went wrong "+e.getMessage());
+        }
+    }
+
+    public static void charArrayReaderMethod(){
+        try {
+            char[] array = {'a', 'q', 'w', 'e', 'r', 't', 'g', 'h', 'j', 'c', 'z'};
+            CharArrayReader reader = new CharArrayReader(array);
+
+            int data = 0;
+            while ((data = reader.read()) != -1) {
+                char ch=(char)data;
+                System.out.println(ch+" : "+data);
+
+            }
+        }catch (IOException e){
+            System.out.println("sth went wrong. "+e.getMessage());
+        }
+    }
+
+    public static void charArrayWriterMethod(){
+        try{
+            CharArrayWriter writer=new CharArrayWriter();
+            writer.write("Wow, such an amazing day. I ma exhilarated");
+
+            FileWriter fn1 = new FileWriter(filePath + "test.txt");
+            FileWriter fn2 = new FileWriter(filePath + "test copy.txt");
+            FileWriter fn3 = new FileWriter(filePath + "test copy 2.txt");
+            FileWriter fn4 = new FileWriter(filePath + "test copy 3.txt");
+            FileWriter fn5 = new FileWriter(filePath + "test copy 4.txt");
+
+            writer.writeTo(fn1);
+            writer.writeTo(fn2);
+            writer.writeTo(fn3);
+            writer.writeTo(fn4);
+            writer.writeTo(fn5);
+
+            fn1.close();
+            fn2.close();
+            fn3.close();
+            fn4.close();
+            fn5.close();
+
+
+        }catch (IOException e){
+            System.out.println("sthe went wrong: "+e.getMessage());
+        }
+    }
+
+    public static void printStreamMethod(){
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(filePath + "test.txt");
+            PrintStream printStream=new PrintStream(fileOutputStream);
+
+            printStream.println("wow wow wow, am so amazed and excited about life");
+            printStream.printf("%s","Such a beautifule day outside...");
+        }catch (FileNotFoundException e){
+            System.out.println("sth went wrong: "+e.getMessage());
+        }
+
+    }
+
+    public static void printWriterConsole(){
+
+        try {
+            PrintWriter printWriter = new PrintWriter(System.out);
+            FileReader fileReader = new FileReader(filePath + "test.txt");
+            int data=0;
+            while((data=fileReader.read())!=-1){
+                printWriter.write(data);
+            }
+            printWriter.flush();
+            printWriter.close();
+            fileReader.close();
+        }catch (IOException e){
+            System.out.println("sth went wrong: "+e.getMessage());
+        }
+    }
+
+    public static void printWriterFile(){
+        try {
+            PrintWriter printWriter = new PrintWriter(new File(filePath + "template.txt"));
+            printWriter.write("I love hiking. It is a very refreshing activity...");
+            printWriter.flush();
+            printWriter.close();
+
+        }catch (FileNotFoundException e){
+            System.out.println("sth went wrong. "+e.getMessage());
+        }
+    }
+
+    public static void outputStreamWriterMethod() {
+        try {
+            OutputStream outputStream = new FileOutputStream(filePath + "template.txt");
+            Writer writer=new OutputStreamWriter(outputStream);
+
+            writer.write("Working remotely has been a blast... Such an invigorating experience");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 }

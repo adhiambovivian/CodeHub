@@ -36,7 +36,8 @@ public class FileService {
 //        charArrayReaderMethod();
 //        charArrayWriterMethod();
 //        printStreamMethod();
-        printWriterMethod();
+        printWriterConsole();
+        printWriterFile();
 
     }
 
@@ -508,7 +509,7 @@ public class FileService {
 
     }
 
-    public static void printWriterMethod(){
+    public static void printWriterConsole(){
 
         try {
             PrintWriter printWriter = new PrintWriter(System.out);
@@ -522,6 +523,18 @@ public class FileService {
             fileReader.close();
         }catch (IOException e){
             System.out.println("sth went wrong: "+e.getMessage());
+        }
+    }
+
+    public static void printWriterFile(){
+        try {
+            PrintWriter printWriter = new PrintWriter(new File(filePath + "template.txt"));
+            printWriter.write("I love hiking. It is a very refreshing activity...");
+            printWriter.flush();
+            printWriter.close();
+
+        }catch (FileNotFoundException e){
+            System.out.println("sth went wrong. "+e.getMessage());
         }
     }
 }

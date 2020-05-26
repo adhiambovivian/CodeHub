@@ -32,8 +32,7 @@ public class FileService {
 //        readerMethod();
 //        fileWriterReaderMethod();
 //        fileWriterReaderBufferMethod();
-        readConsole();
-
+        bufferedConsoleReader();
 
     }
 
@@ -432,7 +431,7 @@ public class FileService {
         }
     }
 
-    public static void readConsole(){
+    public static void bufferedConsoleReader(){
         try{
             InputStreamReader inputStreamReader=new InputStreamReader(System.in);
             BufferedReader bufferedReader=new BufferedReader(inputStreamReader);

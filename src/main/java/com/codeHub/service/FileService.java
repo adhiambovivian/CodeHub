@@ -38,7 +38,8 @@ public class FileService {
 //        printStreamMethod();
 //        printWriterConsole();
 //        printWriterFile();
-        outputStreamWriterMethod();
+//        outputStreamWriterMethod();
+//        inputStreamReaderMethod();
 
     }
 
@@ -551,6 +552,25 @@ public class FileService {
         }
     }
 
+    //todo: generates big file size
+    public static void inputStreamReaderMethod() {
+        try {
+            long start=System.currentTimeMillis();
+            OutputStream outputStream = new FileOutputStream(filePath + "template.txt");
+            Writer writer=new OutputStreamWriter(outputStream);
 
+            InputStream inputStream=new FileInputStream(filePath+"final.txt");
+            Reader reader=new InputStreamReader(inputStream);
+
+            int data=reader.read();
+            while(data!=-1) {
+                writer.write((char)data);
+            }
+            writer.close();
+            System.out.println("TT by streamReader & stream writer: "+(System.currentTimeMillis()-start));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

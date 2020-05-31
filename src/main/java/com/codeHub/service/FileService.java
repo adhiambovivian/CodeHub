@@ -37,6 +37,8 @@ public class FileService {
 //        printWriterFile();
 //        outputStreamWriterMethod();
 //        inputStreamReaderMethod();
+//        pushbackInputStreamMethod();
+        pushbackReaderMethod();
 
     }
 
@@ -567,6 +569,61 @@ public class FileService {
             System.out.println("TT by streamReader & stream writer: "+(System.currentTimeMillis()-start));
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void pushbackInputStreamMethod(){
+
+        try {
+            String value = "aldo$zyrie$ksh";
+
+            byte[] valueByte = value.getBytes();
+
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(valueByte);
+            PushbackInputStream pushbackInputStream = new PushbackInputStream(byteArrayInputStream);
+
+            int data = 0;
+            while ((data = pushbackInputStream.read()) != -1) {
+                if(data=='$'){
+                    int val=0;
+                    if((val=pushbackInputStream.read())=='$'){
+                        System.out.println("*************");
+
+                    }else {
+                        pushbackInputStream.unread(val);
+                        System.out.println((char)data);
+                    }
+                }else{
+                    System.out.println((char)data);
+                }
+            }
+        }catch (IOException e){
+            e.getStackTrace();
+        }
+    }
+//todo
+    public static void pushbackReaderMethod(){
+        try {
+            char arr[] = {'1', '-', '-', '2', '-', '3', '4', '-', '-', '-', '5', '6'};
+            CharArrayReader reader = new CharArrayReader(arr);
+            PushbackReader pushbackReader = new PushbackReader(reader);
+
+            int data = 0;
+            while ((data = pushbackReader.read()) != -1) {
+                if(data == '-'){
+                    int val;
+                    if((val=pushbackReader.read())=='-'){
+                        System.out.println("*************");
+                    }else{
+                        pushbackReader.unread(val);//push back single character
+                        System.out.println((char)data);
+                    }
+                }else{
+                    System.out.println((char)data);
+                }
+            }
+        }catch ( IOException e){
+            e.getMessage();
         }
     }
 

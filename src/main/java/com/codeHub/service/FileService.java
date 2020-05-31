@@ -6,7 +6,17 @@ import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.Vector;
 
-public class FileService {
+public class FileService{
+
+    public class CustomFilterWriter extends FilterWriter {
+        CustomFilterWriter(Writer writer) {
+            super(writer);
+        }
+
+        public void write(String val) throws IOException{
+            super.write(val.toLowerCase());
+        }
+    }
 
     public static void fileCommands() {
 

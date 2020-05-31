@@ -1,9 +1,11 @@
 package com.codeHub.service;
 
+
 import java.io.*;
 import java.security.PermissionCollection;
 import java.util.Calendar;
 import java.util.Enumeration;
+import java.util.RandomAccess;
 import java.util.Vector;
 
 public class FileService{
@@ -60,7 +62,7 @@ public class FileService{
 //        printWriterConsole();
 //        printWriterFile();
 //        outputStreamWriterMethod();
-        inputStreamReaderMethod();
+//        inputStreamReaderMethod();
 //        pushbackInputStreamMethod();
 //        pushbackReaderMethod();
 //        stringWriterMethod();
@@ -69,6 +71,7 @@ public class FileService{
 //        filterReaderWriter();
 //        fileMethods();
 //        fdMethod();
+        processRandomAccessMethod();
 
     }
 
@@ -797,6 +800,32 @@ public  static void fdMethod(){
         }catch (IOException e){
             e.getMessage();
         }
+}
+
+public static void writeRandomAccess(String path, String data,int position) throws IOException{
+    RandomAccessFile randomAccessFile=new RandomAccessFile(path,"rw");
+    randomAccessFile.seek(position);
+    randomAccessFile.write(data.getBytes());
+    randomAccessFile.close();
+}
+
+public static byte[] readRandomAccess(String path, int position, int size) throws IOException{
+        RandomAccessFile randomAccessFile=new RandomAccessFile(path,"r");
+        randomAccessFile.seek(position);
+        byte[] bytes =new byte[size];
+        randomAccessFile.read(bytes);
+        randomAccessFile.close();
+
+        return bytes;
+}
+
+public static void processRandomAccessMethod() {
+    try {
+        System.out.println(new String(readRandomAccess(filePath + "test.txt", 0, 5)));
+        writeRandomAccess(filePath + "template.txt", "la ls ld lf lg lh lj lk", 10);
+    } catch (IOException e) {
+        e.getMessage();
+    }
 }
 
 }

@@ -12,6 +12,7 @@ public class NetworkService extends Thread{
 //         readWebpage();
 //         readHttpWebpage();
          getWebpageHeaders();
+         getWebpageInformation();
     }
 
     public  void run(){
@@ -125,6 +126,20 @@ public class NetworkService extends Thread{
             for(int key=1;key<10;key++){
                 System.out.println(connection.getHeaderFieldKey(key)+" = "+connection.getHeaderField(key));
             }
+        }catch (IOException e){
+            e.getMessage();
+        }
+    }
+
+    public static void getWebpageInformation(){
+        try{
+            URL url =new URL("https://google.com");
+            HttpURLConnection connection =(HttpURLConnection) url.openConnection();
+            StringBuilder stringBuilder=new StringBuilder();
+            stringBuilder.append("method: "+connection.getRequestMethod()).append(" code:"+connection.getResponseCode()).append(" permission: "+connection.getPermission()).
+                    append(" msg: "+connection.getResponseMessage()).append(" encoding: "+connection.getContentEncoding());
+
+            System.out.println(stringBuilder);
         }catch (IOException e){
             e.getMessage();
         }

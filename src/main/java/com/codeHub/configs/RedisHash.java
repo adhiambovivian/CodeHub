@@ -1,4 +1,4 @@
-package com.codeHub;
+package com.codeHub.configs;
 
 public class RedisHash {
     private String key_data;

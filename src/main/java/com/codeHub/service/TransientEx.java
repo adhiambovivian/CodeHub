@@ -1,4 +1,4 @@
-package com.codeHub;
+package com.codeHub.service;
 
 import com.codeHub.models.Blacklist;
 

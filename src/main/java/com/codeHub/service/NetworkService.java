@@ -71,7 +71,7 @@ public class NetworkService extends Thread{
                 append("path: "+url.getPath()).append("protocol: "+url.getProtocol()).append("user: "+url.getUserInfo()).append("file: "+url.getFile()).
                 append("query: "+url.getQuery()).append("content: "+url.getContent());
 
-        System.out.println();
+        System.out.println(stringBuilder.toString());
     }
 
 }

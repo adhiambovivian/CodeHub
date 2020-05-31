@@ -70,9 +70,18 @@ public class NetworkService extends Thread{
         stringBuilder.append("authority: "+url.getAuthority()).append("host: "+url.getHost()).append("port: "+url.getPort()).append("def port: "+url.getDefaultPort()).
                 append("path: "+url.getPath()).append("protocol: "+url.getProtocol()).append("user: "+url.getUserInfo()).append("file: "+url.getFile()).
                 append("query: "+url.getQuery()).append("content: "+url.getContent());
+        return stringBuilder.toString();
+    }
 
-        System.out.println(stringBuilder.toString());
-        return stringBuilder.toString()
+    public static void getDocUrlDetails(){
+        try {
+            URL url = new URL("https://docs.google.com/document/d/1gNOG_3A-JQZA7iIgI0oOunuu5kW0O1wU7Ga5Eu5C2xA/edit#");
+            String detail=getURLdetails(url);
+            System.out.println(detail);
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
 }

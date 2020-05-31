@@ -1,10 +1,11 @@
 package com.codeHub.service;
 
+
+import com.codeHub.models.Blacklist;
 import java.io.*;
 import java.security.PermissionCollection;
-import java.util.Calendar;
-import java.util.Enumeration;
-import java.util.Vector;
+import java.util.*;
+import java.util.zip.DeflaterOutputStream;
 
 public class FileService{
 
@@ -68,7 +69,12 @@ public class FileService{
 //        pipedReaderWriterMethod();
 //        filterReaderWriter();
 //        fileMethods();
-        fdMethod();
+//        fdMethod();
+//        processRandomAccessMethod();
+//        scannerReader();
+//        compressFileDeflater();
+//        serialization();
+        deserialization();
 
     }
 
@@ -581,7 +587,6 @@ public class FileService{
         }
     }
 
-    //todo: generates big file size
     public static void inputStreamReaderMethod() {
         try {
             long start=System.currentTimeMillis();
@@ -591,8 +596,8 @@ public class FileService{
             InputStream inputStream=new FileInputStream(filePath+"final.txt");
             Reader reader=new InputStreamReader(inputStream);
 
-            int data=reader.read();
-            while(data!=-1) {
+            int data=0;
+            while((data=reader.read())!=-1) {
                 writer.write((char)data);
             }
             writer.close();
@@ -737,7 +742,6 @@ public static void pipedReaderWriterMethod(){
         }
 }
 
-//todo: printing own things
 public static void filterReaderWriter(){
         try{
             FileWriter fileWriter=new FileWriter(filePath+"template.txt");
@@ -749,8 +753,8 @@ public static void filterReaderWriter(){
 
             CustomFilterReader customFilterReader=new CustomFilterReader(bufferedReader);
 
-            int data=customFilterReader.read();
-            while(data != -1){
+            int data=0;
+            while((data = customFilterReader.read())!= -1){
                 System.out.print((char)data);
             }
             bufferedReader.close();
@@ -801,4 +805,91 @@ public  static void fdMethod(){
         }
 }
 
+public static void writeRandomAccess(String path, String data,int position) throws IOException{
+    RandomAccessFile randomAccessFile=new RandomAccessFile(path,"rw");
+    randomAccessFile.seek(position);
+    randomAccessFile.write(data.getBytes());
+    randomAccessFile.close();
+}
+
+public static byte[] readRandomAccess(String path, int position, int size) throws IOException{
+        RandomAccessFile randomAccessFile=new RandomAccessFile(path,"r");
+        randomAccessFile.seek(position);
+        byte[] bytes =new byte[size];
+        randomAccessFile.read(bytes);
+        randomAccessFile.close();
+
+        return bytes;
+}
+
+public static void processRandomAccessMethod() {
+    try {
+        System.out.println(new String(readRandomAccess(filePath + "test.txt", 0, 5)));
+        writeRandomAccess(filePath + "template.txt", "la ls ld lf lg lh lj lk", 10);
+    } catch (IOException e) {
+        e.getMessage();
+    }
+}
+
+public static void  scannerReader(){
+        Scanner scanner =new Scanner(System.in);
+        scanner.useDelimiter("\n");
+        System.out.println("Enter your username: ");
+        String username=scanner.nextLine();
+        System.out.println("username: "+username);
+        scanner.close();
+}
+//todo: not working
+public static void compressFileDeflater(){
+        try{
+            FileInputStream fileInputStream=new FileInputStream(filePath+"tests.txt");
+            FileOutputStream fileOutputStream=new FileOutputStream(filePath+"compressed.txt");
+            DeflaterOutputStream deflaterOutputStream=new DeflaterOutputStream(fileOutputStream);
+
+            int data=0;
+            while((data=fileInputStream.read())!=-1){
+                deflaterOutputStream.write((byte)data);
+            }
+            deflaterOutputStream.flush();
+
+            fileInputStream.close();
+            fileOutputStream.close();
+        }catch (IOException e){
+            e.getMessage();
+        }
+}
+
+public static void serialization(){
+    Blacklist blacklist=new Blacklist();
+    blacklist.setAccountId(2);
+    blacklist.setBlockedBy(3);
+    blacklist.setCommId("+25363773736");
+    blacklist.setComment("You have been added to dnd. we will not contact you again");
+    Date date=new Date();
+    blacklist.setCreateDate(date);
+
+    try {
+        FileOutputStream fileOutputStream = new FileOutputStream(filePath + "objects.txt");
+        ObjectOutputStream objectOutputStream=new ObjectOutputStream(fileOutputStream);
+
+        objectOutputStream.writeObject(blacklist);
+        objectOutputStream.flush();
+        objectOutputStream.close();
+
+    }catch (IOException e){
+        e.getMessage();
+    }
+}
+
+public static void deserialization(){
+        try {
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath + "objects.txt"));
+            Blacklist blacklist=(Blacklist)objectInputStream.readObject();
+            System.out.println(blacklist.toString());
+        }catch (IOException e){
+            e.getMessage();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+}
 }

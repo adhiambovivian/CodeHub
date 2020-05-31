@@ -1,5 +1,6 @@
 package com.codeHub.service;
 
+import org.boon.Str;
 import org.boon.core.Sys;
 
 import java.io.*;
@@ -9,7 +10,11 @@ public class NetworkService extends Thread{
 
     public static void networkCommands(){
          getDocUrlDetails();
-         readWebpage();
+//         readWebpage();
+//         readHttpWebpage();
+         getWebpageHeaders();
+         getWebpageInformation();
+         getPageAddressDetails();
     }
 
     public  void run(){
@@ -93,8 +98,66 @@ public class NetworkService extends Thread{
             while((data=stream.read())!=-1){
                 System.out.print((char)data);
             }
+            stream.close();
         }catch (IOException e){
             e.getMessage();
+        }
+    }
+
+
+    public static void readHttpWebpage(){
+        try{
+            URL url =new URL("https://www.javatpoint.com/URLConnection-class");
+            HttpURLConnection connection =(HttpURLConnection) url.openConnection();
+            InputStream stream=connection.getInputStream();
+
+            int data=0;
+            while((data=stream.read())!=-1){
+                System.out.print((char)data);
+            }
+        }catch (IOException e){
+            e.getMessage();
+        }
+    }
+
+    public static void getWebpageHeaders(){
+        try{
+            URL url =new URL("https://google.com");
+            HttpURLConnection connection =(HttpURLConnection) url.openConnection();
+
+            for(int key=1;key<10;key++){
+                System.out.println(connection.getHeaderFieldKey(key)+" = "+connection.getHeaderField(key));
+            }
+            connection.disconnect();
+        }catch (IOException e){
+            e.getMessage();
+        }
+    }
+
+    public static void getWebpageInformation(){
+        try{
+            URL url =new URL("https://google.com");
+            HttpURLConnection connection =(HttpURLConnection) url.openConnection();
+            StringBuilder stringBuilder=new StringBuilder();
+            stringBuilder.append("method: "+connection.getRequestMethod()).append(" code:"+connection.getResponseCode()).append(" permission: "+connection.getPermission()).
+                    append(" msg: "+connection.getResponseMessage()).append(" encoding: "+connection.getContentEncoding());
+
+            System.out.println(stringBuilder);
+            connection.disconnect();
+        }catch (IOException e){
+            e.getMessage();
+        }
+    }
+
+    public static void getPageAddressDetails(){
+        try{
+            InetAddress ip=InetAddress.getByName("www.ajua.com");
+            StringBuilder stringBuilder=new StringBuilder();
+
+            stringBuilder.append("hostname: "+ip.getHostName()).append(" hostAdd: "+ip.getHostAddress()).append(" canonical Addr: "+ip.getCanonicalHostName());
+            System.out.println(stringBuilder);
+        }catch (IOException e){
+            e.printStackTrace();
         }
     }
 }

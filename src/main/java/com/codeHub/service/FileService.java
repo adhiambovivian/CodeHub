@@ -1,12 +1,38 @@
 package com.codeHub.service;
 
+import org.boon.core.Sys;
+
 import java.io.*;
 import java.security.PermissionCollection;
 import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.Vector;
 
-public class FileService {
+public class FileService{
+
+    public static class CustomFilterWriter extends FilterWriter {
+        CustomFilterWriter(Writer writer) {
+            super(writer);
+        }
+
+        public void write(String val) throws IOException{
+            super.write(val.toLowerCase());
+        }
+    }
+
+    public static class CustomFilterReader extends FilterReader{
+        CustomFilterReader(Reader filterReader){
+            super(filterReader);
+        }
+
+        public int read() throws IOException{
+            int data=super.read();
+            if((char)data == ' ')
+                return (int)'?';
+            else
+                return data;
+        }
+    }
 
     public static void fileCommands() {
 
@@ -38,7 +64,11 @@ public class FileService {
 //        outputStreamWriterMethod();
 //        inputStreamReaderMethod();
 //        pushbackInputStreamMethod();
-        pushbackReaderMethod();
+//        pushbackReaderMethod();
+//        stringWriterMethod();
+//        stringReaderMethod();
+//        pipedReaderWriterMethod();
+        filterReaderWriter();
 
     }
 
@@ -626,5 +656,110 @@ public class FileService {
             e.getMessage();
         }
     }
+
+    public static void stringWriterMethod(){
+        try {
+            long start=System.currentTimeMillis();
+            char[] arr = new char[512];
+            StringWriter stringWriter = new StringWriter();
+            FileInputStream fileInputStream = new FileInputStream(filePath + "final.txt");
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream,"UTF-8"));
+
+            int data;
+            while((data=bufferedReader.read(arr))!=-1){
+                stringWriter.write(arr,0,data);
+            }
+            System.out.println(stringWriter.toString());
+            stringWriter.close();
+            fileInputStream.close();
+            bufferedReader.close();
+            System.out.println("TT string writer: "+(System.currentTimeMillis()-start));
+        }catch (IOException e){
+            e.getMessage();
+        }
+
+    }
+
+    public static void stringReaderMethod(){
+        try {
+            String val = "Helllo hello, it's madaraka day....such an amazing day";
+            StringReader stringReader = new StringReader(val);
+
+            int data = 0;
+            while ((data = stringReader.read()) != -1) {
+                System.out.print((char) data);
+            }
+        }catch (IOException e){
+            e.getMessage();
+        }
+    }
+
+public static void pipedReaderWriterMethod(){
+        try{
+            final PipedReader pipedReader=new PipedReader();
+            final PipedWriter pipedWriter=new PipedWriter(pipedReader);
+
+            Thread readerThread=new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try{
+                        int data=pipedReader.read();
+                        while(data!=-1){
+                            System.out.print((char)data);
+                            data=pipedReader.read();
+                        }
+                        System.out.println("Reader: "+Thread.currentThread().getName());
+
+                    }catch (IOException e){
+                        e.getMessage();
+                    }
+                }
+            });
+
+
+            Thread writerThread =  new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try{
+                        pipedWriter.write("Wah wah wah ... no daze\n".toCharArray());
+                        System.out.println("Writer: "+Thread.currentThread().getName());
+                    }catch (IOException e){
+                        e.getMessage();
+                    }
+                }
+            });
+
+
+            readerThread.start();
+            writerThread.start();
+        }catch (IOException e){
+            e.getMessage();
+        }
+}
+
+//todo: printing own things
+public static void filterReaderWriter(){
+        try{
+            FileWriter fileWriter=new FileWriter(filePath+"template.txt");
+            CustomFilterWriter customFilterWriter=new CustomFilterWriter(fileWriter);
+
+            customFilterWriter.write("ohhh nanannana ohhhh nannannan");
+            FileReader fileReader=new FileReader(filePath+"test.txt");
+            BufferedReader bufferedReader=new BufferedReader(fileReader);
+
+            CustomFilterReader customFilterReader=new CustomFilterReader(bufferedReader);
+
+            int data=customFilterReader.read();
+            while(data != -1){
+                System.out.print((char)data);
+            }
+            bufferedReader.close();
+            fileWriter.close();
+            fileReader.close();
+
+        }catch (IOException e){
+            e.getMessage();
+        }
+}
 
 }

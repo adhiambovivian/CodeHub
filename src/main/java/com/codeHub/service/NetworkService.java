@@ -72,6 +72,7 @@ public class NetworkService extends Thread{
                 append("query: "+url.getQuery()).append("content: "+url.getContent());
 
         System.out.println(stringBuilder.toString());
+        return stringBuilder.toString()
     }
 
 }

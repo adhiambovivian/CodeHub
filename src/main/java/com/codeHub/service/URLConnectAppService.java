@@ -1,4 +1,6 @@
-package com.codeHub;
+package com.codeHub.service;
+
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -6,7 +8,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 
-public class URLConnect {
+@Component
+public class URLConnectAppService {
     public static void getUsers() {
         try {
             URL url = new URL("http://api.msurvey.co.ke:8083/v1/users");

@@ -126,6 +126,7 @@ public class NetworkService extends Thread{
             for(int key=1;key<10;key++){
                 System.out.println(connection.getHeaderFieldKey(key)+" = "+connection.getHeaderField(key));
             }
+            connection.disconnect();
         }catch (IOException e){
             e.getMessage();
         }
@@ -140,6 +141,7 @@ public class NetworkService extends Thread{
                     append(" msg: "+connection.getResponseMessage()).append(" encoding: "+connection.getContentEncoding());
 
             System.out.println(stringBuilder);
+            connection.disconnect();
         }catch (IOException e){
             e.getMessage();
         }

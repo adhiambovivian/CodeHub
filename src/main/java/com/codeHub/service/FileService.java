@@ -40,6 +40,7 @@ public class FileService {
 //        pushbackInputStreamMethod();
 //        pushbackReaderMethod();
         stringWriterMethod();
+        stringReaderMethod();
 
     }
 
@@ -649,6 +650,20 @@ public class FileService {
             e.getMessage();
         }
 
+    }
+
+    public static void stringReaderMethod(){
+        try {
+            String val = "Helllo hello, it's madaraka day....such an amazing day";
+            StringReader stringReader = new StringReader(val);
+
+            int data = 0;
+            while ((data = stringReader.read()) != -1) {
+                System.out.print((char) data);
+            }
+        }catch (IOException e){
+            e.getMessage();
+        }
     }
 
 }

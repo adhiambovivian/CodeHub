@@ -37,7 +37,8 @@ public class FileService {
 //        printWriterFile();
 //        outputStreamWriterMethod();
 //        inputStreamReaderMethod();
-        pushbackInputStreamMethod();
+//        pushbackInputStreamMethod();
+        pushbackReaderMethod();
 
     }
 
@@ -598,6 +599,31 @@ public class FileService {
             }
         }catch (IOException e){
             e.getStackTrace();
+        }
+    }
+//todo
+    public static void pushbackReaderMethod(){
+        try {
+            char arr[] = {'1', '-', '-', '2', '-', '3', '4', '-', '-', '-', '5', '6'};
+            CharArrayReader reader = new CharArrayReader(arr);
+            PushbackReader pushbackReader = new PushbackReader(reader);
+
+            int data = 0;
+            while ((data = pushbackReader.read()) != -1) {
+                if(data == '-'){
+                    int val;
+                    if((val=pushbackReader.read())=='-'){
+                        System.out.println("*************");
+                    }else{
+                        pushbackReader.unread(val);//push back single character
+                        System.out.println((char)data);
+                    }
+                }else{
+                    System.out.println((char)data);
+                }
+            }
+        }catch ( IOException e){
+            e.getMessage();
         }
     }
 

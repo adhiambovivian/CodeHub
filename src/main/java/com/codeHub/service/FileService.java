@@ -1,7 +1,5 @@
 package com.codeHub.service;
 
-import org.boon.core.Sys;
-
 import java.io.*;
 import java.security.PermissionCollection;
 import java.util.Calendar;
@@ -69,7 +67,8 @@ public class FileService{
 //        stringReaderMethod();
 //        pipedReaderWriterMethod();
 //        filterReaderWriter();
-        fileMethods();
+//        fileMethods();
+        fdMethod();
 
     }
 
@@ -779,6 +778,26 @@ public static void fileMethods(){
 
         }catch (IOException e){
             System.out.println("sth went wrong: "+e.getMessage());
+        }
+}
+
+public  static void fdMethod(){
+        FileDescriptor fileDescriptor=null;
+        byte[] bytes={34,55,23,98,27,74,43};
+        try{
+            FileOutputStream fileOutputStream=new FileOutputStream(filePath+"test.txt");
+            FileInputStream fileInputStream=new FileInputStream(filePath+"final.txt");
+
+            fileDescriptor=fileOutputStream.getFD();
+            fileOutputStream.write(bytes);
+            fileOutputStream.flush();
+            fileDescriptor.sync();//confirms data to be written to the disk
+            int data=0;
+            while((data=fileInputStream.read())!=-1){
+                System.out.print((char)data);
+            }
+        }catch (IOException e){
+            e.getMessage();
         }
 }
 

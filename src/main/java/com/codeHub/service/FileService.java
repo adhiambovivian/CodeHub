@@ -2,7 +2,6 @@ package com.codeHub.service;
 
 
 import com.codeHub.models.Blacklist;
-
 import java.io.*;
 import java.security.PermissionCollection;
 import java.util.*;
@@ -74,7 +73,8 @@ public class FileService{
 //        processRandomAccessMethod();
 //        scannerReader();
 //        compressFileDeflater();
-        serialization();
+//        serialization();
+        deserialization();
 
     }
 
@@ -879,5 +879,17 @@ public static void serialization(){
     }catch (IOException e){
         e.getMessage();
     }
+}
+
+public static void deserialization(){
+        try {
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath + "objects.txt"));
+            Blacklist blacklist=(Blacklist)objectInputStream.readObject();
+            System.out.println(blacklist.toString());
+        }catch (IOException e){
+            e.getMessage();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
 }
 }

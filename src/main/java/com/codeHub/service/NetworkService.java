@@ -10,7 +10,8 @@ public class NetworkService extends Thread{
     public static void networkCommands(){
          getDocUrlDetails();
 //         readWebpage();
-         readHttpWebpage();
+//         readHttpWebpage();
+         getWebpageHeaders();
     }
 
     public  void run(){
@@ -94,10 +95,12 @@ public class NetworkService extends Thread{
             while((data=stream.read())!=-1){
                 System.out.print((char)data);
             }
+            stream.close();
         }catch (IOException e){
             e.getMessage();
         }
     }
+
 
     public static void readHttpWebpage(){
         try{
@@ -108,6 +111,19 @@ public class NetworkService extends Thread{
             int data=0;
             while((data=stream.read())!=-1){
                 System.out.print((char)data);
+            }
+        }catch (IOException e){
+            e.getMessage();
+        }
+    }
+
+    public static void getWebpageHeaders(){
+        try{
+            URL url =new URL("https://google.com");
+            HttpURLConnection connection =(HttpURLConnection) url.openConnection();
+
+            for(int key=1;key<10;key++){
+                System.out.println(connection.getHeaderFieldKey(key)+" = "+connection.getHeaderField(key));
             }
         }catch (IOException e){
             e.getMessage();

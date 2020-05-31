@@ -1,5 +1,7 @@
 package com.codeHub.service;
 
+import org.boon.core.Sys;
+
 import java.io.*;
 import java.security.PermissionCollection;
 import java.util.Calendar;
@@ -8,7 +10,7 @@ import java.util.Vector;
 
 public class FileService{
 
-    public class CustomFilterWriter extends FilterWriter {
+    public static class CustomFilterWriter extends FilterWriter {
         CustomFilterWriter(Writer writer) {
             super(writer);
         }
@@ -715,6 +717,26 @@ public static void pipedReaderWriterMethod(){
 
             readerThread.start();
             writerThread.start();
+        }catch (IOException e){
+            e.getMessage();
+        }
+}
+
+public static void filterWriter(){
+        try{
+            FileWriter fileWriter=new FileWriter(filePath+"template.txt");
+            CustomFilterWriter customFilterWriter=new CustomFilterWriter(fileWriter);
+
+            customFilterWriter.write("ohhh nanannana ohhhh nannannan");
+            FileReader fileReader=new FileReader(filePath+"output.txt");
+            BufferedReader bufferedReader=new BufferedReader(fileReader);
+
+            int data=bufferedReader.read();
+            while(data != -1){
+                System.out.print((char)data);
+            }
+            bufferedReader.close();
+
         }catch (IOException e){
             e.getMessage();
         }

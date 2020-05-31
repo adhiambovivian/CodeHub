@@ -3,14 +3,13 @@ package com.codeHub.service;
 import org.boon.core.Sys;
 
 import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.URL;
+import java.net.*;
 
 public class NetworkService extends Thread{
 
     public static void networkCommands(){
          getDocUrlDetails();
+         readWebpage();
     }
 
     public  void run(){
@@ -84,4 +83,18 @@ public class NetworkService extends Thread{
         }
     }
 
+    public static void readWebpage(){
+        try{
+            URL url =new URL("https://www.javatpoint.com/URLConnection-class");
+            URLConnection connection=url.openConnection();
+            InputStream stream=connection.getInputStream();
+
+            int data=0;
+            while((data=stream.read())!=-1){
+                System.out.print((char)data);
+            }
+        }catch (IOException e){
+            e.getMessage();
+        }
+    }
 }

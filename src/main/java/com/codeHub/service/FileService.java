@@ -39,8 +39,9 @@ public class FileService {
 //        inputStreamReaderMethod();
 //        pushbackInputStreamMethod();
 //        pushbackReaderMethod();
-        stringWriterMethod();
-        stringReaderMethod();
+//        stringWriterMethod();
+//        stringReaderMethod();
+        pipedReaderWriterMethod();
 
     }
 
@@ -666,6 +667,47 @@ public class FileService {
         }
     }
 
+public static void pipedReaderWriterMethod(){
+        try{
+            final PipedReader pipedReader=new PipedReader();
+            final PipedWriter pipedWriter=new PipedWriter(pipedReader);
 
+            Thread readerThread=new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try{
+                        int data=pipedReader.read();
+                        while(data!=-1){
+                            System.out.print((char)data);
+                            data=pipedReader.read();
+                        }
+                        System.out.println("Reader: "+Thread.currentThread().getName());
+
+                    }catch (IOException e){
+                        e.getMessage();
+                    }
+                }
+            });
+
+
+            Thread writerThread =  new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try{
+                        pipedWriter.write("Wah wah wah ... no daze\n".toCharArray());
+                        System.out.println("Writer: "+Thread.currentThread().getName());
+                    }catch (IOException e){
+                        e.getMessage();
+                    }
+                }
+            });
+
+
+            readerThread.start();
+            writerThread.start();
+        }catch (IOException e){
+            e.getMessage();
+        }
+}
 
 }

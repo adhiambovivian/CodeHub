@@ -24,7 +24,7 @@ public class NetworkService extends Thread{
             String val="",val2="";
             while(!val.equals("stop")) {
                 val = dataInputStream.readUTF();
-                System.out.println(val);
+                System.out.println("client says: "+val);
 
                 val2=bufferedReader.readLine();
                 dataOutputStream.writeUTF(val2);
@@ -44,8 +44,19 @@ public class NetworkService extends Thread{
         try {
             Socket socket = new Socket("127.0.0.1", 8097);
             DataOutputStream dataOutputStream=new DataOutputStream(socket.getOutputStream());
-            dataOutputStream.writeUTF("hey you ...");
-            dataOutputStream.flush();
+
+            DataInputStream dataInputStream=new DataInputStream(socket.getInputStream());
+            BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(System.in));
+
+            String val="",val2="";
+            while(!val.equals("stop")){
+                val=bufferedReader.readLine();
+                dataOutputStream.writeUTF(val);
+                dataOutputStream.flush();
+                val2=dataInputStream.readUTF();
+                System.out.println("Server says: "+val2);
+            }
+
             dataOutputStream.close();
             socket.close();
         }catch (IOException e){

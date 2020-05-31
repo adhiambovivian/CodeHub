@@ -10,7 +10,7 @@ import java.net.URL;
 public class NetworkService extends Thread{
 
     public static void networkCommands(){
-        clientMethod();
+         getDocUrlDetails();
     }
 
     public  void run(){
@@ -67,9 +67,9 @@ public class NetworkService extends Thread{
 
     public static String getURLdetails(URL url) throws IOException{
         StringBuilder stringBuilder=new StringBuilder();
-        stringBuilder.append("authority: "+url.getAuthority()).append("host: "+url.getHost()).append("port: "+url.getPort()).append("def port: "+url.getDefaultPort()).
-                append("path: "+url.getPath()).append("protocol: "+url.getProtocol()).append("user: "+url.getUserInfo()).append("file: "+url.getFile()).
-                append("query: "+url.getQuery()).append("content: "+url.getContent());
+        stringBuilder.append("authority: "+url.getAuthority()).append(" host: "+url.getHost()).append(" port: "+url.getPort()).append(" def port: "+url.getDefaultPort()).
+                append(" path: "+url.getPath()).append(" protocol: "+url.getProtocol()).append(" user: "+url.getUserInfo()).append(" file: "+url.getFile()).
+                append(" query: "+url.getQuery()).append(" content: "+url.getContent());
         return stringBuilder.toString();
     }
 

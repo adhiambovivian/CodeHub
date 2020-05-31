@@ -68,7 +68,8 @@ public class FileService{
 //        stringWriterMethod();
 //        stringReaderMethod();
 //        pipedReaderWriterMethod();
-        filterReaderWriter();
+//        filterReaderWriter();
+        fileMethods();
 
     }
 
@@ -759,6 +760,19 @@ public static void filterReaderWriter(){
 
         }catch (IOException e){
             e.getMessage();
+        }
+}
+
+public static void fileMethods(){
+        try{
+            File file=new File(filePath+"test.txt");
+            if(file.createNewFile()){
+                System.out.println("Created new file "+file.getName());
+            }else{
+                System.out.println("File with name "+file.getName()+" exists");
+            }
+        }catch (IOException e){
+            System.out.println("sth went wrong: "+e.getMessage());
         }
 }
 

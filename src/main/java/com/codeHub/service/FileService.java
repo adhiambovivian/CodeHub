@@ -38,7 +38,8 @@ public class FileService {
 //        outputStreamWriterMethod();
 //        inputStreamReaderMethod();
 //        pushbackInputStreamMethod();
-        pushbackReaderMethod();
+//        pushbackReaderMethod();
+        stringWriterMethod();
 
     }
 
@@ -625,6 +626,29 @@ public class FileService {
         }catch ( IOException e){
             e.getMessage();
         }
+    }
+
+    public static void stringWriterMethod(){
+        try {
+            long start=System.currentTimeMillis();
+            char[] arr = new char[512];
+            StringWriter stringWriter = new StringWriter();
+            FileInputStream fileInputStream = new FileInputStream(filePath + "final.txt");
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream,"UTF-8"));
+
+            int data;
+            while((data=bufferedReader.read(arr))!=-1){
+                stringWriter.write(arr,0,data);
+            }
+            System.out.println(stringWriter.toString());
+            stringWriter.close();
+            fileInputStream.close();
+            bufferedReader.close();
+            System.out.println("TT string writer: "+(System.currentTimeMillis()-start));
+        }catch (IOException e){
+            e.getMessage();
+        }
+
     }
 
 }

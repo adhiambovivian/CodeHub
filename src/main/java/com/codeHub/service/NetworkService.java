@@ -1,5 +1,6 @@
 package com.codeHub.service;
 
+import org.boon.Str;
 import org.boon.core.Sys;
 
 import java.io.*;
@@ -13,6 +14,7 @@ public class NetworkService extends Thread{
 //         readHttpWebpage();
          getWebpageHeaders();
          getWebpageInformation();
+         getPageAddressDetails();
     }
 
     public  void run(){
@@ -144,6 +146,18 @@ public class NetworkService extends Thread{
             connection.disconnect();
         }catch (IOException e){
             e.getMessage();
+        }
+    }
+
+    public static void getPageAddressDetails(){
+        try{
+            InetAddress ip=InetAddress.getByName("www.ajua.com");
+            StringBuilder stringBuilder=new StringBuilder();
+
+            stringBuilder.append("hostname: "+ip.getHostName()).append(" hostAdd: "+ip.getHostAddress()).append(" canonical Addr: "+ip.getCanonicalHostName());
+            System.out.println(stringBuilder);
+        }catch (IOException e){
+            e.printStackTrace();
         }
     }
 }

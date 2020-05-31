@@ -2,6 +2,7 @@ package com.codeHub;
 
 import com.codeHub.service.CoderService;
 import com.codeHub.service.FileService;
+import com.codeHub.service.NetworkService;
 import com.stripe.exception.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -157,6 +158,9 @@ public class CodeHubApplication {
 
 		CoderService.minor();
         FileService.fileCommands();
+//        NetworkService networkService=new NetworkService();
+//        networkService.run();
+		NetworkService.networkCommands();
 
 
 	}

@@ -37,6 +37,7 @@ public class FileService {
 //        printWriterFile();
 //        outputStreamWriterMethod();
 //        inputStreamReaderMethod();
+        pushbackInputStreamMethod();
 
     }
 
@@ -567,6 +568,36 @@ public class FileService {
             System.out.println("TT by streamReader & stream writer: "+(System.currentTimeMillis()-start));
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void pushbackInputStreamMethod(){
+
+        try {
+            String value = "aldo$zyrie$ksh";
+
+            byte[] valueByte = value.getBytes();
+
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(valueByte);
+            PushbackInputStream pushbackInputStream = new PushbackInputStream(byteArrayInputStream);
+
+            int data = 0;
+            while ((data = pushbackInputStream.read()) != -1) {
+                if(data=='$'){
+                    int val=0;
+                    if((val=pushbackInputStream.read())=='$'){
+                        System.out.println("*************");
+
+                    }else {
+                        pushbackInputStream.unread(val);
+                        System.out.println((char)data);
+                    }
+                }else{
+                    System.out.println((char)data);
+                }
+            }
+        }catch (IOException e){
+            e.getStackTrace();
         }
     }
 

@@ -1,9 +1,12 @@
 package com.codeHub.service;
 
 
+import com.codeHub.models.Blacklist;
+
 import java.io.*;
 import java.security.PermissionCollection;
 import java.util.*;
+import java.util.zip.DeflaterOutputStream;
 
 public class FileService{
 
@@ -69,7 +72,9 @@ public class FileService{
 //        fileMethods();
 //        fdMethod();
 //        processRandomAccessMethod();
-        scannerReader();
+//        scannerReader();
+//        compressFileDeflater();
+        serialization();
 
     }
 
@@ -833,5 +838,46 @@ public static void  scannerReader(){
         String username=scanner.nextLine();
         System.out.println("username: "+username);
         scanner.close();
+}
+//todo: not working
+public static void compressFileDeflater(){
+        try{
+            FileInputStream fileInputStream=new FileInputStream(filePath+"tests.txt");
+            FileOutputStream fileOutputStream=new FileOutputStream(filePath+"compressed.txt");
+            DeflaterOutputStream deflaterOutputStream=new DeflaterOutputStream(fileOutputStream);
+
+            int data=0;
+            while((data=fileInputStream.read())!=-1){
+                deflaterOutputStream.write((byte)data);
+            }
+            deflaterOutputStream.flush();
+
+            fileInputStream.close();
+            fileOutputStream.close();
+        }catch (IOException e){
+            e.getMessage();
+        }
+}
+
+public static void serialization(){
+    Blacklist blacklist=new Blacklist();
+    blacklist.setAccountId(2);
+    blacklist.setBlockedBy(3);
+    blacklist.setCommId("+25363773736");
+    blacklist.setComment("You have been added to dnd. we will not contact you again");
+    Date date=new Date();
+    blacklist.setCreateDate(date);
+
+    try {
+        FileOutputStream fileOutputStream = new FileOutputStream(filePath + "objects.txt");
+        ObjectOutputStream objectOutputStream=new ObjectOutputStream(fileOutputStream);
+
+        objectOutputStream.writeObject(blacklist);
+        objectOutputStream.flush();
+        objectOutputStream.close();
+
+    }catch (IOException e){
+        e.getMessage();
+    }
 }
 }

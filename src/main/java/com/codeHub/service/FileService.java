@@ -66,9 +66,9 @@ public class FileService{
 //        stringWriterMethod();
 //        stringReaderMethod();
 //        pipedReaderWriterMethod();
-//        filterReaderWriter();
+        filterReaderWriter();
 //        fileMethods();
-        fdMethod();
+//        fdMethod();
 
     }
 
@@ -737,7 +737,6 @@ public static void pipedReaderWriterMethod(){
         }
 }
 
-//todo: printing own things
 public static void filterReaderWriter(){
         try{
             FileWriter fileWriter=new FileWriter(filePath+"template.txt");
@@ -749,8 +748,8 @@ public static void filterReaderWriter(){
 
             CustomFilterReader customFilterReader=new CustomFilterReader(bufferedReader);
 
-            int data=customFilterReader.read();
-            while(data != -1){
+            int data=0;
+            while((data = customFilterReader.read())!= -1){
                 System.out.print((char)data);
             }
             bufferedReader.close();

@@ -765,12 +765,18 @@ public static void filterReaderWriter(){
 
 public static void fileMethods(){
         try{
-            File file=new File(filePath+"test.txt");
+            File file=new File(filePath+"tester.txt");
             if(file.createNewFile()){
                 System.out.println("Created new file "+file.getName());
             }else{
-                System.out.println("File with name "+file.getName()+" exists");
+                System.out.println("File with name "+file.getName()+" exists. Path Relative: "+file.getCanonicalPath()+" Absolute path: "+file.getAbsoluteFile());
             }
+
+            File[] files=new File(filePath).listFiles();
+            for(File file1:files){
+                System.out.println("Name: "+file1.getName()+" path: "+file1.getPath()+"Disk space:  "+(file1.getFreeSpace())/1E9+" size: "+file1.length());
+            }
+
         }catch (IOException e){
             System.out.println("sth went wrong: "+e.getMessage());
         }

@@ -20,6 +20,20 @@ public class FileService{
         }
     }
 
+    public static class CustomFilterReader extends FilterReader{
+        CustomFilterReader(Reader filterReader){
+            super(filterReader);
+        }
+
+        public int read() throws IOException{
+            int data=super.read();
+            if((char)data == ' ')
+                return (int)'?';
+            else
+                return data;
+        }
+    }
+
     public static void fileCommands() {
 
 //        readWriteFileInputOutputStream();
@@ -53,7 +67,8 @@ public class FileService{
 //        pushbackReaderMethod();
 //        stringWriterMethod();
 //        stringReaderMethod();
-        pipedReaderWriterMethod();
+//        pipedReaderWriterMethod();
+        filterReaderWriter();
 
     }
 
@@ -722,20 +737,25 @@ public static void pipedReaderWriterMethod(){
         }
 }
 
-public static void filterWriter(){
+//todo: printing own things
+public static void filterReaderWriter(){
         try{
             FileWriter fileWriter=new FileWriter(filePath+"template.txt");
             CustomFilterWriter customFilterWriter=new CustomFilterWriter(fileWriter);
 
             customFilterWriter.write("ohhh nanannana ohhhh nannannan");
-            FileReader fileReader=new FileReader(filePath+"output.txt");
+            FileReader fileReader=new FileReader(filePath+"test.txt");
             BufferedReader bufferedReader=new BufferedReader(fileReader);
 
-            int data=bufferedReader.read();
+            CustomFilterReader customFilterReader=new CustomFilterReader(bufferedReader);
+
+            int data=customFilterReader.read();
             while(data != -1){
                 System.out.print((char)data);
             }
             bufferedReader.close();
+            fileWriter.close();
+            fileReader.close();
 
         }catch (IOException e){
             e.getMessage();

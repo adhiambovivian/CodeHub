@@ -3,10 +3,7 @@ package com.codeHub.service;
 
 import java.io.*;
 import java.security.PermissionCollection;
-import java.util.Calendar;
-import java.util.Enumeration;
-import java.util.RandomAccess;
-import java.util.Vector;
+import java.util.*;
 
 public class FileService{
 
@@ -71,7 +68,8 @@ public class FileService{
 //        filterReaderWriter();
 //        fileMethods();
 //        fdMethod();
-        processRandomAccessMethod();
+//        processRandomAccessMethod();
+        scannerReader();
 
     }
 
@@ -828,4 +826,12 @@ public static void processRandomAccessMethod() {
     }
 }
 
+public static void  scannerReader(){
+        Scanner scanner =new Scanner(System.in);
+        scanner.useDelimiter("\n");
+        System.out.println("Enter your username: ");
+        String username=scanner.nextLine();
+        System.out.println("username: "+username);
+        scanner.close();
+}
 }

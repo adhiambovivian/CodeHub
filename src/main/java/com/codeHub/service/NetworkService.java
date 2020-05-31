@@ -2,9 +2,7 @@ package com.codeHub.service;
 
 import org.boon.core.Sys;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -19,11 +17,23 @@ public class NetworkService extends Thread{
             ServerSocket serverSocket = new ServerSocket(8097);
             Socket socket=serverSocket.accept(); //establish connection and waits for the client
             DataInputStream dataInputStream=new DataInputStream((socket.getInputStream()));
-            String text=(String)dataInputStream.readUTF();
 
-            System.out.println(text);
+            DataOutputStream dataOutputStream=new DataOutputStream(socket.getOutputStream());
+
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+            String val="",val2="";
+            while(!val.equals("stop")) {
+                val = dataInputStream.readUTF();
+                System.out.println(val);
+
+                val2=bufferedReader.readLine();
+                dataOutputStream.writeUTF(val2);
+                dataOutputStream.flush();
+
+            }
             dataInputStream.close();
             serverSocket.close();
+            socket.close();
         }catch (IOException e){
             e.printStackTrace();
         }

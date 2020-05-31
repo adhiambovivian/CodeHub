@@ -158,8 +158,8 @@ public class CodeHubApplication {
 
 		CoderService.minor();
         FileService.fileCommands();
-        NetworkService networkService=new NetworkService();
-        networkService.run();
+//        NetworkService networkService=new NetworkService();
+//        networkService.run();
 		NetworkService.networkCommands();
 
 

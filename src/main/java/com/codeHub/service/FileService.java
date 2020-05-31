@@ -60,13 +60,13 @@ public class FileService{
 //        printWriterConsole();
 //        printWriterFile();
 //        outputStreamWriterMethod();
-//        inputStreamReaderMethod();
+        inputStreamReaderMethod();
 //        pushbackInputStreamMethod();
 //        pushbackReaderMethod();
 //        stringWriterMethod();
 //        stringReaderMethod();
 //        pipedReaderWriterMethod();
-        filterReaderWriter();
+//        filterReaderWriter();
 //        fileMethods();
 //        fdMethod();
 
@@ -581,7 +581,6 @@ public class FileService{
         }
     }
 
-    //todo: generates big file size
     public static void inputStreamReaderMethod() {
         try {
             long start=System.currentTimeMillis();
@@ -591,8 +590,8 @@ public class FileService{
             InputStream inputStream=new FileInputStream(filePath+"final.txt");
             Reader reader=new InputStreamReader(inputStream);
 
-            int data=reader.read();
-            while(data!=-1) {
+            int data=0;
+            while((data=reader.read())!=-1) {
                 writer.write((char)data);
             }
             writer.close();

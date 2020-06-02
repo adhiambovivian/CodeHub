@@ -9,12 +9,14 @@ import java.net.*;
 public class NetworkService extends Thread{
 
     public static void networkCommands(){
-         getDocUrlDetails();
+//         getDocUrlDetails();
 //         readWebpage();
 //         readHttpWebpage();
-         getWebpageHeaders();
-         getWebpageInformation();
-         getPageAddressDetails();
+//         getWebpageHeaders();
+//         getWebpageInformation();
+//         getPageAddressDetails();
+         sendDatagramPacket();
+         receiveDatagramPacket();
     }
 
     public  void run(){
@@ -174,5 +176,24 @@ public class NetworkService extends Thread{
             e.printStackTrace();
         }
 
+    }
+
+    public static void receiveDatagramPacket(){
+        try {
+            Thread.sleep(1000);
+
+            DatagramSocket datagramSocket = new DatagramSocket(8099);
+            byte[] buf=new byte[1024];
+            DatagramPacket datagramPacket = new DatagramPacket(buf,1024);
+            datagramSocket.receive(datagramPacket);
+
+            String val=new String(datagramPacket.getData(),0,datagramPacket.getLength());
+            System.out.println(val);
+            datagramSocket.close();
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }

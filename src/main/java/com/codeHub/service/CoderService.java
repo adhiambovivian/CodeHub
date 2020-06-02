@@ -1,5 +1,6 @@
 package com.codeHub.service;
 
+import com.codeHub.models.Blacklist;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.io.*;
@@ -61,6 +62,8 @@ StringBuffer
 
         CoderService coderService=new CoderService();
         coderService.forNameMethod();
+
+        getClassMethod();
 
     }
 
@@ -154,6 +157,7 @@ StringBuffer
 
 
     }
+    //todo: generating classexcp
 
     public  void forNameMethod(){
         try {
@@ -162,6 +166,12 @@ StringBuffer
         }catch (ClassNotFoundException e){
             e.printStackTrace();
         }
+    }
+
+    public static void getClassMethod(){
+        Blacklist blacklist=new Blacklist();
+        Class classVal=blacklist.getClass();
+        System.out.println("Class det: "+classVal.getName());
     }
 
 

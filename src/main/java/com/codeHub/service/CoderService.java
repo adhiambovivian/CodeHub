@@ -177,11 +177,20 @@ StringBuffer
     }
 
     public static void dotClassMethod(){
-        Class classVal=boolean.class;
-        System.out.println(classVal.toString());
 
-        Class classVal2=CoderService.class;
-        System.out.println("details: "+classVal2.toString()+" interface check: "+classVal2.isInterface()+" "+classVal2.isArray());
+        try {
+            Class classVal = boolean.class;
+            System.out.println(classVal.toString());
+
+            Class classVal2 = Blacklist.class;
+            System.out.println("details: " + classVal2.toString() + " interface check: " + classVal2.isInterface() + " " + classVal2.isArray());
+
+            Blacklist blacklist = (Blacklist) classVal2.newInstance();
+            blacklist.setCommId("+272727727272");
+            System.out.println(blacklist.toString());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 

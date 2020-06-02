@@ -39,27 +39,28 @@ public class CoderService {
 
         String st1=s3.intern();
 
-//StringBuffer
+/*
+StringBuffer
+ */
+/*
 
         StringBuffer sb=new StringBuffer("wow");
         System.out.println(sb.append(""));
 
-    //insert()
-//        sb.insert(1,"wow ");
-//        sb.replace(1,3,"Nice");
-//        sb.delete(1,3);
+        sb.insert(1,"wow ");
+        sb.replace(1,3,"Nice");
+        sb.delete(1,3);
         sb.reverse();
 
         System.out.println(sb);
-        CoderService.compareStringConcatPerformance();
+        compareStringConcatPerformance();
         stringTokenizing();
-        stringBytes();
+ */
+//        patternMatching();
+//        toConsole();
 
-        String schinese="ni3好你好";
-                //"hao3,  你好,  感feeling,  愛,  子hao, shànghǎi,  ni3好";
-        System.out.println("No xters in chinese word: "+schinese+" "+schinese.length());
-        //patternMatching();
-        //toConsole();
+        CoderService coderService=new CoderService();
+        coderService.forNameMethod();
 
     }
 
@@ -152,6 +153,15 @@ public class CoderService {
         System.out.println(Pattern.matches("[789]{1}\\d{9}", "3853038949"));//false (starts from 3)
 
 
+    }
+
+    public  void forNameMethod(){
+        try {
+            Class classVal = Class.forName("CoderService");
+            System.out.println("Class details: " + classVal.toString());
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
     }
 
 

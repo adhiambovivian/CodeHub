@@ -15,8 +15,8 @@ public class NetworkService extends Thread{
 //         getWebpageHeaders();
 //         getWebpageInformation();
 //         getPageAddressDetails();
-         sendDatagramPacket();
-         receiveDatagramPacket();
+//         sendDatagramPacket();
+//         receiveDatagramPacket();
     }
 
     public  void run(){

@@ -160,4 +160,19 @@ public class NetworkService extends Thread{
             e.printStackTrace();
         }
     }
+
+    public static void sendDatagramPacket(){
+        try {
+            DatagramSocket datagramSocket = new DatagramSocket();
+            String val = "Welcome to today's session... hope y'al have fun";
+            InetAddress ip=InetAddress.getByName("127.0.0.1");
+            DatagramPacket datagramPacket=new DatagramPacket(val.getBytes(),val.length(),ip,8099);
+
+            datagramSocket.send(datagramPacket);
+            datagramSocket.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
 }

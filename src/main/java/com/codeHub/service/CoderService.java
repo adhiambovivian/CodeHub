@@ -1,6 +1,7 @@
 package com.codeHub.service;
 
 import com.codeHub.models.Blacklist;
+import org.boon.core.Sys;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.io.*;
@@ -59,11 +60,12 @@ StringBuffer
  */
 //        patternMatching();
 //        toConsole();
+//
+//        CoderService coderService=new CoderService();
+//        coderService.forNameMethod();
 
-        CoderService coderService=new CoderService();
-        coderService.forNameMethod();
-
-        getClassMethod();
+//        getClassMethod();
+        dotClassMethod();
 
     }
 
@@ -172,6 +174,14 @@ StringBuffer
         Blacklist blacklist=new Blacklist();
         Class classVal=blacklist.getClass();
         System.out.println("Class det: "+classVal.getName());
+    }
+
+    public static void dotClassMethod(){
+        Class classVal=boolean.class;
+        System.out.println(classVal.toString());
+
+        Class classVal2=CoderService.class;
+        System.out.println("details: "+classVal2.toString()+" interface check: "+classVal2.isInterface()+" "+classVal2.isArray());
     }
 
 

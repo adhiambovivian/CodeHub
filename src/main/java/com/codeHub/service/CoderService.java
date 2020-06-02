@@ -1,5 +1,7 @@
 package com.codeHub.service;
 
+import com.codeHub.models.Blacklist;
+import org.boon.core.Sys;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.io.*;
@@ -39,27 +41,31 @@ public class CoderService {
 
         String st1=s3.intern();
 
-//StringBuffer
+/*
+StringBuffer
+ */
+/*
 
         StringBuffer sb=new StringBuffer("wow");
         System.out.println(sb.append(""));
 
-    //insert()
-//        sb.insert(1,"wow ");
-//        sb.replace(1,3,"Nice");
-//        sb.delete(1,3);
+        sb.insert(1,"wow ");
+        sb.replace(1,3,"Nice");
+        sb.delete(1,3);
         sb.reverse();
 
         System.out.println(sb);
-        CoderService.compareStringConcatPerformance();
+        compareStringConcatPerformance();
         stringTokenizing();
-        stringBytes();
+ */
+//        patternMatching();
+//        toConsole();
+//
+//        CoderService coderService=new CoderService();
+//        coderService.forNameMethod();
 
-        String schinese="ni3好你好";
-                //"hao3,  你好,  感feeling,  愛,  子hao, shànghǎi,  ni3好";
-        System.out.println("No xters in chinese word: "+schinese+" "+schinese.length());
-        //patternMatching();
-        //toConsole();
+//        getClassMethod();
+        dotClassMethod();
 
     }
 
@@ -152,6 +158,30 @@ public class CoderService {
         System.out.println(Pattern.matches("[789]{1}\\d{9}", "3853038949"));//false (starts from 3)
 
 
+    }
+    //todo: generating classexcp
+
+    public  void forNameMethod(){
+        try {
+            Class classVal = Class.forName("CoderService");
+            System.out.println("Class details: " + classVal.toString());
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void getClassMethod(){
+        Blacklist blacklist=new Blacklist();
+        Class classVal=blacklist.getClass();
+        System.out.println("Class det: "+classVal.getName());
+    }
+
+    public static void dotClassMethod(){
+        Class classVal=boolean.class;
+        System.out.println(classVal.toString());
+
+        Class classVal2=CoderService.class;
+        System.out.println("details: "+classVal2.toString()+" interface check: "+classVal2.isInterface()+" "+classVal2.isArray());
     }
 
 

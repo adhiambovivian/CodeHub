@@ -9,12 +9,14 @@ import java.net.*;
 public class NetworkService extends Thread{
 
     public static void networkCommands(){
-         getDocUrlDetails();
+//         getDocUrlDetails();
 //         readWebpage();
 //         readHttpWebpage();
-         getWebpageHeaders();
-         getWebpageInformation();
-         getPageAddressDetails();
+//         getWebpageHeaders();
+//         getWebpageInformation();
+//         getPageAddressDetails();
+//         sendDatagramPacket();
+//         receiveDatagramPacket();
     }
 
     public  void run(){
@@ -156,6 +158,40 @@ public class NetworkService extends Thread{
 
             stringBuilder.append("hostname: "+ip.getHostName()).append(" hostAdd: "+ip.getHostAddress()).append(" canonical Addr: "+ip.getCanonicalHostName());
             System.out.println(stringBuilder);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void sendDatagramPacket(){
+        try {
+            DatagramSocket datagramSocket = new DatagramSocket();
+            String val = "Welcome to today's session... hope y'al have fun";
+            InetAddress ip=InetAddress.getByName("127.0.0.1");
+            DatagramPacket datagramPacket=new DatagramPacket(val.getBytes(),val.length(),ip,8099);
+
+            datagramSocket.send(datagramPacket);
+            datagramSocket.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void receiveDatagramPacket(){
+        try {
+            Thread.sleep(1000);
+
+            DatagramSocket datagramSocket = new DatagramSocket(8099);
+            byte[] buf=new byte[1024];
+            DatagramPacket datagramPacket = new DatagramPacket(buf,1024);
+            datagramSocket.receive(datagramPacket);
+
+            String val=new String(datagramPacket.getData(),0,datagramPacket.getLength());
+            System.out.println(val);
+            datagramSocket.close();
+        }catch (InterruptedException e){
+            e.printStackTrace();
         }catch (IOException e){
             e.printStackTrace();
         }

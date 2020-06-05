@@ -5,6 +5,9 @@ import org.boon.core.Sys;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.io.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
@@ -65,7 +68,8 @@ StringBuffer
 //        coderService.forNameMethod();
 
 //        getClassMethod();
-        dotClassMethod();
+//        dotClassMethod();
+        getClassDetails();
 
     }
 
@@ -177,11 +181,44 @@ StringBuffer
     }
 
     public static void dotClassMethod(){
-        Class classVal=boolean.class;
-        System.out.println(classVal.toString());
 
-        Class classVal2=CoderService.class;
-        System.out.println("details: "+classVal2.toString()+" interface check: "+classVal2.isInterface()+" "+classVal2.isArray());
+        try {
+            Class classVal = boolean.class;
+            System.out.println(classVal.toString());
+
+            Class classVal2 = Blacklist.class;
+            System.out.println("details: " + classVal2.toString() + " interface check: " + classVal2.isInterface() + " " + classVal2.isArray());
+
+            Blacklist blacklist = (Blacklist) classVal2.newInstance();
+            blacklist.setCommId("+272727727272");
+            System.out.println(blacklist.toString());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public static void getClassDetails(){
+        FileService fileService=new FileService();
+
+        Field field[] = fileService.getClass().getDeclaredFields();
+        System.out.println("Fields: .......");
+        for(int i=0;i<field.length;i++)
+            System.out.println(field[i]);
+        System.out.println("Constructors: ..........");
+        Constructor constructor[]=fileService.getClass().getDeclaredConstructors();
+        for(int i=0;i<constructor.length;i++){
+            System.out.println(constructor[i]);
+        }
+
+        System.out.println("Methods: .......");
+        Method method []= fileService.getClass().getDeclaredMethods();
+        for (int i=0;i<method.length;i++){
+            System.out.println(method[i]);
+        }
+
+
+
+
+
     }
 
 

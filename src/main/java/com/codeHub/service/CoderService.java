@@ -196,30 +196,28 @@ StringBuffer
             e.printStackTrace();
         }
     }
-    public static void getClassDetails(){
-        FileService fileService=new FileService();
+    public static void getClassDetails() {
+        FileService fileService = new FileService();
 
         Field field[] = fileService.getClass().getDeclaredFields();
         System.out.println("Fields: .......");
-        for(int i=0;i<field.length;i++)
+        for (int i = 0; i < field.length; i++)
             System.out.println(field[i]);
         System.out.println("Constructors: ..........");
-        Constructor constructor[]=fileService.getClass().getDeclaredConstructors();
-        for(int i=0;i<constructor.length;i++){
+        Constructor constructor[] = fileService.getClass().getDeclaredConstructors();
+        for (int i = 0; i < constructor.length; i++) {
             System.out.println(constructor[i]);
         }
 
         System.out.println("Methods: .......");
-        Method method []= fileService.getClass().getDeclaredMethods();
-        for (int i=0;i<method.length;i++){
+        Method method[] = fileService.getClass().getDeclaredMethods();
+        for (int i = 0; i < method.length; i++) {
             System.out.println(method[i]);
         }
 
-
-
-
-
     }
-
+    private static void printMessage(){
+            System.out.println("Hello Helllo");
+        }
 
 }

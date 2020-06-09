@@ -6,6 +6,9 @@ import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.PermissionCollection;
 import java.util.*;
 import java.util.zip.DeflaterOutputStream;
@@ -78,7 +81,8 @@ public class FileService{
 //        compressFileDeflater();
 //        serialization();
 //        deserialization();
-        copyData();
+//        copyData();
+        readDataFiles();
 
     }
 
@@ -922,5 +926,23 @@ public static void copyData(){
             catch (IOException e){
             e.printStackTrace();
         }
-}
+    }
+
+    public static void readDataFiles(){
+        try{
+            long start = System.currentTimeMillis();
+            Path path = Paths.get(filePath+"final.txt");
+            InputStream inputStream = Files.newInputStream(path);
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            int data=0;
+            while((data=bufferedReader.read())!=-1)
+            System.out.print((char)data);
+            bufferedReader.close();
+            inputStream.close();
+
+            System.out.println("TT: "+(System.currentTimeMillis()-start));
+        }catch (IOException e){
+            e.printStackTrace();
+           }
+        }
 }

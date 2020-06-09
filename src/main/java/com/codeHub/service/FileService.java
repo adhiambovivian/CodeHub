@@ -3,6 +3,9 @@ package com.codeHub.service;
 
 import com.codeHub.models.Blacklist;
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.ReadableByteChannel;
+import java.nio.channels.WritableByteChannel;
 import java.security.PermissionCollection;
 import java.util.*;
 import java.util.zip.DeflaterOutputStream;
@@ -75,6 +78,7 @@ public class FileService{
 //        compressFileDeflater();
 //        serialization();
 //        deserialization();
+        copyData();
 
     }
 
@@ -889,6 +893,33 @@ public static void deserialization(){
         }catch (IOException e){
             e.getMessage();
         }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+}
+
+public static void copyData(){
+        try {
+            long start=System.currentTimeMillis();
+            FileInputStream fileInputStream = new FileInputStream(filePath + "final.txt");
+            ReadableByteChannel source = fileInputStream.getChannel();
+
+            FileOutputStream fileOutputStream = new FileOutputStream(filePath + "test.txt");
+            WritableByteChannel destination = fileOutputStream.getChannel();
+            ByteBuffer buffer = ByteBuffer.allocateDirect(20 * 1024);
+            while (source.read(buffer) != -1) {
+                //buffer is to be used to drained
+                buffer.flip();
+                //ensure buffer is fully drained
+                while (buffer.hasRemaining()) {
+                    destination.write(buffer);
+                }
+                buffer.clear(); //now the buffer is empty, ready for filling
+            }
+            source.close();
+            destination.close();
+            System.out.println("TT: "+(System.currentTimeMillis()-start));
+        }
+            catch (IOException e){
             e.printStackTrace();
         }
 }

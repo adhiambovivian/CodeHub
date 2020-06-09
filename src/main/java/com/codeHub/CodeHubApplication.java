@@ -157,22 +157,25 @@ public class CodeHubApplication {
 		System.out.println("Failed count: "+failed);
 */
 
+/**
+ * File commands
+ */
 		CoderService.minor();
         FileService.fileCommands();
 //        NetworkService networkService=new NetworkService();
 //        networkService.run();
-		NetworkService.networkCommands();
+//		NetworkService.networkCommands();
 
 		/**
 		 * Get private method at runtime
 		 */
-
+/*
 		Class classVal=Class.forName("com.codeHub.service.CoderService");
 		Object object=classVal.newInstance();
 		Method method=classVal.getDeclaredMethod("printMessage",null);
 		method.setAccessible(true);
 		method.invoke(object,null);
-
+*/
 	}
 
 

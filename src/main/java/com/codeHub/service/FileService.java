@@ -2,8 +2,12 @@ package com.codeHub.service;
 
 
 import com.codeHub.models.Blacklist;
+import org.boon.primitive.ByteBuf;
+
 import java.io.*;
 import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.channels.GatheringByteChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
 import java.nio.file.Files;
@@ -82,7 +86,8 @@ public class FileService{
 //        serialization();
 //        deserialization();
 //        copyData();
-        readDataFiles();
+//        readDataFiles();
+        gatherBytes();
 
     }
 
@@ -945,4 +950,26 @@ public static void copyData(){
             e.printStackTrace();
            }
         }
+
+        //todo: unable to open file
+    public static void gatherBytes() {
+
+        try {
+            //1st buffer is used for holding a random number
+            ByteBuffer buffer = ByteBuffer.allocate(8);
+            //2nd buffer is used for holding data that's to be written
+            ByteBuffer buffer1 = ByteBuffer.allocate(400);
+            buffer.asIntBuffer().put(420);
+            buffer1.asCharBuffer().put("Wow Wow weeu weeeeu asgsgsgajauwuuwnsn shhshsuuwuwu shbxbuss");
+
+            FileChannel fileChannel = new FileOutputStream(filePath + "test.txt").getChannel();
+
+            GatheringByteChannel gatherer = fileChannel;
+            //write data to file
+            gatherer.write(new ByteBuffer[]{buffer, buffer1});
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -2,10 +2,15 @@ package com.codeHub.service;
 
 
 import com.codeHub.models.Blacklist;
+import org.boon.core.Sys;
+import org.boon.primitive.ByteBuf;
+
 import java.io.*;
 import java.nio.ByteBuffer;
-import java.nio.channels.ReadableByteChannel;
-import java.nio.channels.WritableByteChannel;
+import java.nio.channels.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.PermissionCollection;
 import java.util.*;
 import java.util.zip.DeflaterOutputStream;
@@ -78,7 +83,11 @@ public class FileService{
 //        compressFileDeflater();
 //        serialization();
 //        deserialization();
-        copyData();
+//        copyData();
+//        readDataFiles();
+//        gatherBytes();
+//        scatterBytes();
+        combineFiles();
 
     }
 
@@ -922,5 +931,93 @@ public static void copyData(){
             catch (IOException e){
             e.printStackTrace();
         }
-}
+    }
+
+    public static void readDataFiles(){
+        try{
+            long start = System.currentTimeMillis();
+            Path path = Paths.get(filePath+"final.txt");
+            InputStream inputStream = Files.newInputStream(path);
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            int data=0;
+            while((data=bufferedReader.read())!=-1)
+            System.out.print((char)data);
+            bufferedReader.close();
+            inputStream.close();
+
+            System.out.println("TT: "+(System.currentTimeMillis()-start));
+        }catch (IOException e){
+            e.printStackTrace();
+           }
+        }
+
+        //todo: unable to open file
+    public static void gatherBytes() {
+
+        try {
+            //1st buffer is used for holding a random number
+            ByteBuffer buffer = ByteBuffer.allocate(8);
+            //2nd buffer is used for holding data that's to be written
+            ByteBuffer buffer1 = ByteBuffer.allocate(400);
+            buffer.asIntBuffer().put(420);
+            buffer1.asCharBuffer().put("Wow Wow weeu weeeeu asgsgsgajauwuuwnsn shhshsuuwuwu shbxbuss");
+
+            FileChannel fileChannel = new FileOutputStream(filePath + "test.txt").getChannel();
+
+            GatheringByteChannel gatherer = fileChannel;
+            //write data to file
+            gatherer.write(new ByteBuffer[]{buffer, buffer1});
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void scatterBytes(){
+        try{
+            ByteBuffer buffer = ByteBuffer.allocate(8);
+            ByteBuffer buffer1 = ByteBuffer.allocate(400);
+
+            FileChannel fileChannel = new FileInputStream(filePath + "test.txt").getChannel();
+
+            ScatteringByteChannel scatter =fileChannel;
+            scatter.read(new ByteBuffer[]{buffer,buffer1});
+
+            //read the two buffers separately
+            buffer.rewind();
+            buffer1.rewind();
+
+            int bufferOne=buffer.asIntBuffer().get();
+            String bufferTwo=buffer1.asCharBuffer().toString();
+            //verify content
+
+            System.out.println(bufferOne);
+            System.out.println(bufferTwo);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    //todo: open file
+    public static void combineFiles() {
+        try {
+            String[] filePaths = new String[]{filePath + "test.txt", filePath + "test copy 2.txt", filePath + "test copy 3.txt", filePath + "test copy 4.txt"};
+            FileOutputStream outputStream = new FileOutputStream(new File(filePath + "output.txt"));
+            WritableByteChannel targetChannel = outputStream.getChannel();
+
+            for (int i = 0; i < filePaths.length; i++) {
+                FileInputStream inputStream = new FileInputStream(filePaths[i]);
+                FileChannel fileChannel = inputStream.getChannel();
+
+                fileChannel.transferTo(0, fileChannel.size(), targetChannel);
+                fileChannel.close();
+                inputStream.close();
+            }
+
+            targetChannel.close();
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

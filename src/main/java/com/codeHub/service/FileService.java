@@ -2,14 +2,12 @@ package com.codeHub.service;
 
 
 import com.codeHub.models.Blacklist;
+import org.boon.core.Sys;
 import org.boon.primitive.ByteBuf;
 
 import java.io.*;
 import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
-import java.nio.channels.GatheringByteChannel;
-import java.nio.channels.ReadableByteChannel;
-import java.nio.channels.WritableByteChannel;
+import java.nio.channels.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -87,7 +85,9 @@ public class FileService{
 //        deserialization();
 //        copyData();
 //        readDataFiles();
-        gatherBytes();
+//        gatherBytes();
+//        scatterBytes();
+        combineFiles();
 
     }
 
@@ -968,6 +968,54 @@ public static void copyData(){
             //write data to file
             gatherer.write(new ByteBuffer[]{buffer, buffer1});
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void scatterBytes(){
+        try{
+            ByteBuffer buffer = ByteBuffer.allocate(8);
+            ByteBuffer buffer1 = ByteBuffer.allocate(400);
+
+            FileChannel fileChannel = new FileInputStream(filePath + "test.txt").getChannel();
+
+            ScatteringByteChannel scatter =fileChannel;
+            scatter.read(new ByteBuffer[]{buffer,buffer1});
+
+            //read the two buffers separately
+            buffer.rewind();
+            buffer1.rewind();
+
+            int bufferOne=buffer.asIntBuffer().get();
+            String bufferTwo=buffer1.asCharBuffer().toString();
+            //verify content
+
+            System.out.println(bufferOne);
+            System.out.println(bufferTwo);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    //todo: open file
+    public static void combineFiles() {
+        try {
+            String[] filePaths = new String[]{filePath + "test.txt", filePath + "test copy 2.txt", filePath + "test copy 3.txt", filePath + "test copy 4.txt"};
+            FileOutputStream outputStream = new FileOutputStream(new File(filePath + "output.txt"));
+            WritableByteChannel targetChannel = outputStream.getChannel();
+
+            for (int i = 0; i < filePaths.length; i++) {
+                FileInputStream inputStream = new FileInputStream(filePaths[i]);
+                FileChannel fileChannel = inputStream.getChannel();
+
+                fileChannel.transferTo(0, fileChannel.size(), targetChannel);
+                fileChannel.close();
+                inputStream.close();
+            }
+
+            targetChannel.close();
+            outputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

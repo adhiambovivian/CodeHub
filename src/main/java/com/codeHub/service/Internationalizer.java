@@ -1,12 +1,15 @@
 package com.codeHub.service;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Internationalizer {
     public static void internationalierCmds(){
         //printLocalDetails();
-        translateMessages();
+//        translateMessages();
+        dateLocalization();
     }
     public static void printLocalDetails(){
         Locale [] locales=Locale.getAvailableLocales();
@@ -38,6 +41,21 @@ public class Internationalizer {
         ResourceBundle bundle = ResourceBundle.getBundle("messages",new Locale("luo","KE"));
         System.out.println("Message: "+bundle.getString("greeting1"));
 
+    }
+
+    public static void dateLocalization(){
+        Locale[] locales=Locale.getAvailableLocales();
+        for(Locale locale:locales) {
+            try {
+                DateFormat format=DateFormat.getDateInstance(DateFormat.DEFAULT,locale);
+                Date currentDate=new Date();
+                String date = format.format(currentDate);
+                System.out.println("country>\t"+locale.getCountry()+"\t"+date+" "+locale);
+            } catch (Exception e) {
+                e.printStackTrace();
+                continue;
+            }
+        }
     }
 
 

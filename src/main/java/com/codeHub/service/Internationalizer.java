@@ -9,7 +9,7 @@ public class Internationalizer {
     public static void internationalierCmds(){
         //printLocalDetails();
 //        translateMessages();
-        dateLocalization();
+        dateTimeLocalization();
     }
     public static void printLocalDetails(){
         Locale [] locales=Locale.getAvailableLocales();
@@ -43,14 +43,18 @@ public class Internationalizer {
 
     }
 
-    public static void dateLocalization(){
+    public static void dateTimeLocalization(){
         Locale[] locales=Locale.getAvailableLocales();
         for(Locale locale:locales) {
             try {
                 DateFormat format=DateFormat.getDateInstance(DateFormat.DEFAULT,locale);
+                DateFormat formatTime=DateFormat.getTimeInstance(DateFormat.DEFAULT,locale);
+
                 Date currentDate=new Date();
                 String date = format.format(currentDate);
-                System.out.println("country>\t"+locale.getCountry()+"\t"+date+" "+locale);
+                String time=formatTime.format(currentDate);
+
+                System.out.println("country>\t"+locale+"\t"+date+"\t"+time);
             } catch (Exception e) {
                 e.printStackTrace();
                 continue;

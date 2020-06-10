@@ -22,4 +22,4 @@ docker exec -it --user=solr <container-id> bin/solr create_core -c participants
 
 #Running the application
 
-mvn spring-boot:run -Drun.jvmArguments='-Dserver.port=7090
+mvn spring-boot:run -Drun.jvmArguments='-Dserver.port=7090'

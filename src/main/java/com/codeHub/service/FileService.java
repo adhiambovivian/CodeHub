@@ -2,8 +2,6 @@ package com.codeHub.service;
 
 
 import com.codeHub.models.Blacklist;
-import org.boon.core.Sys;
-import org.boon.primitive.ByteBuf;
 
 import java.io.*;
 import java.net.InetSocketAddress;
@@ -88,7 +86,8 @@ public class FileService{
 //        readDataFiles();
 //        gatherBytes();
 //        scatterBytes();
-        combineFiles();
+//        combineFiles();
+        serverSelectors();
 
     }
 
@@ -1069,6 +1068,31 @@ public static void copyData(){
                 }
             }
         }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void clientSelector(){
+
+        try {
+            InetSocketAddress address = new InetSocketAddress("localhost", 8090);
+            SocketChannel client = SocketChannel.open(address);
+            System.out.println("Client is sending msg to server...");
+            String [] msg =  new String[] {"Time flies","What a year!!!!","Bye bye"};
+
+            for(int i=0; i<msg.length;i++){
+                byte[] byteMsg=new String(msg[i]).getBytes();
+                ByteBuffer buffer = ByteBuffer.wrap(byteMsg);
+                client.write(buffer);
+
+                System.out.println(msg[i]);
+                buffer.clear();
+                Thread.sleep(2000);
+            }
+            client.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }catch (InterruptedException e){
             e.printStackTrace();
         }
     }

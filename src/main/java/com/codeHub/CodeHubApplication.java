@@ -1,10 +1,7 @@
 package com.codeHub;
 
 import com.codeHub.models.Blacklist;
-import com.codeHub.service.CoderService;
-import com.codeHub.service.FileService;
-import com.codeHub.service.NetworkService;
-import com.codeHub.service.RmiService;
+import com.codeHub.service.*;
 import com.stripe.exception.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -183,12 +180,12 @@ public class CodeHubApplication {
 */
 
 //RMI: server
-//		Remote remote = new RmiService();
-//		Naming.rebind("rmi://localhost:8070/lol",remote);
+		Remote remote = new RmiService();
+		Naming.rebind("rmi://localhost:8070/lol",remote);
 
 //RMI: client
 
-		RmiService dnd=(RmiService)Naming.lookup("rmi://localhost:8070/lol");
+		DNDInterface dnd=(DNDInterface)Naming.lookup("rmi://localhost:8070/lol");
 
 		List<Blacklist> listDnd=dnd.getDndList();
 		for(Blacklist person:listDnd){

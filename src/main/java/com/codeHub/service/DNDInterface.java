@@ -6,7 +6,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-interface DNDInterface extends Remote {
+public interface DNDInterface extends Remote {
 
     public List<Blacklist> getDndList() throws RemoteException;
 

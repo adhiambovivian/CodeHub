@@ -60,9 +60,10 @@ public class Internationalizer {
                 NumberFormat numberFormat=NumberFormat.getNumberInstance(locale);
                 String number = numberFormat.format(digit);
 
+                NumberFormat currencyFormat=NumberFormat.getCurrencyInstance(locale);
+                String currency=currencyFormat.format(digit);
 
-
-                System.out.println("<country> "+locale+"\t"+date+"\t"+time+" <Number> "+number);
+                System.out.println("<country> "+locale+"\t"+date+"\t"+time+" <Number> "+number+" <Currency> "+currency);
             } catch (Exception e) {
                 e.printStackTrace();
                 continue;

@@ -1,6 +1,7 @@
 package com.codeHub.service;
 
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -45,6 +46,7 @@ public class Internationalizer {
 
     public static void dateTimeLocalization(){
         Locale[] locales=Locale.getAvailableLocales();
+        double digit=1818.383830;
         for(Locale locale:locales) {
             try {
                 DateFormat format=DateFormat.getDateInstance(DateFormat.DEFAULT,locale);
@@ -54,7 +56,13 @@ public class Internationalizer {
                 String date = format.format(currentDate);
                 String time=formatTime.format(currentDate);
 
-                System.out.println("country>\t"+locale+"\t"+date+"\t"+time);
+                //format numbers
+                NumberFormat numberFormat=NumberFormat.getNumberInstance(locale);
+                String number = numberFormat.format(digit);
+
+
+
+                System.out.println("<country> "+locale+"\t"+date+"\t"+time+" <Number> "+number);
             } catch (Exception e) {
                 e.printStackTrace();
                 continue;

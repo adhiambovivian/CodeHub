@@ -87,7 +87,8 @@ public class FileService{
 //        gatherBytes();
 //        scatterBytes();
 //        combineFiles();
-        serverSelectors();
+//        serverSelectors();
+        pipeServerClient();
 
     }
 
@@ -1095,5 +1096,39 @@ public static void copyData(){
         }catch (InterruptedException e){
             e.printStackTrace();
         }
+    }
+
+    public static void pipeServerClient(){
+        try {
+            //create pipe
+            Pipe pipe = Pipe.open();
+            //access the pipe sink channel
+            Pipe.SinkChannel sinkChannel=pipe.sink();
+            String data ="Blah blah blah dah dah dah ahha ahhha";
+            ByteBuffer buffer=ByteBuffer.allocate(512);
+            buffer.clear();
+            buffer.put(data.getBytes());
+            buffer.flip();
+
+            //write the data into a sink channel
+            while(buffer.hasRemaining()){
+                sinkChannel.write(buffer);
+            }
+            //access pipe source channel
+            Pipe.SourceChannel sourceChannel=pipe.source();
+            buffer=ByteBuffer.allocate(512);
+            while(sourceChannel.read(buffer)>0){
+                buffer.flip();
+                while(buffer.hasRemaining()){
+                    System.out.print((char)buffer.get());
+                }
+                buffer.clear();
+            }
+
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
     }
 }

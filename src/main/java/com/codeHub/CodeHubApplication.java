@@ -1,8 +1,7 @@
 package com.codeHub;
 
-import com.codeHub.service.CoderService;
-import com.codeHub.service.FileService;
-import com.codeHub.service.NetworkService;
+import com.codeHub.models.Blacklist;
+import com.codeHub.service.*;
 import com.stripe.exception.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,6 +9,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.rmi.Naming;
+import java.rmi.Remote;
+import java.util.List;
 
 @SpringBootApplication
 @EnableScheduling
@@ -176,6 +178,21 @@ public class CodeHubApplication {
 		method.setAccessible(true);
 		method.invoke(object,null);
 */
+
+//RMI: server: Run: $ rmic com.codeHub.service.RmiService , Run: $ rmiregistry 8070 , Run this section of the server before client
+		Remote remote = new RmiService();
+		Naming.rebind("rmi://localhost:8070/lol",remote);
+
+//RMI: client: Run client last
+
+		DNDInterface dnd=(DNDInterface)Naming.lookup("rmi://localhost:8070/lol");
+
+		List<Blacklist> listDnd=dnd.getDndList();
+		for(Blacklist person:listDnd){
+			System.out.println(person.toString());
+		}
+
+
 	}
 
 

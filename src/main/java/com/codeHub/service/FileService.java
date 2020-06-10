@@ -2,15 +2,19 @@ package com.codeHub.service;
 
 
 import com.codeHub.models.Blacklist;
-import org.boon.core.Sys;
-import org.boon.primitive.ByteBuf;
+import org.boon.primitive.CharBuf;
 
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
+import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.nio.channels.*;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.security.PermissionCollection;
 import java.util.*;
 import java.util.zip.DeflaterOutputStream;
@@ -87,7 +91,11 @@ public class FileService{
 //        readDataFiles();
 //        gatherBytes();
 //        scatterBytes();
-        combineFiles();
+//        combineFiles();
+//        serverSelectors();
+//        pipeServerClient();
+//        charsetChannel();
+//        acquireFileLocks();
 
     }
 
@@ -1019,5 +1027,177 @@ public static void copyData(){
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public static void serverSelectors(){
+        try {
+            Selector selector = Selector.open();
+            System.out.println("Selector is open for making connection: "+selector.isOpen());
+
+            //get the server socket channel and register using selector
+            ServerSocketChannel server = ServerSocketChannel.open();
+            InetSocketAddress address=new InetSocketAddress("localhost",8090);
+            server.bind(address);
+            server.configureBlocking(false);
+            int ops = server.validOps();
+
+            SelectionKey selectionKey = server.register(selector,ops,null);
+
+            for(;;){
+                System.out.println("Waiting for connection...");
+                int noOfKeys = selector.select();
+                System.out.println("No of keys selected: "+noOfKeys);
+                Set selectedKeys  = selector.selectedKeys();
+                Iterator iterator = selectedKeys.iterator();
+
+                while(iterator.hasNext()){
+                    SelectionKey key = (SelectionKey)iterator.next();
+                    if(key.isAcceptable()){
+                        //the new client connection is accepted
+                        SocketChannel client = server.accept();
+                        client.configureBlocking(false);
+                        //new connection is added to the selector
+                        client.register(selector,SelectionKey.OP_READ);
+                        System.out.println("The new connection is accepted from the client: "+client);
+                    }else if (key.isReadable()){
+                        //data is read from the client
+                        SocketChannel client = (SocketChannel)key.channel();
+                        ByteBuffer buffer = ByteBuffer.allocate(256);
+                        client.read(buffer);
+                        String output = new String(buffer.array()).trim();
+                        System.out.println("Msg from client: "+output);
+                        if(output.equals("Bye bye")){
+                            client.close();
+                            System.out.println("Close session");
+                        }
+                    }
+                    iterator.remove();
+                }
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void clientSelector(){
+
+        try {
+            InetSocketAddress address = new InetSocketAddress("localhost", 8090);
+            SocketChannel client = SocketChannel.open(address);
+            System.out.println("Client is sending msg to server...");
+            String [] msg =  new String[] {"Time flies","What a year!!!!","Bye bye"};
+
+            for(int i=0; i<msg.length;i++){
+                byte[] byteMsg=new String(msg[i]).getBytes();
+                ByteBuffer buffer = ByteBuffer.wrap(byteMsg);
+                client.write(buffer);
+
+                System.out.println(msg[i]);
+                buffer.clear();
+                Thread.sleep(2000);
+            }
+            client.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void pipeServerClient(){
+        try {
+            //create pipe
+            Pipe pipe = Pipe.open();
+            //access the pipe sink channel
+            Pipe.SinkChannel sinkChannel=pipe.sink();
+            String data ="Blah blah blah dah dah dah ahha ahhha";
+            ByteBuffer buffer=ByteBuffer.allocate(512);
+            buffer.clear();
+            buffer.put(data.getBytes());
+            buffer.flip();
+
+            //write the data into a sink channel
+            while(buffer.hasRemaining()){
+                sinkChannel.write(buffer);
+            }
+            //access pipe source channel
+            Pipe.SourceChannel sourceChannel=pipe.source();
+            buffer=ByteBuffer.allocate(512);
+            while(sourceChannel.read(buffer)>0){
+                buffer.flip();
+                while(buffer.hasRemaining()){
+                    System.out.print((char)buffer.get());
+                }
+                buffer.clear();
+            }
+
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public static  void charsetChannel() {
+        try {
+            SortedMap<String, Charset> charsetMap = Charset.availableCharsets();
+            for (Map.Entry<String, Charset> entry : charsetMap.entrySet()) {
+
+                Charset charset = Charset.forName(entry.getKey());
+                System.out.println("Name: " + charset.displayName() + " Encoding: " + charset.canEncode());
+                String data = "Welcome to this place. it is wonderful and thrilling at the same time.";
+
+                //convert byte buffer from given charset to char buffer in unicode
+                ByteBuffer buffer = ByteBuffer.wrap(data.getBytes());
+                CharBuffer charBuffer = charset.decode(buffer);
+
+                //conversion of char buffer from unicode to byte buffer in given charset
+                ByteBuffer byteBuffer=null;
+                try {
+                    byteBuffer = charset.encode(charBuffer);
+                }catch (Exception e){
+                    e.printStackTrace();
+                    continue;
+                }
+                while (byteBuffer.hasRemaining()) {
+                    System.out.print((char) byteBuffer.get());
+                }
+                byteBuffer.clear();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void acquireFileLocks(){
+        try {
+            String data = "This is the end of this file you are viewing currently";
+            ByteBuffer buffer =ByteBuffer.wrap(data.getBytes());
+            Path path=Paths.get(filePath+"test.txt");
+            FileChannel fileChannel=FileChannel.open(path, StandardOpenOption.WRITE,StandardOpenOption.APPEND);
+
+            fileChannel.position(fileChannel.size()-1);//position cursor to end of file
+            FileLock fileLock=fileChannel.lock();
+            System.out.println("Lock is shared: "+fileLock.isShared());
+            fileChannel.write(buffer);
+            fileChannel.close();//release lock
+
+            //print file
+            FileReader fileReader = new FileReader(filePath+"test.txt");
+            BufferedReader bufferedReader=new BufferedReader(fileReader);
+            String line=bufferedReader.readLine();
+            while(line!=null){
+                System.out.println(" "+line);
+                line=bufferedReader.readLine();
+            }
+            fileReader.close();
+            bufferedReader.close();
+
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
     }
 }

@@ -2,11 +2,15 @@ package com.codeHub.service;
 
 
 import com.codeHub.models.Blacklist;
+import org.boon.primitive.CharBuf;
 
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.nio.channels.*;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -88,7 +92,8 @@ public class FileService{
 //        scatterBytes();
 //        combineFiles();
 //        serverSelectors();
-        pipeServerClient();
+//        pipeServerClient();
+        charsetChannel();
 
     }
 
@@ -1130,5 +1135,36 @@ public static void copyData(){
             e.printStackTrace();
         }
 
+    }
+
+    public static  void charsetChannel() {
+        try {
+            SortedMap<String, Charset> charsetMap = Charset.availableCharsets();
+            for (Map.Entry<String, Charset> entry : charsetMap.entrySet()) {
+
+                Charset charset = Charset.forName(entry.getKey());
+                System.out.println("Name: " + charset.displayName() + " Encoding: " + charset.canEncode());
+                String data = "Welcome to this place. it is wonderful and thrilling at the same time.";
+
+                //convert byte buffer from given charset to char buffer in unicode
+                ByteBuffer buffer = ByteBuffer.wrap(data.getBytes());
+                CharBuffer charBuffer = charset.decode(buffer);
+
+                //conversion of char buffer from unicode to byte buffer in given charset
+                ByteBuffer byteBuffer=null;
+                try {
+                    byteBuffer = charset.encode(charBuffer);
+                }catch (Exception e){
+                    e.printStackTrace();
+                    continue;
+                }
+                while (byteBuffer.hasRemaining()) {
+                    System.out.print((char) byteBuffer.get());
+                }
+                byteBuffer.clear();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

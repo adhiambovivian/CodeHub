@@ -95,7 +95,7 @@ public class FileService{
 //        serverSelectors();
 //        pipeServerClient();
 //        charsetChannel();
-        acquireFileLocks();
+//        acquireFileLocks();
 
     }
 

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class RmiService extends UnicastRemoteObject implements DNDInterface {
 
-    RmiService() throws RemoteException{}
+    public RmiService() throws RemoteException{}
 
     public List<Blacklist> getDndList() {
         List<Blacklist>dndList=new ArrayList<>();

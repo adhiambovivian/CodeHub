@@ -180,19 +180,20 @@ public class CodeHubApplication {
 */
 
 //RMI: server: Run: $ rmic com.codeHub.service.RmiService , Run: $ rmiregistry 8070 , Run this section of the server before client
-		Remote remote = new RmiService();
+	/*	Remote remote = new RmiService();
 		Naming.rebind("rmi://localhost:8070/lol",remote);
-
+*/
 //RMI: client: Run client last
-
+/*
 		DNDInterface dnd=(DNDInterface)Naming.lookup("rmi://localhost:8070/lol");
 
 		List<Blacklist> listDnd=dnd.getDndList();
 		for(Blacklist person:listDnd){
 			System.out.println(person.toString());
 		}
+*/
 
-
+Internationalizer.internationalierCmds();
 	}
 
 

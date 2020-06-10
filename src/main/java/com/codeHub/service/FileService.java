@@ -1038,7 +1038,7 @@ public static void copyData(){
 
             for(;;){
                 System.out.println("Waiting for connection...");
-                int noOfKeys =selector.select();
+                int noOfKeys = selector.select();
                 System.out.println("No of keys selected: "+noOfKeys);
                 Set selectedKeys  = selector.selectedKeys();
                 Iterator iterator = selectedKeys.iterator();

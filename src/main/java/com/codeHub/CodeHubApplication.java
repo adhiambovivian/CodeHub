@@ -179,11 +179,11 @@ public class CodeHubApplication {
 		method.invoke(object,null);
 */
 
-//RMI: server
+//RMI: server: Run: $ rmic com.codeHub.service.RmiService , Run: $ rmiregistry 8070 , Run this section of the server before client
 		Remote remote = new RmiService();
 		Naming.rebind("rmi://localhost:8070/lol",remote);
 
-//RMI: client
+//RMI: client: Run client last
 
 		DNDInterface dnd=(DNDInterface)Naming.lookup("rmi://localhost:8070/lol");
 

@@ -14,6 +14,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.security.PermissionCollection;
 import java.util.*;
 import java.util.zip.DeflaterOutputStream;
@@ -93,7 +94,8 @@ public class FileService{
 //        combineFiles();
 //        serverSelectors();
 //        pipeServerClient();
-        charsetChannel();
+//        charsetChannel();
+        acquireFileLocks();
 
     }
 
@@ -1166,5 +1168,36 @@ public static void copyData(){
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public static void acquireFileLocks(){
+        try {
+            String data = "This is the end of this file you are viewing currently";
+            ByteBuffer buffer =ByteBuffer.wrap(data.getBytes());
+            Path path=Paths.get(filePath+"test.txt");
+            FileChannel fileChannel=FileChannel.open(path, StandardOpenOption.WRITE,StandardOpenOption.APPEND);
+
+            fileChannel.position(fileChannel.size()-1);//position cursor to end of file
+            FileLock fileLock=fileChannel.lock();
+            System.out.println("Lock is shared: "+fileLock.isShared());
+            fileChannel.write(buffer);
+            fileChannel.close();//release lock
+
+            //print file
+            FileReader fileReader = new FileReader(filePath+"test.txt");
+            BufferedReader bufferedReader=new BufferedReader(fileReader);
+            String line=bufferedReader.readLine();
+            while(line!=null){
+                System.out.println(" "+line);
+                line=bufferedReader.readLine();
+            }
+            fileReader.close();
+            bufferedReader.close();
+
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
     }
 }

@@ -6,6 +6,7 @@ import org.boon.core.Sys;
 import org.boon.primitive.ByteBuf;
 
 import java.io.*;
+import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.nio.file.Files;
@@ -1017,6 +1018,57 @@ public static void copyData(){
             targetChannel.close();
             outputStream.close();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void serverSelectors(){
+        try {
+            Selector selector = Selector.open();
+            System.out.println("Selector is open for making connection: "+selector.isOpen());
+
+            //get the server socket channel and register using selector
+            ServerSocketChannel server = ServerSocketChannel.open();
+            InetSocketAddress address=new InetSocketAddress("localhost",8090);
+            server.bind(address);
+            server.configureBlocking(false);
+            int ops = server.validOps();
+
+            SelectionKey selectionKey = server.register(selector,ops,null);
+
+            for(;;){
+                System.out.println("Waiting for connection...");
+                int noOfKeys =selector.select();
+                System.out.println("No of keys selected: "+noOfKeys);
+                Set selectedKeys  = selector.selectedKeys();
+                Iterator iterator = selectedKeys.iterator();
+
+                while(iterator.hasNext()){
+                    SelectionKey key = (SelectionKey)iterator.next();
+                    if(key.isAcceptable()){
+                        //the new client connection is accepted
+                        SocketChannel client = server.accept();
+                        client.configureBlocking(false);
+                        //new connection is added to the selector
+                        client.register(selector,SelectionKey.OP_READ);
+                        System.out.println("The new connection is accepted from the client: "+client);
+                    }else if (key.isReadable()){
+                        //data is read from the client
+                        SocketChannel client = (SocketChannel)key.channel();
+                        ByteBuffer buffer = ByteBuffer.allocate(256);
+                        client.read(buffer);
+                        String output = new String(buffer.array()).trim();
+                        System.out.println("Msg from client: "+output);
+                        if(output.equals("Bye bye")){
+                            client.close();
+                            System.out.println("Close session");
+                        }
+                    }
+                    iterator.remove();
+                }
+            }
+        }catch (IOException e){
             e.printStackTrace();
         }
     }

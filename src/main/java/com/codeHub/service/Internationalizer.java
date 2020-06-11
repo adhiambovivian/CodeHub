@@ -44,6 +44,7 @@ public class Internationalizer {
 
     }
 
+    //todo: add missing locales
     public static void dateTimeLocalization(){
         Locale[] locales=Locale.getAvailableLocales();
         double digit=1818.383830;

@@ -194,6 +194,7 @@ public class CodeHubApplication {
 */
 
 Internationalizer.internationalierCmds();
+DateService.localDateCmd();
 	}
 
 

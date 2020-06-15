@@ -10,7 +10,7 @@ public class Internationalizer {
     public static void internationalierCmds(){
         //printLocalDetails();
 //        translateMessages();
-        dateTimeLocalization();
+//        dateTimeLocalization();
     }
     public static void printLocalDetails(){
         Locale [] locales=Locale.getAvailableLocales();

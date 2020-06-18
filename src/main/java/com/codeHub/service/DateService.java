@@ -17,7 +17,8 @@ public class DateService {
 //        localDatetimeCmd();
 //        monthDayCmd();
 //        offsetTimeCmd();
-        offsetDateTimeCmd();
+//        offsetDateTimeCmd();
+        clockCmd();
     }
 
     public static void localDateCmd(){
@@ -87,5 +88,11 @@ public class DateService {
         st.append("Date: "+off+" Day of month: "+off.getDayOfMonth()+" Day of year: "+off.getDayOfYear()+" Day of week: "+off.getDayOfWeek()).append(" Minus 100 months: "+off.minusMonths(100)).
                 append(" To localDate: "+off.toLocalDate());
         System.out.println(st.toString());
+    }
+
+    public static void clockCmd(){
+        Clock clock=Clock.systemDefaultZone();
+        Duration duration =Duration.ofSeconds(3600);
+        System.out.println("Current zone: "+clock.getZone()+" System utc: "+Clock.systemUTC().instant()+" +duration: "+Clock.offset(Clock.systemUTC(),duration).instant());
     }
 }

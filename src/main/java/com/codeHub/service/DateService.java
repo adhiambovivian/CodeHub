@@ -34,8 +34,8 @@ public class DateService {
 
         LocalTime timeKolkata = LocalTime.now(kolkataZone);
         LocalTime timeTokyo=LocalTime.now(tokyoZone);
-        long hours = ChronoUnit.HOURS.between(timeKolkata,timeTokyo);
-        long minutes =ChronoUnit.MONTHS.between(timeKolkata,timeTokyo);
+        long hours = ChronoUnit.HOURS.between(timeTokyo,timeKolkata);
+        long minutes =ChronoUnit.MINUTES.between(timeKolkata,timeTokyo);
 
         System.out.println("Time in Tokyo: "+timeTokyo+" Time in Kolkota: "+timeKolkata+" Hours btn: "+hours);
     }

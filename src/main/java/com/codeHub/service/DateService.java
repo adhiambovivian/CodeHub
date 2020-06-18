@@ -111,5 +111,7 @@ public class DateService {
         ZonedDateTime currentZone=ZonedDateTime.now();
         System.out.println("Parse zone: "+zone+" lagos Time: "+lagosZone+" London: "+londonZone+" Current zone: "+currentZone+" minus 100 days: "+currentZone.minus(Period.ofDays(120)));
 
+
     }
+
 }

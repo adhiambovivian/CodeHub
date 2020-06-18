@@ -17,7 +17,9 @@ public class DateService {
 //        localDatetimeCmd();
 //        monthDayCmd();
 //        offsetTimeCmd();
-        offsetDateTimeCmd();
+//        offsetDateTimeCmd();
+//        clockCmd();
+        zonedDateTimeCmd();
     }
 
     public static void localDateCmd(){
@@ -88,4 +90,28 @@ public class DateService {
                 append(" To localDate: "+off.toLocalDate());
         System.out.println(st.toString());
     }
+
+    public static void clockCmd(){
+        Clock clock=Clock.systemDefaultZone();
+        Duration duration =Duration.ofSeconds(3600);
+        System.out.println("Current zone: "+clock.getZone()+" System utc: "+Clock.systemUTC().instant()+" +duration: "+Clock.offset(Clock.systemUTC(),duration).instant());
+    }
+
+    //todo not working
+    public static void zonedDateTimeCmd(){
+        ZonedDateTime zone = ZonedDateTime.parse("2020-06-08T08:20:10+03:30[Africa/Nairobi]");
+
+        LocalDateTime date=LocalDateTime.of(2020,Month.JUNE,18,21,23);
+        ZoneId lagos=ZoneId.of("Africa/Lagos");
+        ZonedDateTime lagosZone=ZonedDateTime.of(date,lagos);
+
+        ZoneId london=ZoneId.of("Europe/London");
+        ZonedDateTime londonZone=lagosZone.withZoneSameInstant(london);
+
+        ZonedDateTime currentZone=ZonedDateTime.now();
+        System.out.println("Parse zone: "+zone+" lagos Time: "+lagosZone+" London: "+londonZone+" Current zone: "+currentZone+" minus 100 days: "+currentZone.minus(Period.ofDays(120)));
+
+
+    }
+
 }

@@ -16,7 +16,8 @@ public class DateService {
 //        localTimeCmd();
 //        localDatetimeCmd();
 //        monthDayCmd();
-        offsetTimeCmd();
+//        offsetTimeCmd();
+        offsetDateTimeCmd();
     }
 
     public static void localDateCmd(){
@@ -76,6 +77,15 @@ public class DateService {
         st.append("Now: "+offsetTime+" Hr of day: "+offsetTime.get(ChronoField.HOUR_OF_DAY)).append(" Min of day: "+offsetTime.get(ChronoField.MINUTE_OF_DAY)).
                 append(" Sec of day: "+offsetTime.get(ChronoField.SECOND_OF_DAY)).append(" Current hr: "+offsetTime.getHour()).append(" Offset minus 34 hrs: "+offsetTime.minusHours(34));
 
+        System.out.println(st.toString());
+    }
+
+    public static void offsetDateTimeCmd(){
+        OffsetDateTime off=OffsetDateTime.now();
+        StringBuilder st=new StringBuilder();
+
+        st.append("Date: "+off+" Day of month: "+off.getDayOfMonth()+" Day of year: "+off.getDayOfYear()+" Day of week: "+off.getDayOfWeek()).append(" Minus 100 months: "+off.minusMonths(100)).
+                append(" To localDate: "+off.toLocalDate());
         System.out.println(st.toString());
     }
 }

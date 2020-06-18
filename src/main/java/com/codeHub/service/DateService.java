@@ -2,20 +2,19 @@ package com.codeHub.service;
 
 import org.boon.core.Sys;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.ValueRange;
 
 public class DateService {
 
     public static void dateCmds(){
         //localDateCmd();
-        localTimeCmd();
-        localDatetimeCmd();
+//        localTimeCmd();
+//        localDatetimeCmd();
+        monthDayCmd();
     }
 
     public static void localDateCmd(){
@@ -55,6 +54,17 @@ public class DateService {
         stringBuilder.append("Day of week: "+now.get(ChronoField.DAY_OF_WEEK)).append(" Day of year: "+now.get(ChronoField.DAY_OF_YEAR)).append(" Day of month "+now.get(ChronoField.DAY_OF_MONTH)).
                 append(" Hour of day "+now.get(ChronoField.HOUR_OF_DAY)).append(" Minute of day "+now.get(ChronoField.MINUTE_OF_DAY));
         System.out.println("Formatted current datetime: "+formatDateTime+" Current datetime details: "+stringBuilder.toString()+" past time: "+pastDateTime);
+
+    }
+
+    public static void monthDayCmd(){
+        MonthDay month = MonthDay.now();
+        LocalDate date = month.atYear(1995);
+        ValueRange valMonth=month.range(ChronoField.MONTH_OF_YEAR);
+        ValueRange valDay=month.range(ChronoField.DAY_OF_YEAR);
+        ValueRange valEra=month.range(ChronoField.YEAR_OF_ERA);
+
+        System.out.println("   "+date+" Month of year "+month.get(ChronoField.MONTH_OF_YEAR)+" is 2021 valid "+month.isValidYear(2012)+" rangeMonth: "+valMonth+" rangeDay: "+valDay+" rangeEra: "+valEra);
 
     }
 }

@@ -1,12 +1,16 @@
 package com.codeHub.service;
 
+import java.text.DateFormat;
+import java.text.NumberFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Internationalizer {
     public static void internationalierCmds(){
         //printLocalDetails();
-        translateMessages();
+//        translateMessages();
+//        dateTimeLocalization();
     }
     public static void printLocalDetails(){
         Locale [] locales=Locale.getAvailableLocales();
@@ -38,6 +42,34 @@ public class Internationalizer {
         ResourceBundle bundle = ResourceBundle.getBundle("messages",new Locale("luo","KE"));
         System.out.println("Message: "+bundle.getString("greeting1"));
 
+    }
+
+    //todo: add missing locales
+    public static void dateTimeLocalization(){
+        Locale[] locales=Locale.getAvailableLocales();
+        double digit=1818.383830;
+        for(Locale locale:locales) {
+            try {
+                DateFormat format=DateFormat.getDateInstance(DateFormat.DEFAULT,locale);
+                DateFormat formatTime=DateFormat.getTimeInstance(DateFormat.DEFAULT,locale);
+
+                Date currentDate=new Date();
+                String date = format.format(currentDate);
+                String time=formatTime.format(currentDate);
+
+                //format numbers
+                NumberFormat numberFormat=NumberFormat.getNumberInstance(locale);
+                String number = numberFormat.format(digit);
+
+                NumberFormat currencyFormat=NumberFormat.getCurrencyInstance(locale);
+                String currency=currencyFormat.format(digit);
+
+                System.out.println("<country> "+locale+"\t"+date+"\t"+time+" <Number> "+number+" <Currency> "+currency);
+            } catch (Exception e) {
+                e.printStackTrace();
+                continue;
+            }
+        }
     }
 
 

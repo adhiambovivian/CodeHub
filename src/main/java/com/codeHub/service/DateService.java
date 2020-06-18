@@ -1,6 +1,7 @@
 package com.codeHub.service;
 
 import org.boon.core.Sys;
+import org.boon.primitive.Chr;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -14,7 +15,8 @@ public class DateService {
         //localDateCmd();
 //        localTimeCmd();
 //        localDatetimeCmd();
-        monthDayCmd();
+//        monthDayCmd();
+        offsetTimeCmd();
     }
 
     public static void localDateCmd(){
@@ -61,10 +63,19 @@ public class DateService {
         MonthDay month = MonthDay.now();
         LocalDate date = month.atYear(1995);
         ValueRange valMonth=month.range(ChronoField.MONTH_OF_YEAR);
-        ValueRange valDay=month.range(ChronoField.DAY_OF_YEAR);
-        ValueRange valEra=month.range(ChronoField.YEAR_OF_ERA);
+        ValueRange valDay=month.range(ChronoField.DAY_OF_MONTH);
 
-        System.out.println("   "+date+" Month of year "+month.get(ChronoField.MONTH_OF_YEAR)+" is 2021 valid "+month.isValidYear(2012)+" rangeMonth: "+valMonth+" rangeDay: "+valDay+" rangeEra: "+valEra);
+        System.out.println("   "+date+" Month of year "+month.get(ChronoField.MONTH_OF_YEAR)+" is 2021 valid "+month.isValidYear(2012)+" rangeMonth: "+valMonth+" rangeDay: "+valDay);
 
+    }
+
+    public static void offsetTimeCmd(){
+        OffsetTime offsetTime=OffsetTime.now();
+
+        StringBuilder st=new StringBuilder();
+        st.append("Now: "+offsetTime+" Hr of day: "+offsetTime.get(ChronoField.HOUR_OF_DAY)).append(" Min of day: "+offsetTime.get(ChronoField.MINUTE_OF_DAY)).
+                append(" Sec of day: "+offsetTime.get(ChronoField.SECOND_OF_DAY)).append(" Current hr: "+offsetTime.getHour()).append(" Offset minus 34 hrs: "+offsetTime.minusHours(34));
+
+        System.out.println(st.toString());
     }
 }

@@ -5,9 +5,11 @@ import org.boon.primitive.Chr;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.ValueRange;
+import java.util.Locale;
 
 public class DateService {
 
@@ -19,7 +21,8 @@ public class DateService {
 //        offsetTimeCmd();
 //        offsetDateTimeCmd();
 //        clockCmd();
-        zonedDateTimeCmd();
+//        zonedDateTimeCmd();
+        zonedIdCmd();
     }
 
     public static void localDateCmd(){
@@ -111,6 +114,20 @@ public class DateService {
         ZonedDateTime currentZone=ZonedDateTime.now();
         System.out.println("Parse zone: "+zone+" lagos Time: "+lagosZone+" London: "+londonZone+" Current zone: "+currentZone+" minus 100 days: "+currentZone.minus(Period.ofDays(120)));
 
+    }
+
+
+    public static void zonedIdCmd(){
+        ZoneId zoneId = ZoneId.of("Asia/Kolkata");
+        ZoneId zoneId1 = ZoneId.of("Asia/Tokyo");
+
+        LocalTime localTime = LocalTime.now(zoneId);
+        LocalTime localTime1 = LocalTime.now(zoneId1);
+
+        System.out.println(localTime);
+        System.out.println(localTime1);
+
+        System.out.println(zoneId.getDisplayName(TextStyle.FULL, Locale.ROOT)+"   "+localTime.isBefore(localTime1));
 
     }
 

@@ -137,6 +137,6 @@ public class DateService {
         ZoneOffset zoneOffset = ZoneOffset.UTC;
         Temporal temporal = zoneOffset.adjustInto(ZonedDateTime.now());
 
-        System.out.println(temporal);
+        System.out.println(temporal+" Gap in time: "+ZoneOffset.ofHours(6)+" Zone supported: "+ZoneOffset.UTC.isSupported(ChronoField.OFFSET_SECONDS));
     }
 }

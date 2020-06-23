@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
 import java.time.temporal.ValueRange;
 import java.util.Locale;
 
@@ -22,7 +23,8 @@ public class DateService {
 //        offsetDateTimeCmd();
 //        clockCmd();
 //        zonedDateTimeCmd();
-        zonedIdCmd();
+//        zonedIdCmd();
+        zoneOffsetCmd();
     }
 
     public static void localDateCmd(){
@@ -131,4 +133,10 @@ public class DateService {
 
     }
 
+    public static void zoneOffsetCmd(){
+        ZoneOffset zoneOffset = ZoneOffset.UTC;
+        Temporal temporal = zoneOffset.adjustInto(ZonedDateTime.now());
+
+        System.out.println(temporal);
+    }
 }

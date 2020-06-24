@@ -24,7 +24,8 @@ public class DateService {
 //        clockCmd();
 //        zonedDateTimeCmd();
 //        zonedIdCmd();
-        zoneOffsetCmd();
+//        zoneOffsetCmd();
+        yearCmd();
     }
 
     public static void localDateCmd(){
@@ -138,5 +139,11 @@ public class DateService {
         Temporal temporal = zoneOffset.adjustInto(ZonedDateTime.now());
 
         System.out.println(temporal+" Gap in time: "+ZoneOffset.ofHours(6)+" Zone supported: "+ZoneOffset.UTC.isSupported(ChronoField.OFFSET_SECONDS));
+    }
+
+    public static void yearCmd(){
+        Year year = Year.now();
+        LocalDate localDate = year.atDay(200);
+        System.out.println("Current Year: "+year+" and day 200: "+localDate+" Year length: "+year.length()+" Comparison: "+year.minusYears(1023));
     }
 }

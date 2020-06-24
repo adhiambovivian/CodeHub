@@ -3,6 +3,7 @@ package com.codeHub.service;
 import org.boon.core.Sys;
 import org.boon.primitive.Chr;
 
+import java.text.DateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
@@ -25,7 +26,8 @@ public class DateService {
 //        zonedDateTimeCmd();
 //        zonedIdCmd();
 //        zoneOffsetCmd();
-        yearCmd();
+//        yearCmd();
+        yearMonthCmd();
     }
 
     public static void localDateCmd(){
@@ -145,5 +147,13 @@ public class DateService {
         Year year = Year.now();
         LocalDate localDate = year.atDay(200);
         System.out.println("Current Year: "+year+" and day 200: "+localDate+" Year length: "+year.length()+" Comparison: "+year.minusYears(1023));
+    }
+
+    public static void yearMonthCmd(){
+        YearMonth yearMonth = YearMonth.now();
+        String formattedYearMonth = yearMonth.format(DateTimeFormatter.ofPattern("MM yyyy"));
+        System.out.println("Current YearMonth: "+yearMonth+" current month: "+yearMonth.get(ChronoField.MONTH_OF_YEAR)+
+                " Comparison: "+yearMonth.minus(Period.ofYears(1837))+" Formatted date: "+formattedYearMonth);
+
     }
 }

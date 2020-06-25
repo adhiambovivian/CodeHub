@@ -3,11 +3,13 @@ package com.codeHub.service;
 import org.boon.core.Sys;
 import org.boon.primitive.Chr;
 
+import java.text.DateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
 import java.time.temporal.ValueRange;
 import java.util.Locale;
 
@@ -22,7 +24,10 @@ public class DateService {
 //        offsetDateTimeCmd();
 //        clockCmd();
 //        zonedDateTimeCmd();
-        zonedIdCmd();
+//        zonedIdCmd();
+//        zoneOffsetCmd();
+//        yearCmd();
+        yearMonthCmd();
     }
 
     public static void localDateCmd(){
@@ -131,4 +136,24 @@ public class DateService {
 
     }
 
+    public static void zoneOffsetCmd(){
+        ZoneOffset zoneOffset = ZoneOffset.UTC;
+        Temporal temporal = zoneOffset.adjustInto(ZonedDateTime.now());
+
+        System.out.println(temporal+" Gap in time: "+ZoneOffset.ofHours(6)+" Zone supported: "+ZoneOffset.UTC.isSupported(ChronoField.OFFSET_SECONDS));
+    }
+
+    public static void yearCmd(){
+        Year year = Year.now();
+        LocalDate localDate = year.atDay(200);
+        System.out.println("Current Year: "+year+" and day 200: "+localDate+" Year length: "+year.length()+" Comparison: "+year.minusYears(1023));
+    }
+
+    public static void yearMonthCmd(){
+        YearMonth yearMonth = YearMonth.now();
+        String formattedYearMonth = yearMonth.format(DateTimeFormatter.ofPattern("MM yyyy"));
+        System.out.println("Current YearMonth: "+yearMonth+" current month: "+yearMonth.get(ChronoField.MONTH_OF_YEAR)+
+                " Comparison: "+yearMonth.minus(Period.ofYears(1837))+" Formatted date: "+formattedYearMonth);
+
+    }
 }

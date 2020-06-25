@@ -1,9 +1,5 @@
 package com.codeHub.service;
 
-import org.boon.core.Sys;
-import org.boon.primitive.Chr;
-
-import java.text.DateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
@@ -27,7 +23,8 @@ public class DateService {
 //        zonedIdCmd();
 //        zoneOffsetCmd();
 //        yearCmd();
-        yearMonthCmd();
+//        yearMonthCmd();
+        periodCmd();
     }
 
     public static void localDateCmd(){
@@ -154,6 +151,17 @@ public class DateService {
         String formattedYearMonth = yearMonth.format(DateTimeFormatter.ofPattern("MM yyyy"));
         System.out.println("Current YearMonth: "+yearMonth+" current month: "+yearMonth.get(ChronoField.MONTH_OF_YEAR)+
                 " Comparison: "+yearMonth.minus(Period.ofYears(1837))+" Formatted date: "+formattedYearMonth);
+
+    }
+
+    public static void periodCmd(){
+        Period period = Period.ofDays(23);
+        Temporal temporal = period.addTo(LocalDateTime.now());
+        System.out.println(temporal);
+
+        Period period2 = period.minus(Period.ofYears(322));
+        System.out.println(period2);
+
 
     }
 }

@@ -24,7 +24,8 @@ public class DateService {
 //        zoneOffsetCmd();
 //        yearCmd();
 //        yearMonthCmd();
-        periodCmd();
+//        periodCmd();
+        durationCmd();
     }
 
     public static void localDateCmd(){
@@ -162,6 +163,12 @@ public class DateService {
         Period period2 = period.minus(Period.ofYears(322));
         System.out.println(period2);
 
+    }
 
+    public static void durationCmd(){
+        Duration duration = Duration.between(LocalTime.NOON, LocalTime.MAX);
+        System.out.println(duration.get(ChronoUnit.SECONDS));
+
+        System.out.println("Duration: "+duration.plus(duration).getSeconds());
     }
 }

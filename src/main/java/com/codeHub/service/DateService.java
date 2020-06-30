@@ -171,4 +171,12 @@ public class DateService {
 
         System.out.println("Duration: "+duration.plus(duration).getSeconds());
     }
+
+    public static void instantCmd(){
+        Instant instant = Instant.parse("2018-08-03T10:37:30.00Z");
+        System.out.println("Some future date: "+instant.plus(Duration.ofDays(8928))+" is Years supported: "+instant.isSupported(ChronoUnit.YEARS)+" current time: "+Instant.now());
+
+    }
+
+
 }

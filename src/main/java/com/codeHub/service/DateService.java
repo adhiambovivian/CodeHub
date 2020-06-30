@@ -25,7 +25,9 @@ public class DateService {
 //        yearCmd();
 //        yearMonthCmd();
 //        periodCmd();
-        durationCmd();
+//        durationCmd();
+//        instantCmd();
+        dayOfWeekCmd();
     }
 
     public static void localDateCmd(){
@@ -176,6 +178,12 @@ public class DateService {
         Instant instant = Instant.parse("2018-08-03T10:37:30.00Z");
         System.out.println("Some future date: "+instant.plus(Duration.ofDays(8928))+" is Years supported: "+instant.isSupported(ChronoUnit.YEARS)+" current time: "+Instant.now());
 
+    }
+
+    public static void dayOfWeekCmd(){
+        LocalDate localDate = LocalDate.of(2020,Month.JUNE,22);
+        DayOfWeek dayOfWeek = DayOfWeek.from((localDate));
+        System.out.println(dayOfWeek.get(ChronoField.DAY_OF_WEEK)+" Day::"+dayOfWeek.name()+" Future day: "+dayOfWeek.plus(56));
     }
 
 

@@ -31,7 +31,8 @@ public class DateService {
 //        instantCmd();
 //        dayOfWeekCmd();
 //        monthCmd();
-        utilDateCmd();
+//        utilDateCmd();
+        sqlDateCmd();
     }
 
     public static void localDateCmd(){
@@ -201,6 +202,15 @@ public class DateService {
         java.util.Date date=new java.util.Date();
         long millis=System.currentTimeMillis();
         java.util.Date date1=new java.util.Date(millis);
+        System.out.println("Date 0: "+date+" Date 1: "+date1);
+    }
+
+    public static void sqlDateCmd(){
+        long millis=System.currentTimeMillis();
+
+        java.sql.Date date=new java.sql.Date(millis);
+        String dateStr= "2020-06-23";
+        java.sql.Date date1=java.sql.Date.valueOf(dateStr);
         System.out.println("Date 0: "+date+" Date 1: "+date1);
     }
 

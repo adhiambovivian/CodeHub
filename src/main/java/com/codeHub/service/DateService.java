@@ -1,5 +1,7 @@
 package com.codeHub.service;
 
+import org.boon.core.Sys;
+
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
@@ -27,7 +29,9 @@ public class DateService {
 //        periodCmd();
 //        durationCmd();
 //        instantCmd();
-        dayOfWeekCmd();
+//        dayOfWeekCmd();
+//        monthCmd();
+        utilDateCmd();
     }
 
     public static void localDateCmd(){
@@ -186,5 +190,18 @@ public class DateService {
         System.out.println(dayOfWeek.get(ChronoField.DAY_OF_WEEK)+" Day::"+dayOfWeek.name()+" Future day: "+dayOfWeek.plus(56));
     }
 
+    public static void monthCmd(){
+        Month month = Month.valueOf("January".toUpperCase());
+        Month month1 = Month.from(LocalDateTime.now());
+
+        System.out.println("Month: "+month1+" Days: "+month1.length(true)+" Name: "+month1.name());
+    }
+
+    public static void utilDateCmd(){
+        java.util.Date date=new java.util.Date();
+        long millis=System.currentTimeMillis();
+        java.util.Date date1=new java.util.Date(millis);
+        System.out.println("Date 0: "+date+" Date 1: "+date1);
+    }
 
 }

@@ -1,9 +1,5 @@
 package com.codeHub.service;
 
-import org.boon.core.Sys;
-import org.boon.primitive.Chr;
-
-import java.text.DateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
@@ -27,7 +23,9 @@ public class DateService {
 //        zonedIdCmd();
 //        zoneOffsetCmd();
 //        yearCmd();
-        yearMonthCmd();
+//        yearMonthCmd();
+//        periodCmd();
+        durationCmd();
     }
 
     public static void localDateCmd(){
@@ -156,4 +154,29 @@ public class DateService {
                 " Comparison: "+yearMonth.minus(Period.ofYears(1837))+" Formatted date: "+formattedYearMonth);
 
     }
+
+    public static void periodCmd(){
+        Period period = Period.ofDays(23);
+        Temporal temporal = period.addTo(LocalDateTime.now());
+        System.out.println(temporal);
+
+        Period period2 = period.minus(Period.ofYears(322));
+        System.out.println(period2);
+
+    }
+
+    public static void durationCmd(){
+        Duration duration = Duration.between(LocalTime.NOON, LocalTime.MAX);
+        System.out.println(duration.get(ChronoUnit.SECONDS));
+
+        System.out.println("Duration: "+duration.plus(duration).getSeconds());
+    }
+
+    public static void instantCmd(){
+        Instant instant = Instant.parse("2018-08-03T10:37:30.00Z");
+        System.out.println("Some future date: "+instant.plus(Duration.ofDays(8928))+" is Years supported: "+instant.isSupported(ChronoUnit.YEARS)+" current time: "+Instant.now());
+
+    }
+
+
 }

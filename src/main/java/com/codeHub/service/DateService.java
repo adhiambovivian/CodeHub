@@ -217,7 +217,9 @@ public class DateService {
     }
     public static void calendarCmd(){
         Calendar calendar = Calendar.getInstance();
-        System.out.println("Current date: "+calendar.getTime());
+        System.out.print("Calendar type: "+calendar.getCalendarType()+" Current date: "+calendar.getTime()+" Current year: "+calendar.get(Calendar.YEAR)+" Current Day: "+calendar.get(Calendar.DATE));
+        System.out.print("\tMax no of days in a week: "+calendar.getMaximum(Calendar.DAY_OF_WEEK)+" Max weeks in a yr: "+calendar.getMaximum(Calendar.WEEK_OF_YEAR)+" Time zone: "+calendar.getTimeZone());
+
 
         calendar.add(Calendar.DATE,-12);
         calendar.getTime();

@@ -260,7 +260,7 @@ public class DateService {
         System.out.println("Date format using getDateTimeInstance(DateFormat.LONG,DateFormat.SHORT): "+DateFormat.getDateTimeInstance(DateFormat.LONG,DateFormat.SHORT).format(currentDate));
 
         try {
-            Date someDate = DateFormat.getDateInstance().parse("31 Jun, 2034");
+            Date someDate = DateFormat.getDateInstance().parse("30 Jun, 2034");
             System.out.println("Some date: "+someDate);
         }catch (ParseException e){
             e.printStackTrace();

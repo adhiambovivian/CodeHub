@@ -1,5 +1,9 @@
 package com.codeHub.service;
 
+import org.boon.core.Sys;
+
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
@@ -7,7 +11,10 @@ import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 import java.time.temporal.ValueRange;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class DateService {
 
@@ -25,7 +32,15 @@ public class DateService {
 //        yearCmd();
 //        yearMonthCmd();
 //        periodCmd();
-        durationCmd();
+//        durationCmd();
+//        instantCmd();
+//        dayOfWeekCmd();
+//        monthCmd();
+//        utilDateCmd();
+//        sqlDateCmd();
+//        calendarCmd();
+//        timezoneCmd();
+        dateformatCmd();
     }
 
     public static void localDateCmd(){
@@ -178,5 +193,79 @@ public class DateService {
 
     }
 
+    public static void dayOfWeekCmd(){
+        LocalDate localDate = LocalDate.of(2020,Month.JUNE,22);
+        DayOfWeek dayOfWeek = DayOfWeek.from((localDate));
+        System.out.println(dayOfWeek.get(ChronoField.DAY_OF_WEEK)+" Day::"+dayOfWeek.name()+" Future day: "+dayOfWeek.plus(56));
+    }
+
+    public static void monthCmd(){
+        Month month = Month.valueOf("January".toUpperCase());
+        Month month1 = Month.from(LocalDateTime.now());
+
+        System.out.println("Month: "+month1+" Days: "+month1.length(true)+" Name: "+month1.name());
+    }
+
+    public static void utilDateCmd(){
+        java.util.Date date=new java.util.Date();
+        long millis=System.currentTimeMillis();
+        java.util.Date date1=new java.util.Date(millis);
+        System.out.println("Date 0: "+date+" Date 1: "+date1);
+    }
+
+    public static void sqlDateCmd(){
+        long millis=System.currentTimeMillis();
+
+        java.sql.Date date=new java.sql.Date(millis);
+        String dateStr= "2020-06-23";
+        java.sql.Date date1=java.sql.Date.valueOf(dateStr);
+        System.out.println("Date 0: "+date+" Date 1: "+date1);
+    }
+    public static void calendarCmd(){
+        Calendar calendar = Calendar.getInstance();
+        System.out.print("Calendar type: "+calendar.getCalendarType()+" Current date: "+calendar.getTime()+" Current year: "+calendar.get(Calendar.YEAR)+" Current Day: "+calendar.get(Calendar.DATE));
+        System.out.print("\tMax no of days in a week: "+calendar.getMaximum(Calendar.DAY_OF_WEEK)+" Max weeks in a yr: "+calendar.getMaximum(Calendar.WEEK_OF_YEAR)+" Time zone: "+calendar.getTimeZone());
+
+
+        calendar.add(Calendar.DATE,-12);
+        calendar.getTime();
+        System.out.println("12 days ago: "+calendar.getTime());
+
+        calendar.add(Calendar.MONTH,5);
+        System.out.println("5 months later: "+calendar.getTime());
+
+        calendar.add(Calendar.YEAR,-5);
+        System.out.println("5 years ago: "+calendar.getTime());
+
+
+    }
+
+    public static void timezoneCmd(){
+        String[] timezones= TimeZone.getAvailableIDs();
+        for(int i=0;i<timezones.length;i++){
+            TimeZone timeZone=TimeZone.getTimeZone(timezones[i]);
+            System.out.println(timezones[i]+" Offset: "+timeZone.getOffset(Calendar.ZONE_OFFSET)+" Observes daylight: "+timeZone.observesDaylightTime());
+        }
+    }
+
+    public static void dateformatCmd(){
+        Date currentDate=new Date();
+        System.out.println("Date format using getInstance(): "+DateFormat.getInstance().format(currentDate));
+        System.out.println("Date format using getDateInstance(): "+DateFormat.getDateInstance().format(currentDate));
+        System.out.println("Date format using getTimeInstance(): "+DateFormat.getTimeInstance().format(currentDate));
+        System.out.println("Date format using getDateTimeInstance(): "+DateFormat.getDateTimeInstance().format(currentDate));
+        System.out.println("Date format using getTimeInstance(DateFormat.SHORT): "+DateFormat.getTimeInstance(DateFormat.SHORT).format(currentDate));
+        System.out.println("Date format using getTimeInstance(DateFormat.MEDIUM): "+DateFormat.getTimeInstance(DateFormat.MEDIUM).format(currentDate));
+        System.out.println("Date format using getTimeInstance(DateFormat.LONG): "+DateFormat.getTimeInstance(DateFormat.LONG).format(currentDate));
+        System.out.println("Date format using getDateTimeInstance(DateFormat.LONG,DateFormat.SHORT): "+DateFormat.getDateTimeInstance(DateFormat.LONG,DateFormat.SHORT).format(currentDate));
+
+        try {
+            Date someDate = DateFormat.getDateInstance().parse("Jun 30, 2034");
+            System.out.println("Some date: "+someDate);
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+
+    }
 
 }

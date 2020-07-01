@@ -4,6 +4,7 @@ import org.boon.core.Sys;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
@@ -40,7 +41,8 @@ public class DateService {
 //        sqlDateCmd();
 //        calendarCmd();
 //        timezoneCmd();
-        dateformatCmd();
+//        dateformatCmd();
+        simpleDateFormatCmd();
     }
 
     public static void localDateCmd(){
@@ -262,6 +264,26 @@ public class DateService {
         try {
             Date someDate = DateFormat.getDateInstance().parse("Jun 30, 2034");
             System.out.println("Some date: "+someDate);
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void simpleDateFormatCmd(){
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        System.out.println("Current date: dd-MM-yyyy HH:mm:ss: "+format.format(date));
+
+        format=new SimpleDateFormat("dd MMMM yyyy zzzz");
+        System.out.println("Current date: dd MMMM yyyy zzzz: "+format.format(date));
+
+        format=new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss z");
+        System.out.println("Current date: E, dd MMM yyyy HH:mm:ss z: "+format.format(date));
+
+        try {
+            Date someDate = format.parse("Wed, 01 Jul 2020 19:48:39 EAT");
+            System.out.println("Somedate: "+someDate);
         }catch (ParseException e){
             e.printStackTrace();
         }

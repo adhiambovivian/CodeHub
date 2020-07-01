@@ -4,6 +4,7 @@ import org.boon.core.Sys;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
@@ -40,7 +41,8 @@ public class DateService {
 //        sqlDateCmd();
 //        calendarCmd();
 //        timezoneCmd();
-        dateformatCmd();
+//        dateformatCmd();
+        simpleDateFormatCmd();
     }
 
     public static void localDateCmd(){
@@ -265,6 +267,19 @@ public class DateService {
         }catch (ParseException e){
             e.printStackTrace();
         }
+
+    }
+
+    public static void simpleDateFormatCmd(){
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        System.out.println("Current date: dd-MM-yyyy HH:mm:ss: "+format.format(date));
+
+        format=new SimpleDateFormat("dd MMMM yyyy zzzz");
+        System.out.println("Current date: dd MMMM yyyy zzzz: "+format.format(date));
+
+        format=new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss z");
+        System.out.println("Current date: E, dd MMM yyyy HH:mm:ss z: "+format.format(date));
 
     }
 

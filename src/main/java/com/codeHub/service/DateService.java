@@ -281,6 +281,13 @@ public class DateService {
         format=new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss z");
         System.out.println("Current date: E, dd MMM yyyy HH:mm:ss z: "+format.format(date));
 
+        try {
+            Date someDate = format.parse("Wed, 01 Jul 2020 19:48:39 EAT");
+            System.out.println("Somedate: "+someDate);
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+
     }
 
 }

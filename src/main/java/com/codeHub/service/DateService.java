@@ -11,6 +11,7 @@ import java.time.temporal.Temporal;
 import java.time.temporal.ValueRange;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class DateService {
 
@@ -34,7 +35,8 @@ public class DateService {
 //        monthCmd();
 //        utilDateCmd();
 //        sqlDateCmd();
-        calendarCmd();
+//        calendarCmd();
+        timezoneCmd();
     }
 
     public static void localDateCmd(){
@@ -232,6 +234,14 @@ public class DateService {
         System.out.println("5 years ago: "+calendar.getTime());
 
 
+    }
+
+    public static void timezoneCmd(){
+        String[] timezones= TimeZone.getAvailableIDs();
+        for(int i=0;i<timezones.length;i++){
+            TimeZone timeZone=TimeZone.getTimeZone(timezones[i]);
+            System.out.println(timezones[i]+" Offset: "+timeZone.getOffset(Calendar.ZONE_OFFSET)+" Observes daylight: "+timeZone.observesDaylightTime());
+        }
     }
 
 }

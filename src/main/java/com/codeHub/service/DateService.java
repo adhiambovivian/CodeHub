@@ -2,6 +2,8 @@ package com.codeHub.service;
 
 import org.boon.core.Sys;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
@@ -10,6 +12,7 @@ import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 import java.time.temporal.ValueRange;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -36,7 +39,8 @@ public class DateService {
 //        utilDateCmd();
 //        sqlDateCmd();
 //        calendarCmd();
-        timezoneCmd();
+//        timezoneCmd();
+        dateformatCmd();
     }
 
     public static void localDateCmd(){
@@ -242,6 +246,26 @@ public class DateService {
             TimeZone timeZone=TimeZone.getTimeZone(timezones[i]);
             System.out.println(timezones[i]+" Offset: "+timeZone.getOffset(Calendar.ZONE_OFFSET)+" Observes daylight: "+timeZone.observesDaylightTime());
         }
+    }
+
+    public static void dateformatCmd(){
+        Date currentDate=new Date();
+        System.out.println("Date format using getInstance(): "+DateFormat.getInstance().format(currentDate));
+        System.out.println("Date format using getDateInstance(): "+DateFormat.getDateInstance().format(currentDate));
+        System.out.println("Date format using getTimeInstance(): "+DateFormat.getTimeInstance().format(currentDate));
+        System.out.println("Date format using getDateTimeInstance(): "+DateFormat.getDateTimeInstance().format(currentDate));
+        System.out.println("Date format using getTimeInstance(DateFormat.SHORT): "+DateFormat.getTimeInstance(DateFormat.SHORT).format(currentDate));
+        System.out.println("Date format using getTimeInstance(DateFormat.MEDIUM): "+DateFormat.getTimeInstance(DateFormat.MEDIUM).format(currentDate));
+        System.out.println("Date format using getTimeInstance(DateFormat.LONG): "+DateFormat.getTimeInstance(DateFormat.LONG).format(currentDate));
+        System.out.println("Date format using getDateTimeInstance(DateFormat.LONG,DateFormat.SHORT): "+DateFormat.getDateTimeInstance(DateFormat.LONG,DateFormat.SHORT).format(currentDate));
+
+        try {
+            Date someDate = DateFormat.getDateInstance().parse("31 Jun, 2034");
+            System.out.println("Some date: "+someDate);
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+
     }
 
 }

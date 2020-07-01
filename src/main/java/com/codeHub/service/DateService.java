@@ -9,6 +9,7 @@ import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 import java.time.temporal.ValueRange;
+import java.util.Calendar;
 import java.util.Locale;
 
 public class DateService {
@@ -32,7 +33,8 @@ public class DateService {
 //        dayOfWeekCmd();
 //        monthCmd();
 //        utilDateCmd();
-        sqlDateCmd();
+//        sqlDateCmd();
+        calendarCmd();
     }
 
     public static void localDateCmd(){
@@ -212,6 +214,22 @@ public class DateService {
         String dateStr= "2020-06-23";
         java.sql.Date date1=java.sql.Date.valueOf(dateStr);
         System.out.println("Date 0: "+date+" Date 1: "+date1);
+    }
+    public static void calendarCmd(){
+        Calendar calendar = Calendar.getInstance();
+        System.out.println("Current date: "+calendar.getTime());
+
+        calendar.add(Calendar.DATE,-12);
+        calendar.getTime();
+        System.out.println("12 days ago: "+calendar.getTime());
+
+        calendar.add(Calendar.MONTH,5);
+        System.out.println("5 months later: "+calendar.getTime());
+
+        calendar.add(Calendar.YEAR,-5);
+        System.out.println("5 years ago: "+calendar.getTime());
+
+
     }
 
 }

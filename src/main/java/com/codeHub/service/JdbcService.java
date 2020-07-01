@@ -34,6 +34,7 @@ public class JdbcService {
         return connection;
     }
 
+    //todo: setup docker mysql
     public static void storeImage(){
         try {
             Connection connection = connectDbCmd("");

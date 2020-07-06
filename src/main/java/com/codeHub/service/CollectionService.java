@@ -27,6 +27,13 @@ public class CollectionService {
         LinkedList<String> list = new LinkedList<String>();
         list.add("LOL");
         list.add("WOW");
+        list .add("huh");
+
+        //traverse
+        Iterator iterator=list.iterator();
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
     }
 
 

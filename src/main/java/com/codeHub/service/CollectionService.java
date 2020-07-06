@@ -38,10 +38,10 @@ public class CollectionService {
         list.add("WOW");
         list .add("huh");
 
-        //traverse
-        Iterator iterator=list.iterator();
-        while(iterator.hasNext()){
-            System.out.println(iterator.next());
+        //traverse in reverse order
+        ListIterator iterator=list.listIterator();
+        while(iterator.hasPrevious()){
+            System.out.println(iterator.previous());
         }
     }
 
@@ -51,11 +51,10 @@ public class CollectionService {
         vector.add("sabaki");
         vector.add("Nynando");
         System.out.println("Vector: ");
-
-        Iterator iterator=vector.iterator();
-        while(iterator.hasNext()){
-            System.out.println(iterator.next());
+        for(int i=0; i<vector.size();i++) {
+            System.out.println(vector.get(i));
         }
+
     }
 
     public static void stackCmd(){
@@ -84,10 +83,10 @@ public class CollectionService {
         System.out.println("Head: " + queue.element());
         System.out.println("Head: " + queue.peek());
 
-        Iterator iterator = queue.iterator();
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next());
-        }
+        //traverse using forEach
+        queue.forEach(item->{ //lambda expression
+            System.out.println(item);
+        });
         queue.remove();//remove
         queue.poll();//remove
         Iterator iterator2 = queue.iterator();

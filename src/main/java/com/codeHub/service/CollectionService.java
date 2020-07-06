@@ -9,6 +9,8 @@ public class CollectionService {
         vectorCmd();
         stackCmd();
         priorityQueueCmd();
+        arrayDequeCmd();
+        hashSetCmd();
     }
 
     public static void arrayListCmd(){
@@ -96,6 +98,18 @@ public class CollectionService {
 
         for(String str:deque){
             System.out.println(str);
+        }
+    }
+
+    public static void hashSetCmd(){
+        HashSet<String> hashSet=new HashSet<>();
+        hashSet.add("mercury");
+        hashSet.add("venus");
+        hashSet.add("earth");
+
+        Iterator iterator=hashSet.iterator();
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
         }
     }
 

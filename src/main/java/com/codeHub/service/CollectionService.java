@@ -88,4 +88,15 @@ public class CollectionService {
         }
     }
 
+    public static void arrayDequeCmd(){
+        Deque<String> deque = new ArrayDeque<>();
+        deque.add("red");
+        deque.add("yellow");
+        deque.add("green");
+
+        for(String str:deque){
+            System.out.println(str);
+        }
+    }
+
 }

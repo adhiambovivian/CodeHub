@@ -3,6 +3,7 @@ package com.codeHub.service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Vector;
 
 public class CollectionService {
     public static void collectionCmd(){
@@ -31,6 +32,18 @@ public class CollectionService {
 
         //traverse
         Iterator iterator=list.iterator();
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+    }
+
+    public static void vectorCmd(){
+        Vector<String> vector = new Vector<String>();
+        vector.add("Nile");
+        vector.add("sabaki");
+        vector.add("Nynando");
+
+        Iterator iterator=vector.iterator();
         while(iterator.hasNext()){
             System.out.println(iterator.next());
         }

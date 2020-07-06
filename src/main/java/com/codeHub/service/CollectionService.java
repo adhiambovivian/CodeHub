@@ -1,15 +1,13 @@
 package com.codeHub.service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Vector;
+import java.util.*;
 
 public class CollectionService {
     public static void collectionCmd(){
         linkedListCmd();
         arrayListCmd();
         vectorCmd();
+        stackCmd();
     }
 
     public static void arrayListCmd(){
@@ -19,7 +17,7 @@ public class CollectionService {
         list.add("grapes");
 
         //traverse
-        Iterator iterator=list.iterator();
+        Iterator<String> iterator=list.iterator();
         while(iterator.hasNext()){
             System.out.println(iterator.next());
         }
@@ -50,6 +48,21 @@ public class CollectionService {
         }
     }
 
+    public static void stackCmd(){
+        Stack<String> stack=new Stack<String>();
+        stack.push("kales");
+        stack.push("cauliflower");
+        stack.push("cabbage");
+        stack.push("brocolli");
+        stack.push("cucumber");
+        System.out.println(stack.pop());
+
+        Iterator<String> iterator=stack.iterator();
+        while (iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+
+    }
 
 
 

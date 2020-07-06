@@ -125,4 +125,15 @@ public class CollectionService {
         }
     }
 
+    public static void treeSetCmd(){
+        TreeSet<String> set = new TreeSet<>();
+        set.add("cypress");
+        set.add("eucalyptus");
+        set.add("mugo");
+
+        for(String str:set){
+            System.out.println(str);
+        }
+    }
+
 }

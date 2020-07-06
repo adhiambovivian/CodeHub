@@ -113,4 +113,15 @@ public class CollectionService {
         }
     }
 
+    public static void linkedHashsetCmd(){
+        LinkedHashSet<String> set=new LinkedHashSet<>();
+        set.add("Jupiter");
+        set.add("Uranus");
+        set.add("Neptune");
+        Iterator iterator=set.iterator();
+        while (iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+    }
+
 }

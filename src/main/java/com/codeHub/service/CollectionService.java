@@ -12,6 +12,7 @@ public class CollectionService {
         arrayDequeCmd();
         hashSetCmd();
         linkedHashsetCmd();
+        treeSetCmd();
     }
 
     public static void arrayListCmd(){
@@ -21,6 +22,7 @@ public class CollectionService {
         list.add("grapes");
 
         //traverse
+        System.out.println("ArrayList: ");
         Iterator<String> iterator=list.iterator();
         while(iterator.hasNext()){
             System.out.println(iterator.next());
@@ -28,6 +30,7 @@ public class CollectionService {
     }
 
     public static void linkedListCmd(){
+        System.out.println("LinkedList: ");
         LinkedList<String> list = new LinkedList<String>();
         list.add("LOL");
         list.add("WOW");
@@ -45,6 +48,7 @@ public class CollectionService {
         vector.add("Nile");
         vector.add("sabaki");
         vector.add("Nynando");
+        System.out.println("Vector: ");
 
         Iterator iterator=vector.iterator();
         while(iterator.hasNext()){
@@ -60,7 +64,7 @@ public class CollectionService {
         stack.push("brocolli");
         stack.push("cucumber");
         System.out.println(stack.pop());
-
+        System.out.println("Stack: ");
         Iterator<String> iterator=stack.iterator();
         while (iterator.hasNext()){
             System.out.println(iterator.next());
@@ -85,6 +89,8 @@ public class CollectionService {
         queue.remove();//remove
         queue.poll();//remove
         Iterator iterator2 = queue.iterator();
+        System.out.println("PriorityQueue: ");
+
         System.out.println("After removing 2 items: ");
         while (iterator2.hasNext()) {
             System.out.println(iterator2.next());
@@ -96,7 +102,7 @@ public class CollectionService {
         deque.add("red");
         deque.add("yellow");
         deque.add("green");
-
+        System.out.println("ArrayDeque: ");
         for(String str:deque){
             System.out.println(str);
         }
@@ -107,6 +113,7 @@ public class CollectionService {
         hashSet.add("mercury");
         hashSet.add("venus");
         hashSet.add("earth");
+        System.out.println("hashSet: ");
 
         Iterator iterator=hashSet.iterator();
         while(iterator.hasNext()){
@@ -119,6 +126,8 @@ public class CollectionService {
         set.add("Jupiter");
         set.add("Uranus");
         set.add("Neptune");
+        System.out.println("linkedHashset: ");
+
         Iterator iterator=set.iterator();
         while (iterator.hasNext()){
             System.out.println(iterator.next());
@@ -130,6 +139,7 @@ public class CollectionService {
         set.add("cypress");
         set.add("eucalyptus");
         set.add("mugo");
+        System.out.println("treeset: ");
 
         for(String str:set){
             System.out.println(str);

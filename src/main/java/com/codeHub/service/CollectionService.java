@@ -9,6 +9,9 @@ public class CollectionService {
         vectorCmd();
         stackCmd();
         priorityQueueCmd();
+        arrayDequeCmd();
+        hashSetCmd();
+        linkedHashsetCmd();
     }
 
     public static void arrayListCmd(){
@@ -85,6 +88,51 @@ public class CollectionService {
         System.out.println("After removing 2 items: ");
         while (iterator2.hasNext()) {
             System.out.println(iterator2.next());
+        }
+    }
+
+    public static void arrayDequeCmd(){
+        Deque<String> deque = new ArrayDeque<>();
+        deque.add("red");
+        deque.add("yellow");
+        deque.add("green");
+
+        for(String str:deque){
+            System.out.println(str);
+        }
+    }
+
+    public static void hashSetCmd(){
+        HashSet<String> hashSet=new HashSet<>();
+        hashSet.add("mercury");
+        hashSet.add("venus");
+        hashSet.add("earth");
+
+        Iterator iterator=hashSet.iterator();
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+    }
+
+    public static void linkedHashsetCmd(){
+        LinkedHashSet<String> set=new LinkedHashSet<>();
+        set.add("Jupiter");
+        set.add("Uranus");
+        set.add("Neptune");
+        Iterator iterator=set.iterator();
+        while (iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+    }
+
+    public static void treeSetCmd(){
+        TreeSet<String> set = new TreeSet<>();
+        set.add("cypress");
+        set.add("eucalyptus");
+        set.add("mugo");
+
+        for(String str:set){
+            System.out.println(str);
         }
     }
 

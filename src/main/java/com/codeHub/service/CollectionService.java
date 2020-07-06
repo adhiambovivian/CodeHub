@@ -8,6 +8,7 @@ public class CollectionService {
         arrayListCmd();
         vectorCmd();
         stackCmd();
+        priorityQueueCmd();
     }
 
     public static void arrayListCmd(){
@@ -64,6 +65,27 @@ public class CollectionService {
 
     }
 
+    public static void priorityQueueCmd() {
+        PriorityQueue<String> queue = new PriorityQueue<>();
+        queue.add("winter");
+        queue.add("summer");
+        queue.add("spring");
+        queue.add("Autumn");
 
+        System.out.println("Head: " + queue.element());
+        System.out.println("Head: " + queue.peek());
+
+        Iterator iterator = queue.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+        queue.remove();//remove
+        queue.poll();//remove
+        Iterator iterator2 = queue.iterator();
+        System.out.println("After removing 2 items: ");
+        while (iterator2.hasNext()) {
+            System.out.println(iterator2.next());
+        }
+    }
 
 }

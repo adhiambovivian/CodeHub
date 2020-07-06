@@ -193,8 +193,10 @@ public class CodeHubApplication {
 		}
 */
 
-Internationalizer.internationalierCmds();
-DateService.dateCmds();
+//Internationalizer.internationalierCmds();
+//DateService.dateCmds();
+	CollectionService.collectionCmd();
+
 	}
 
 

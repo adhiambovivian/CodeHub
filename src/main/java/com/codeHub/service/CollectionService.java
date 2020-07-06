@@ -20,6 +20,8 @@ public class CollectionService {
         list.add("Apples");
         list.add("bananas");
         list.add("grapes");
+        list.set(1,"watermelon");
+        Collections.sort(list);
 
         //traverse
         System.out.println("ArrayList: ");

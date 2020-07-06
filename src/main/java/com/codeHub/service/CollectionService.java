@@ -9,6 +9,7 @@ public class CollectionService {
     public static void collectionCmd(){
         linkedListCmd();
         arrayListCmd();
+        vectorCmd();
     }
 
     public static void arrayListCmd(){
@@ -48,6 +49,7 @@ public class CollectionService {
             System.out.println(iterator.next());
         }
     }
+
 
 
 

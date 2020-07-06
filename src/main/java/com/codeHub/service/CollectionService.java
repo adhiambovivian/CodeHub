@@ -11,6 +11,7 @@ public class CollectionService {
         priorityQueueCmd();
         arrayDequeCmd();
         hashSetCmd();
+        linkedHashsetCmd();
     }
 
     public static void arrayListCmd(){

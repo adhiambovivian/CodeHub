@@ -115,11 +115,11 @@ public class CollectionService {
         hashSet.add("venus");
         hashSet.add("earth");
         System.out.println("hashSet: ");
-
+        //traverse using forEachRemaining
         Iterator iterator=hashSet.iterator();
-        while(iterator.hasNext()){
-            System.out.println(iterator.next());
-        }
+        iterator.forEachRemaining(item->{
+            System.out.println(item);
+        });
     }
 
     public static void linkedHashsetCmd(){

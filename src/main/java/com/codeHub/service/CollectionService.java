@@ -21,6 +21,14 @@ public class CollectionService {
         list.add("bananas");
         list.add("grapes");
         list.set(1,"watermelon");
+
+        ArrayList<String> list2 =  new ArrayList<>();
+        list2.add("Oranges");
+        list2.add("peach");
+        list2.add("Apples");
+        //retains matching(includin case) elements only
+        //list.retainAll(list2);
+
         Collections.sort(list);
 
         //traverse

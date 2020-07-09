@@ -1,8 +1,11 @@
 package com.codeHub.service;
 
+import java.io.*;
 import java.util.*;
 
 public class CollectionService {
+    static String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
+
     public static void collectionCmd(){
         linkedListCmd();
         arrayListCmd();
@@ -28,6 +31,7 @@ public class CollectionService {
         list2.add("Apples");
         //retains matching(includin case) elements only
         //list.retainAll(list2);
+        list.addAll(list2);
 
         Collections.sort(list);
 
@@ -36,6 +40,27 @@ public class CollectionService {
         Iterator<String> iterator=list.iterator();
         while(iterator.hasNext()){
             System.out.println(iterator.next());
+        }
+
+        try {
+            //serialization
+            FileOutputStream fileOutputStream = new FileOutputStream(filePath + "test.txt");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(list);
+            fileOutputStream.close();
+            objectOutputStream.close();
+
+            //Deserialization
+            FileInputStream fileInputStream = new FileInputStream(filePath+"test.txt");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+            ArrayList list3 = (ArrayList)objectInputStream.readObject();
+            System.out.println(list3);
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
         }
     }
 

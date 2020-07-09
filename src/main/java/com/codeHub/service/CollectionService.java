@@ -70,11 +70,21 @@ public class CollectionService {
         list.add("LOL");
         list.add("WOW");
         list .add("huh");
+        list.addFirst("nah");
+        list.addLast("ok");
+        list.removeLastOccurrence("ok");
 
         //traverse in reverse order
         ListIterator iterator=list.listIterator();
         while(iterator.hasPrevious()){
             System.out.println(iterator.previous());
+        }
+        //traverse in reverse
+        Iterator iterator2=list.descendingIterator();
+        System.out.println("Reverse LinkedList: ");
+
+        while(iterator2.hasNext()){
+            System.out.println(iterator2.next());
         }
     }
 

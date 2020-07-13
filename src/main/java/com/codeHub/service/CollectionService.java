@@ -16,6 +16,8 @@ public class CollectionService {
         hashSetCmd();
         linkedHashsetCmd();
         treeSetCmd();
+        traverseMap();
+        traverseMapCmd();
     }
 
     public static void arrayListCmd(){
@@ -146,6 +148,11 @@ public class CollectionService {
         deque.add("red");
         deque.add("yellow");
         deque.add("green");
+        deque.offer("white");
+        deque.offer("off-white");
+        deque.offerFirst("blue");
+        deque.offerLast("black");
+        deque.pollLast();
         System.out.println("ArrayDeque: ");
         for(String str:deque){
             System.out.println(str);
@@ -196,6 +203,37 @@ public class CollectionService {
 
         for(String str:set){
             System.out.println(str);
+        }
+    }
+    //old
+    public static void traverseMap(){
+        Map map=new HashMap();
+        map.put(1,"circle");
+        map.put(3,"square");
+        map.put(2,"pentagon");
+        map.put(4,"circle");
+
+        //traverse map
+        Set set=map.entrySet();//convert to set
+        Iterator iterator=set.iterator();
+        while (iterator.hasNext()){
+            //convert to Map.Entry to get key and val separately
+            Map.Entry entry=(Map.Entry)iterator.next();
+            System.out.println("Key: "+entry.getKey()+" Val: "+entry.getValue());
+        }
+    }
+
+    //new
+    public static void traverseMapCmd(){
+        Map<Integer,String> map=new HashMap<Integer, String>();
+        map.put(1,"circle");
+        map.put(3,"square");
+        map.put(2,"pentagon");
+        map.put(4,"circle");
+
+        //traverse map
+        for(Map.Entry data:map.entrySet()){
+            System.out.println("Key: "+data.getKey()+" Val: "+data.getValue());
         }
     }
 

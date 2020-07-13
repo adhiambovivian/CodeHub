@@ -240,9 +240,12 @@ public class CollectionService {
         //returns sequential Stream with this collection as its source
         .stream()
         //sorted according to the provided Comparator
-        .sorted(Map.Entry.comparingByKey())
+        //.sorted(Map.Entry.comparingByKey())
+        //to sort in descending order by key
+        .sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
         //performs an action for each element of this stream
         .forEach(System.out::println);
+
     }
 
 }

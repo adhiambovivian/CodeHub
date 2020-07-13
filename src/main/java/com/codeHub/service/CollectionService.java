@@ -5,7 +5,7 @@ import java.util.*;
 
 public class CollectionService {
     static String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
-    enum days{SUNDAY,MAONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY}
+    enum days{SUNDAY,MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY}
 
 
     public static void collectionCmd(){
@@ -24,6 +24,7 @@ public class CollectionService {
         sortedMapCmd();
         hashtableCmd();
         enumSetCmd();
+        enumMapCmd();
     }
 
     public static void arrayListCmd(){
@@ -318,7 +319,7 @@ public class CollectionService {
     }
 
     private static void enumSetCmd(){
-        Set<days> set=EnumSet.of(days.FRIDAY,days.MAONDAY);
+        Set<days> set=EnumSet.of(days.FRIDAY,days.MONDAY);
         //traverse
         Iterator<days> iterator = set.iterator();
         while(iterator.hasNext()){
@@ -328,6 +329,18 @@ public class CollectionService {
         System.out.println("All days: "+set2);
         Set<days> set3=EnumSet.noneOf(days.class);
         System.out.println("None of the days: "+set3);
+    }
+
+    private static void enumMapCmd(){
+        EnumMap<days,String> map=new EnumMap<days, String>(days.class);
+
+        map.put(days.MONDAY,"3");
+        map.put(days.FRIDAY,"6");
+        map.put(days.SATURDAY,"7");
+
+        for(Map.Entry data:map.entrySet()){
+            System.out.println("Key: "+data.getKey()+" Val: "+data.getValue());
+        }
     }
 
 }

@@ -174,6 +174,8 @@ public class CollectionService {
         set.add("Jupiter");
         set.add("Uranus");
         set.add("Neptune");
+        set.add("Jupiter");
+        set.add("neptune");
         System.out.println("linkedHashset: ");
 
         Iterator iterator=set.iterator();
@@ -187,7 +189,10 @@ public class CollectionService {
         set.add("cypress");
         set.add("eucalyptus");
         set.add("mugo");
-        System.out.println("treeset: ");
+        set .add("cypress");
+
+        System.out.println("treeset: Highest val: "+set.pollFirst()+" Lowest val: "+set.pollLast()+
+                " reverse set: "+set.descendingSet());
 
         for(String str:set){
             System.out.println(str);

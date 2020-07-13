@@ -1,11 +1,13 @@
 package com.codeHub.service;
 
+import org.boon.core.Sys;
+
 import java.io.*;
 import java.util.*;
 
 public class CollectionService {
     static String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
-    static String propertyPath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/src/main/resources";
+    static String propertyPath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/src/main/resources/application.properties";
 
     enum days{SUNDAY,MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY}
 
@@ -27,7 +29,7 @@ public class CollectionService {
         hashtableCmd();
         enumSetCmd();
         enumMapCmd();
-        collectionsCmd();
+//        collectionsCmd();
         propertiesCmd();
     }
 
@@ -442,16 +444,31 @@ public class CollectionService {
             FileReader reader = new FileReader(propertyPath);
             Properties properties = new Properties();
             properties.load(reader);
-            Set set = properties.entrySet();
+            print(properties);
+            //get system props
+            System.out.println("system props");
+            Properties properties2= System.getProperties();
+            print(properties2);
 
-            Iterator iterator = set.iterator();
-            while (iterator.hasNext()) {
-                Map.Entry entry = (Map.Entry) iterator.next();
-                System.out.println(entry.getKey() + " = " + entry.getValue());
+            Properties properties3=new Properties();
+            properties3.setProperty("port","3838");
+            properties3.setProperty("email","somemeail@gmail.com");
 
-            }
+            properties3.store(new FileWriter(filePath+"test.properties"),"External props");
+
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void print(Properties properties){
+        Set set = properties.entrySet();
+
+        Iterator iterator = set.iterator();
+        while (iterator.hasNext()) {
+            Map.Entry entry = (Map.Entry) iterator.next();
+            System.out.println(entry.getKey() + " = " + entry.getValue());
+
         }
     }
 }

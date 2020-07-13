@@ -5,6 +5,8 @@ import java.util.*;
 
 public class CollectionService {
     static String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
+    enum days{SUNDAY,MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY}
+
 
     public static void collectionCmd(){
         linkedListCmd();
@@ -16,6 +18,14 @@ public class CollectionService {
         hashSetCmd();
         linkedHashsetCmd();
         treeSetCmd();
+        traverseMap();
+        traverseMapCmd();
+        linkedhashmapCmd();
+        sortedMapCmd();
+        hashtableCmd();
+        enumSetCmd();
+        enumMapCmd();
+        collectionsCmd();
     }
 
     public static void arrayListCmd(){
@@ -146,6 +156,11 @@ public class CollectionService {
         deque.add("red");
         deque.add("yellow");
         deque.add("green");
+        deque.offer("white");
+        deque.offer("off-white");
+        deque.offerFirst("blue");
+        deque.offerLast("black");
+        deque.pollLast();
         System.out.println("ArrayDeque: ");
         for(String str:deque){
             System.out.println(str);
@@ -174,6 +189,8 @@ public class CollectionService {
         set.add("Jupiter");
         set.add("Uranus");
         set.add("Neptune");
+        set.add("Jupiter");
+        set.add("neptune");
         System.out.println("linkedHashset: ");
 
         Iterator iterator=set.iterator();
@@ -187,11 +204,158 @@ public class CollectionService {
         set.add("cypress");
         set.add("eucalyptus");
         set.add("mugo");
-        System.out.println("treeset: ");
+        set .add("cypress");
+
+        System.out.println("treeset: Highest val: "+set.pollFirst()+" Lowest val: "+set.pollLast()+
+                " reverse set: "+set.descendingSet());
 
         for(String str:set){
             System.out.println(str);
         }
+    }
+    //old
+    public static void traverseMap(){
+        Map map=new HashMap();
+        map.put(1,"circle");
+        map.put(3,"square");
+        map.put(2,"pentagon");
+        map.put(4,"circle");
+
+        //traverse map
+        Set set=map.entrySet();//convert to set
+        Iterator iterator=set.iterator();
+        while (iterator.hasNext()){
+            //convert to Map.Entry to get key and val separately
+            Map.Entry entry=(Map.Entry)iterator.next();
+            System.out.println("Key: "+entry.getKey()+" Val: "+entry.getValue());
+        }
+    }
+
+    //new
+    public static void traverseMapCmd(){
+        Map<Integer,String> map=new HashMap<Integer, String>();
+        map.put(1,"circle");
+        map.put(3,"square");
+        map.put(2,"pentagon");
+        map.put(4,"circle");
+        map.put(3,"rectangle");
+
+        HashMap<Integer,String> hashMap=new HashMap<>();
+        hashMap.putIfAbsent(8,"octagon");
+        hashMap.putIfAbsent(5,"oval");
+        map.putAll(hashMap);
+
+        //traverse map
+        for(Map.Entry data:map.entrySet()){
+            System.out.println("Key: "+data.getKey()+" Val: "+data.getValue());
+        }
+        map.replace(5,"quadragon");
+        map.replaceAll((k,v)->"shape");
+        //returns a Set view of the mappings contained in this map
+        map.entrySet()
+        //returns sequential Stream with this collection as its source
+        .stream()
+        //sorted according to the provided Comparator
+        //.sorted(Map.Entry.comparingByKey())
+        //to sort in descending order by key
+        .sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
+        //performs an action for each element of this stream
+        .forEach(System.out::println);
+
+    }
+
+    public static void linkedhashmapCmd(){
+        LinkedHashMap<Integer, String> map=new LinkedHashMap<Integer, String>();
+        map.put(10,"glass");
+        map.put(11,"fork");
+        map.put(22,"spoon");
+
+        System.out.println(map.entrySet());
+    }
+    public static void treeMapCmd(){
+        TreeMap<Integer,String> map=new TreeMap<>();
+        map.put(90,"apple");
+        map.put(23,"lenovo");
+        map.put(45,"sumsung");
+        map.put(2,"google");
+
+        System.out.println("Descending: "+map.descendingMap());
+        //Returns key-value pairs whose keys are less than or equal to the specified key.
+        System.out.println("headMap: "+map.headMap(20,true));
+        //Returns key-value pairs whose keys are greater than or equal to the specified key.
+        System.out.println("tailMap: "+map.tailMap(40,true));
+        //Returns key-value pairs exists in between the specified key.
+        System.out.println("subMap: "+map.subMap(20, false, 30, true));
+
+    }
+
+    public static void sortedMapCmd(){
+        SortedMap<Integer,String> map=new TreeMap<>();
+        map.put(100,"vodka");
+        map.put(198,"wine");
+        map.put(30,"whiskey");
+        map.put(10,"beer");
+
+        //Returns key-value pairs whose keys are less than the specified key.
+        System.out.println("HeadMap: "+map.headMap(30));
+        //Returns key-value pairs whose keys are greater than or equal to the specified key.
+        System.out.println("tailMap: "+map.tailMap(100));
+        //Returns key-value pairs exists in between the specified key.
+        System.out.println("subMap: "+map.subMap(1,30));
+
+    }
+
+    public static void hashtableCmd(){
+        Hashtable<Integer,String> map=new Hashtable<>();
+        map.put(10,"1000");
+        map.put(2,"2000");
+        map.put(30,"3000");
+        map.putIfAbsent(104,"10400");
+
+
+        System.out.println(map.getOrDefault(105, "Not Found"));
+        for(Map.Entry data:map.entrySet()){
+            System.out.println("Key: "+data.getKey()+" Val: "+data.getValue());
+        }
+    }
+
+    private static void enumSetCmd(){
+        Set<days> set=EnumSet.of(days.FRIDAY,days.MONDAY);
+        //traverse
+        Iterator<days> iterator = set.iterator();
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+        Set<days> set2=EnumSet.allOf(days.class);
+        System.out.println("All days: "+set2);
+        Set<days> set3=EnumSet.noneOf(days.class);
+        System.out.println("None of the days: "+set3);
+    }
+
+    private static void enumMapCmd(){
+        EnumMap<days,String> map=new EnumMap<days, String>(days.class);
+
+        map.put(days.MONDAY,"3");
+        map.put(days.FRIDAY,"6");
+        map.put(days.SATURDAY,"7");
+
+        for(Map.Entry data:map.entrySet()){
+            System.out.println("Key: "+data.getKey()+" Val: "+data.getValue());
+        }
+    }
+
+    private static void collectionsCmd(){
+        List<String> list=new ArrayList<>();
+        list.add(1,"circle");
+        list.add(3,"square");
+        list.add(2,"pentagon");
+        list.add(4,"circle");
+        System.out.println("Max: "+Collections.max(list));
+        Collections.sort(list);
+        System.out.println("search: "+Collections.binarySearch(list,"oval"));
+        System.out.println("reverse: "+Collections.reverseOrder());
+        Collections.sort(list,Collections.reverseOrder());
+
     }
 
 }

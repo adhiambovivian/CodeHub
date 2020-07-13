@@ -356,6 +356,47 @@ public class CollectionService {
         System.out.println("reverse: "+Collections.reverseOrder());
         Collections.sort(list,Collections.reverseOrder());
 
+        //sort user-defined objs
+        ArrayList<Student> students=new ArrayList<Student>();
+        students.add(new Student(101,"Lucy",23));
+        students.add(new Student(106,"Mary",27));
+        students.add(new Student(105,"John",21));
+        Collections.sort(students);
+
+        for(Student student:students){
+            System.out.println(student);
+        }
+    }
+
+    private static class Student implements Comparable<Student>{
+        int idNo;
+        String name;
+        int age;
+
+        public Student(int idNo, String name, int age) {
+            this.idNo = idNo;
+            this.name = name;
+            this.age = age;
+        }
+
+        @Override
+        public int compareTo(Student o) {
+            if(age==o.age)
+            return 0;
+            else if(age>o.age)//switch if sort by reverse eg age<0.age, return 1
+                return 1;
+            else
+                return -1;
+        }
+
+        @Override
+        public String toString() {
+            return "Student{" +
+                    "idNo=" + idNo +
+                    ", name='" + name + '\'' +
+                    ", age=" + age +
+                    '}';
+        }
     }
 
 }

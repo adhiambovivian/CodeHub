@@ -1,8 +1,11 @@
 package com.codeHub.service;
 
+import java.io.*;
 import java.util.*;
 
 public class CollectionService {
+    static String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
+
     public static void collectionCmd(){
         linkedListCmd();
         arrayListCmd();
@@ -12,6 +15,7 @@ public class CollectionService {
         arrayDequeCmd();
         hashSetCmd();
         linkedHashsetCmd();
+        treeSetCmd();
     }
 
     public static void arrayListCmd(){
@@ -19,24 +23,68 @@ public class CollectionService {
         list.add("Apples");
         list.add("bananas");
         list.add("grapes");
+        list.set(1,"watermelon");
+
+        ArrayList<String> list2 =  new ArrayList<>();
+        list2.add("Oranges");
+        list2.add("peach");
+        list2.add("Apples");
+        //retains matching(includin case) elements only
+        //list.retainAll(list2);
+        list.addAll(list2);
+
+        Collections.sort(list);
 
         //traverse
+        System.out.println("ArrayList: ");
         Iterator<String> iterator=list.iterator();
         while(iterator.hasNext()){
             System.out.println(iterator.next());
         }
+
+        try {
+            //serialization
+            FileOutputStream fileOutputStream = new FileOutputStream(filePath + "test.txt");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(list);
+            fileOutputStream.close();
+            objectOutputStream.close();
+
+            //Deserialization
+            FileInputStream fileInputStream = new FileInputStream(filePath+"test.txt");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+            ArrayList list3 = (ArrayList)objectInputStream.readObject();
+            System.out.println(list3);
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
     }
 
     public static void linkedListCmd(){
+        System.out.println("LinkedList: ");
         LinkedList<String> list = new LinkedList<String>();
         list.add("LOL");
         list.add("WOW");
         list .add("huh");
+        list.addFirst("nah");
+        list.addLast("ok");
+        list.removeLastOccurrence("ok");
 
-        //traverse
-        Iterator iterator=list.iterator();
-        while(iterator.hasNext()){
-            System.out.println(iterator.next());
+        //traverse in reverse order
+        ListIterator iterator=list.listIterator();
+        while(iterator.hasPrevious()){
+            System.out.println(iterator.previous());
+        }
+        //traverse in reverse
+        Iterator iterator2=list.descendingIterator();
+        System.out.println("Reverse LinkedList: ");
+
+        while(iterator2.hasNext()){
+            System.out.println(iterator2.next());
         }
     }
 
@@ -45,11 +93,11 @@ public class CollectionService {
         vector.add("Nile");
         vector.add("sabaki");
         vector.add("Nynando");
-
-        Iterator iterator=vector.iterator();
-        while(iterator.hasNext()){
-            System.out.println(iterator.next());
+        System.out.println("Vector: ");
+        for(int i=0; i<vector.size();i++) {
+            System.out.println(vector.get(i));
         }
+
     }
 
     public static void stackCmd(){
@@ -60,7 +108,7 @@ public class CollectionService {
         stack.push("brocolli");
         stack.push("cucumber");
         System.out.println(stack.pop());
-
+        System.out.println("Stack: ");
         Iterator<String> iterator=stack.iterator();
         while (iterator.hasNext()){
             System.out.println(iterator.next());
@@ -78,13 +126,15 @@ public class CollectionService {
         System.out.println("Head: " + queue.element());
         System.out.println("Head: " + queue.peek());
 
-        Iterator iterator = queue.iterator();
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next());
-        }
+        //traverse using forEach
+        queue.forEach(item->{ //lambda expression
+            System.out.println(item);
+        });
         queue.remove();//remove
         queue.poll();//remove
         Iterator iterator2 = queue.iterator();
+        System.out.println("PriorityQueue: ");
+
         System.out.println("After removing 2 items: ");
         while (iterator2.hasNext()) {
             System.out.println(iterator2.next());
@@ -96,7 +146,7 @@ public class CollectionService {
         deque.add("red");
         deque.add("yellow");
         deque.add("green");
-
+        System.out.println("ArrayDeque: ");
         for(String str:deque){
             System.out.println(str);
         }
@@ -107,11 +157,16 @@ public class CollectionService {
         hashSet.add("mercury");
         hashSet.add("venus");
         hashSet.add("earth");
+        hashSet.add("pluto");
 
+        hashSet.removeIf(str->str.contains("pluto"));
+
+        System.out.println("hashSet: ");
+        //traverse using forEachRemaining
         Iterator iterator=hashSet.iterator();
-        while(iterator.hasNext()){
-            System.out.println(iterator.next());
-        }
+        iterator.forEachRemaining(item->{
+            System.out.println(item);
+        });
     }
 
     public static void linkedHashsetCmd(){
@@ -119,6 +174,8 @@ public class CollectionService {
         set.add("Jupiter");
         set.add("Uranus");
         set.add("Neptune");
+        System.out.println("linkedHashset: ");
+
         Iterator iterator=set.iterator();
         while (iterator.hasNext()){
             System.out.println(iterator.next());
@@ -130,6 +187,7 @@ public class CollectionService {
         set.add("cypress");
         set.add("eucalyptus");
         set.add("mugo");
+        System.out.println("treeset: ");
 
         for(String str:set){
             System.out.println(str);

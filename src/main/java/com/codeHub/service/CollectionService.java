@@ -368,6 +368,25 @@ public class CollectionService {
         }
     }
 
+    public static void compareObjs(){
+        ArrayList<Student> students=new ArrayList<Student>();
+        students.add(new Student(101,"Lucy",23));
+        students.add(new Student(106,"Mary",27));
+        students.add(new Student(105,"John",21));
+
+        //using java 8
+        Comparator<Student> studentComparator=Comparator.comparing(Student::getName);
+        Collections.sort(students,studentComparator);
+        System.out.println("Sorting by Name");
+        for(Student st: students){
+            System.out.println(st.idNo+" "+st.name+" "+st.age);
+        }
+        //sort but nulls first
+        Comparator<Student> cm1=Comparator.comparing(Student::getName,Comparator.nullsFirst(String::compareTo));
+
+
+    }
+
     private static class Student implements Comparable<Student>{
         int idNo;
         String name;
@@ -396,6 +415,22 @@ public class CollectionService {
                     ", name='" + name + '\'' +
                     ", age=" + age +
                     '}';
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
         }
     }
 

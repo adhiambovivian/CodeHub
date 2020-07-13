@@ -324,6 +324,10 @@ public class CollectionService {
         while(iterator.hasNext()){
             System.out.println(iterator.next());
         }
+        Set<days> set2=EnumSet.allOf(days.class);
+        System.out.println("All days: "+set2);
+        Set<days> set3=EnumSet.noneOf(days.class);
+        System.out.println("None of the days: "+set3);
     }
 
 }

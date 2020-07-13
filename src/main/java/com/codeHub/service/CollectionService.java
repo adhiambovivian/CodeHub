@@ -18,6 +18,7 @@ public class CollectionService {
         treeSetCmd();
         traverseMap();
         traverseMapCmd();
+        linkedhashmapCmd();
     }
 
     public static void arrayListCmd(){
@@ -230,11 +231,19 @@ public class CollectionService {
         map.put(3,"square");
         map.put(2,"pentagon");
         map.put(4,"circle");
+        map.put(3,"rectangle");
+
+        HashMap<Integer,String> hashMap=new HashMap<>();
+        hashMap.putIfAbsent(8,"octagon");
+        hashMap.putIfAbsent(5,"oval");
+        map.putAll(hashMap);
 
         //traverse map
         for(Map.Entry data:map.entrySet()){
             System.out.println("Key: "+data.getKey()+" Val: "+data.getValue());
         }
+        map.replace(5,"quadragon");
+        map.replaceAll((k,v)->"shape");
         //returns a Set view of the mappings contained in this map
         map.entrySet()
         //returns sequential Stream with this collection as its source
@@ -246,6 +255,15 @@ public class CollectionService {
         //performs an action for each element of this stream
         .forEach(System.out::println);
 
+    }
+
+    public static void linkedhashmapCmd(){
+        LinkedHashMap<Integer, String> map=new LinkedHashMap<Integer, String>();
+        map.put(10,"glass");
+        map.put(11,"fork");
+        map.put(22,"spoon");
+
+        System.out.println(map.entrySet());
     }
 
 }

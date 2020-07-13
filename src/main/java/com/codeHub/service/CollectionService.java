@@ -235,6 +235,14 @@ public class CollectionService {
         for(Map.Entry data:map.entrySet()){
             System.out.println("Key: "+data.getKey()+" Val: "+data.getValue());
         }
+        //returns a Set view of the mappings contained in this map
+        map.entrySet()
+        //returns sequential Stream with this collection as its source
+        .stream()
+        //sorted according to the provided Comparator
+        .sorted(Map.Entry.comparingByKey())
+        //performs an action for each element of this stream
+        .forEach(System.out::println);
     }
 
 }

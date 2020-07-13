@@ -20,6 +20,13 @@ docker run -p 8983:8983 -t solr
 
 docker exec -it --user=solr <container-id> bin/solr create_core -c participants
 
+#Install mysql
+**docker run --name mysql -p 3306 -e MYSQL_ROOT_PASSWORD=your-password -d mysql:latest**
+#To access mysql terminal
+docker exec -it mysql bash
+mysql -u root -p
+
+
 #Running the application
 
 mvn spring-boot:run -Drun.jvmArguments='-Dserver.port=7090'

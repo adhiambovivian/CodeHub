@@ -1,10 +1,14 @@
 package com.codeHub.service;
 
+import org.boon.core.Sys;
+
 import java.io.*;
 import java.util.*;
 
 public class CollectionService {
     static String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
+    static String propertyPath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/src/main/resources/application.properties";
+
     enum days{SUNDAY,MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY}
 
 
@@ -25,7 +29,8 @@ public class CollectionService {
         hashtableCmd();
         enumSetCmd();
         enumMapCmd();
-        collectionsCmd();
+//        collectionsCmd();
+        propertiesCmd();
     }
 
     public static void arrayListCmd(){
@@ -349,13 +354,121 @@ public class CollectionService {
         list.add(1,"circle");
         list.add(3,"square");
         list.add(2,"pentagon");
-        list.add(4,"circle");
-        System.out.println("Max: "+Collections.max(list));
-        Collections.sort(list);
-        System.out.println("search: "+Collections.binarySearch(list,"oval"));
-        System.out.println("reverse: "+Collections.reverseOrder());
-        Collections.sort(list,Collections.reverseOrder());
+//        list.add(4,"circle");
+//        System.out.println("Max: "+Collections.max(list));
+//        Collections.sort(list);
+//        System.out.println("search: "+Collections.binarySearch(list,"oval"));
+//        System.out.println("reverse: "+Collections.reverseOrder());
+//        Collections.sort(list,Collections.reverseOrder());
+
+        //sort user-defined objs
+        ArrayList<Student> students=new ArrayList<Student>();
+        students.add(new Student(101,"Lucy",23));
+        students.add(new Student(106,"Mary",27));
+        students.add(new Student(105,"John",21));
+        Collections.sort(students);
+
+        for(Student student:students){
+            System.out.println(student);
+        }
+    }
+
+    public static void compareObjs(){
+        ArrayList<Student> students=new ArrayList<Student>();
+        students.add(new Student(101,"Lucy",23));
+        students.add(new Student(106,"Mary",27));
+        students.add(new Student(105,"John",21));
+
+        //using java 8
+        Comparator<Student> studentComparator=Comparator.comparing(Student::getName);
+        Collections.sort(students,studentComparator);
+        System.out.println("Sorting by Name");
+        for(Student st: students){
+            System.out.println(st.idNo+" "+st.name+" "+st.age);
+        }
+        //sort but nulls first
+        Comparator<Student> cm1=Comparator.comparing(Student::getName,Comparator.nullsFirst(String::compareTo));
+
 
     }
 
+    private static class Student implements Comparable<Student>{
+        int idNo;
+        String name;
+        int age;
+
+        public Student(int idNo, String name, int age) {
+            this.idNo = idNo;
+            this.name = name;
+            this.age = age;
+        }
+
+        @Override
+        public int compareTo(Student o) {
+            if(age==o.age)
+            return 0;
+            else if(age>o.age)//switch if sort by reverse eg age<0.age, return 1
+                return 1;
+            else
+                return -1;
+        }
+
+        @Override
+        public String toString() {
+            return "Student{" +
+                    "idNo=" + idNo +
+                    ", name='" + name + '\'' +
+                    ", age=" + age +
+                    '}';
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+    }
+
+    public static void propertiesCmd() {
+        try {
+            FileReader reader = new FileReader(propertyPath);
+            Properties properties = new Properties();
+            properties.load(reader);
+            print(properties);
+            //get system props
+            System.out.println("system props");
+            Properties properties2= System.getProperties();
+            print(properties2);
+
+            Properties properties3=new Properties();
+            properties3.setProperty("port","3838");
+            properties3.setProperty("email","somemeail@gmail.com");
+
+            properties3.store(new FileWriter(filePath+"test.properties"),"External props");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void print(Properties properties){
+        Set set = properties.entrySet();
+
+        Iterator iterator = set.iterator();
+        while (iterator.hasNext()) {
+            Map.Entry entry = (Map.Entry) iterator.next();
+            System.out.println(entry.getKey() + " = " + entry.getValue());
+
+        }
+    }
 }

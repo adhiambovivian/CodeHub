@@ -5,6 +5,8 @@ import java.util.*;
 
 public class CollectionService {
     static String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
+    enum days{SUNDAY,MAONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY}
+
 
     public static void collectionCmd(){
         linkedListCmd();
@@ -21,6 +23,7 @@ public class CollectionService {
         linkedhashmapCmd();
         sortedMapCmd();
         hashtableCmd();
+        enumSetCmd();
     }
 
     public static void arrayListCmd(){
@@ -311,6 +314,15 @@ public class CollectionService {
         System.out.println(map.getOrDefault(105, "Not Found"));
         for(Map.Entry data:map.entrySet()){
             System.out.println("Key: "+data.getKey()+" Val: "+data.getValue());
+        }
+    }
+
+    private static void enumSetCmd(){
+        Set<days> set=EnumSet.of(days.FRIDAY,days.MAONDAY);
+        //traverse
+        Iterator<days> iterator = set.iterator();
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
         }
     }
 

@@ -157,6 +157,10 @@ public class CollectionService {
         hashSet.add("mercury");
         hashSet.add("venus");
         hashSet.add("earth");
+        hashSet.add("pluto");
+
+        hashSet.removeIf(str->str.contains("pluto"));
+
         System.out.println("hashSet: ");
         //traverse using forEachRemaining
         Iterator iterator=hashSet.iterator();

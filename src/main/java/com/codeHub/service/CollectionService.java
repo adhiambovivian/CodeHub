@@ -354,6 +354,8 @@ public class CollectionService {
         Collections.sort(list);
         System.out.println("search: "+Collections.binarySearch(list,"oval"));
         System.out.println("reverse: "+Collections.reverseOrder());
+        Collections.sort(list,Collections.reverseOrder());
+
     }
 
 }

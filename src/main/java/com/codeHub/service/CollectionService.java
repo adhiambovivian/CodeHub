@@ -25,6 +25,7 @@ public class CollectionService {
         hashtableCmd();
         enumSetCmd();
         enumMapCmd();
+        collectionsCmd();
     }
 
     public static void arrayListCmd(){
@@ -341,6 +342,18 @@ public class CollectionService {
         for(Map.Entry data:map.entrySet()){
             System.out.println("Key: "+data.getKey()+" Val: "+data.getValue());
         }
+    }
+
+    private static void collectionsCmd(){
+        List<String> list=new ArrayList<>();
+        list.add(1,"circle");
+        list.add(3,"square");
+        list.add(2,"pentagon");
+        list.add(4,"circle");
+        System.out.println("Max: "+Collections.max(list));
+        Collections.sort(list);
+        System.out.println("search: "+Collections.binarySearch(list,"oval"));
+        System.out.println("reverse: "+Collections.reverseOrder());
     }
 
 }

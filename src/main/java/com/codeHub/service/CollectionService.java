@@ -5,6 +5,8 @@ import java.util.*;
 
 public class CollectionService {
     static String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
+    static String propertyPath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/src/main/resources";
+
     enum days{SUNDAY,MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY}
 
 
@@ -26,6 +28,7 @@ public class CollectionService {
         enumSetCmd();
         enumMapCmd();
         collectionsCmd();
+        propertiesCmd();
     }
 
     public static void arrayListCmd(){
@@ -349,12 +352,12 @@ public class CollectionService {
         list.add(1,"circle");
         list.add(3,"square");
         list.add(2,"pentagon");
-        list.add(4,"circle");
-        System.out.println("Max: "+Collections.max(list));
-        Collections.sort(list);
-        System.out.println("search: "+Collections.binarySearch(list,"oval"));
-        System.out.println("reverse: "+Collections.reverseOrder());
-        Collections.sort(list,Collections.reverseOrder());
+//        list.add(4,"circle");
+//        System.out.println("Max: "+Collections.max(list));
+//        Collections.sort(list);
+//        System.out.println("search: "+Collections.binarySearch(list,"oval"));
+//        System.out.println("reverse: "+Collections.reverseOrder());
+//        Collections.sort(list,Collections.reverseOrder());
 
         //sort user-defined objs
         ArrayList<Student> students=new ArrayList<Student>();
@@ -434,4 +437,21 @@ public class CollectionService {
         }
     }
 
+    public static void propertiesCmd() {
+        try {
+            FileReader reader = new FileReader(propertyPath);
+            Properties properties = new Properties();
+            properties.load(reader);
+            Set set = properties.entrySet();
+
+            Iterator iterator = set.iterator();
+            while (iterator.hasNext()) {
+                Map.Entry entry = (Map.Entry) iterator.next();
+                System.out.println(entry.getKey() + " = " + entry.getValue());
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

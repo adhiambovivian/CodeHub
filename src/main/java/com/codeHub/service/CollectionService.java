@@ -282,4 +282,20 @@ public class CollectionService {
 
     }
 
+    public static void sortedMapCmd(){
+        SortedMap<Integer,String> map=new TreeMap<>();
+        map.put(100,"vodka");
+        map.put(198,"wine");
+        map.put(30,"whiskey");
+        map.put(10,"beer");
+
+        //Returns key-value pairs whose keys are less than the specified key.
+        System.out.println("HeadMap: "+map.headMap(30));
+        //Returns key-value pairs whose keys are greater than or equal to the specified key.
+        System.out.println("tailMap: "+map.tailMap(100));
+        //Returns key-value pairs exists in between the specified key.
+        System.out.println("subMap: "+map.subMap(1,30));
+
+    }
+
 }

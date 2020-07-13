@@ -19,6 +19,8 @@ public class CollectionService {
         traverseMap();
         traverseMapCmd();
         linkedhashmapCmd();
+        sortedMapCmd();
+        hashtableCmd();
     }
 
     public static void arrayListCmd(){
@@ -296,6 +298,20 @@ public class CollectionService {
         //Returns key-value pairs exists in between the specified key.
         System.out.println("subMap: "+map.subMap(1,30));
 
+    }
+
+    public static void hashtableCmd(){
+        Hashtable<Integer,String> map=new Hashtable<>();
+        map.put(10,"1000");
+        map.put(2,"2000");
+        map.put(30,"3000");
+        map.putIfAbsent(104,"10400");
+
+
+        System.out.println(map.getOrDefault(105, "Not Found"));
+        for(Map.Entry data:map.entrySet()){
+            System.out.println("Key: "+data.getKey()+" Val: "+data.getValue());
+        }
     }
 
 }

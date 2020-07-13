@@ -265,5 +265,21 @@ public class CollectionService {
 
         System.out.println(map.entrySet());
     }
+    public static void treeMapCmd(){
+        TreeMap<Integer,String> map=new TreeMap<>();
+        map.put(90,"apple");
+        map.put(23,"lenovo");
+        map.put(45,"sumsung");
+        map.put(2,"google");
+
+        System.out.println("Descending: "+map.descendingMap());
+        //Returns key-value pairs whose keys are less than or equal to the specified key.
+        System.out.println("headMap: "+map.headMap(20,true));
+        //Returns key-value pairs whose keys are greater than or equal to the specified key.
+        System.out.println("tailMap: "+map.tailMap(40,true));
+        //Returns key-value pairs exists in between the specified key.
+        System.out.println("subMap: "+map.subMap(20, false, 30, true));
+
+    }
 
 }

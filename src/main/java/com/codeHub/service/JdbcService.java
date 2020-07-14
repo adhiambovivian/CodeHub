@@ -10,14 +10,24 @@ import java.util.Properties;
 
 public class JdbcService {
     static String propertyPath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/src/main/resources/application.properties";
+    static String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
 
     public static void jdbcCmd()
     {
-        createTable();
+        String query="\n" +
+            "CREATE TABLE IF NOT EXISTS employee (\n" +
+            "first_name varchar(25),\n" +
+            "last_name  varchar(25),\n" +
+            "department varchar(15),\n" +
+            "email  varchar(50),\n" +
+            "id INT AUTO_INCREMENT PRIMARY KEY\n"+
+            ")";
+        createTable(query);
         createRecord();
         getEmpList();
         getRsDBMetadata();
         getDBMetadata();
+        storeImage();
     }
 
     public static Connection connectDbCmd(){
@@ -48,7 +58,7 @@ public class JdbcService {
 
     public static void getEmpList() {
 
-        String query="SELECT first_name, last_name, department, email FROM employees";
+        String query="SELECT first_name, last_name, department, email FROM employee";
 //        String query="SELECT user FROM user_summary";
         try {
             Connection connection = connectDbCmd();
@@ -71,14 +81,7 @@ public class JdbcService {
         }
     }
 
-    public static void createTable() {
-        String query="\n" +
-                "CREATE TABLE IF NOT EXISTS employees (\n" +
-                "first_name varchar(25),\n" +
-                "last_name  varchar(25),\n" +
-                "department varchar(15),\n" +
-                "email  varchar(50)\n" +
-                ")";
+    public static void createTable(String query) {
         try {
             Connection connection = connectDbCmd();
             //create statement object
@@ -95,9 +98,10 @@ public class JdbcService {
         }
     }
 
+
     public static void createRecord() {
 
-        String insertQuery="INSERT INTO employees (first_name, last_name, department, email,profile_photo) VALUES (?,?,?,?,?)";
+        String insertQuery="INSERT INTO employee (first_name, last_name, department, email) VALUES (?,?,?,?)";
         try {
             Connection connection = connectDbCmd();
             //create statement object
@@ -106,7 +110,6 @@ public class JdbcService {
             statement.setString(2,"Voila");
             statement.setString(3,"TECH");
             statement.setString(4,"voila@gmail.com");
-            statement.setBinaryStream(5,null);
             //execute query
             int result = statement.executeUpdate(insertQuery);
             if(result!=0)
@@ -119,7 +122,7 @@ public class JdbcService {
 
     private static void getRsDBMetadata(){
         try{
-            String query="SELECT first_name, last_name, department, email FROM employees";
+            String query="SELECT first_name, last_name, department, email FROM employee";
 
             Connection connection=connectDbCmd();
             PreparedStatement ps=connection.prepareStatement(query);
@@ -136,7 +139,7 @@ public class JdbcService {
 
     private static void getDBMetadata(){
         try{
-            String query="SELECT first_name, last_name, department, email FROM employees";
+            String query="SELECT first_name, last_name, department, email FROM employee";
 
             Connection connection=connectDbCmd();
             DatabaseMetaData dbmd=connection.getMetaData();
@@ -161,12 +164,29 @@ public class JdbcService {
 
     public static void storeImage(){
         try {
+            String createTableQ="CREATE TABLE IF NOT EXISTS profile_image \n" +
+                    "   (\n" +
+                    "id INT AUTO_INCREMENT PRIMARY KEY,\n" +
+                    "profile_photo BLOB NOT NULL,\n" +
+                    "employee_id INT\n" +
+                    "FOREIGN KEY(employee_id)REFERENCES employee(id)\n" +
+                    " \n" +
+                    "   ); \n";
+            createTable(createTableQ);
+
             Connection connection = connectDbCmd();
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO media_images (name, id) values(?,?)");
-            ps.setString(1, "wow");
-            FileInputStream fileInputStream = new FileInputStream("path");
-            ps.setBinaryStream(2, fileInputStream);
+
+            Statement st=connection.createStatement();
+            st.executeUpdate(createTableQ);
+
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO profile_image (profile_photo, employee_id) values(?,?)");
+            FileInputStream fileInputStream = new FileInputStream(filePath+"profile.png");
+            ps.setBinaryStream(1, fileInputStream,fileInputStream.available());
+            ps.setInt(2, 1);
+
             int status = ps.executeUpdate();
+            if(status>0)
+                System.out.println("Successfully add profile pic");
             connection.close();
         }catch (SQLException e){
             e.printStackTrace();

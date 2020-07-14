@@ -42,7 +42,8 @@ public class JdbcService {
 
     public static void getEmpList() {
 
-        String query="SELECT first_name, last_name, department, email FROM employees";
+//        String query="SELECT first_name, last_name, department, email FROM employees";
+        String query="SELECT user FROM user_summary";
         try {
             Connection connection = connectDbCmd();
             //create statement object
@@ -51,7 +52,7 @@ public class JdbcService {
             ResultSet rs = statement.executeQuery(query);
 
             while (rs.next()) {
-                System.out.println(rs.getString("first_name"));
+                System.out.println(rs.getString("user"));
             }
             connection.close();
         } catch (SQLException e) {

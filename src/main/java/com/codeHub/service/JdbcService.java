@@ -6,14 +6,15 @@ import java.sql.*;
 import java.util.Properties;
 
 public class JdbcService {
-    public static void jdbcCmd(){
+    public static void jdbcCmd()
+    {
         connectDbCmd("");
     }
 
     public static Connection connectDbCmd(String query){
         Connection connection=null;
         try {
-            Class.forName("driver");
+            Class.forName("com.mysql.jdbc.Driver.");
             //create connection object
             connection = DriverManager.getConnection("", "user", "pass");
             //create statement object
@@ -34,7 +35,6 @@ public class JdbcService {
         return connection;
     }
 
-    //todo: setup docker mysql
     public static void storeImage(){
         try {
             Connection connection = connectDbCmd("");

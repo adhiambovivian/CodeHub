@@ -195,7 +195,8 @@ public class CodeHubApplication {
 
 //Internationalizer.internationalierCmds();
 //DateService.dateCmds();
-	CollectionService.collectionCmd();
+//	CollectionService.collectionCmd();
+	JdbcService.jdbcCmd();
 
 	}
 

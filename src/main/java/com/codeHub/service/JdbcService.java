@@ -168,10 +168,10 @@ public class JdbcService {
                     "   (\n" +
                     "id INT AUTO_INCREMENT PRIMARY KEY,\n" +
                     "profile_photo BLOB NOT NULL,\n" +
-                    "employee_id INT\n" +
+                    "employee_id INT,\n" +
                     "FOREIGN KEY(employee_id)REFERENCES employee(id)\n" +
                     " \n" +
-                    "   ); \n";
+                    "   )";
             createTable(createTableQ);
 
             Connection connection = connectDbCmd();

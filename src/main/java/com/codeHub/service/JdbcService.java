@@ -11,6 +11,7 @@ public class JdbcService {
 
     public static void jdbcCmd()
     {
+        createTable();
         getEmpList();
     }
 
@@ -42,8 +43,8 @@ public class JdbcService {
 
     public static void getEmpList() {
 
-//        String query="SELECT first_name, last_name, department, email FROM employees";
-        String query="SELECT user FROM user_summary";
+        String query="SELECT first_name, last_name, department, email FROM employees";
+//        String query="SELECT user FROM user_summary";
         try {
             Connection connection = connectDbCmd();
             //create statement object
@@ -52,8 +53,9 @@ public class JdbcService {
             ResultSet rs = statement.executeQuery(query);
 
             while (rs.next()) {
-                System.out.println(rs.getString("user"));
+                System.out.println(rs.getString("first_name"));
             }
+            Statement stmt=connection.createStatement();
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -73,12 +75,9 @@ public class JdbcService {
             //create statement object
             Statement statement = connection.createStatement();
             //execute query
-            ResultSet rs = statement.executeQuery(query);
-            ResultSet insertRs=statement.executeQuery(query);
-
-            while (insertRs.next()) {
-                //do sth
-            }
+            int result = statement.executeUpdate(query);
+            if(result!=0)
+                System.out.println("Created table successfully");
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();

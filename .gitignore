@@ -35,5 +35,4 @@ mvnw*
 
 .DS_Store
 data/
-application.properties
-
+src/main/resources/application.properties

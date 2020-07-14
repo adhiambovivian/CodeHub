@@ -9,7 +9,7 @@ Pre-requisites
 - redis
 - solr
 - Mongodb
-- 
+- mySQL
 
 # install rabbitmq
 ```docker run -d --hostname my-rabbit --name rammitmq -p 15672:15672 -p 5672:5672 rabbitmq:3-management```
@@ -25,8 +25,11 @@ Pre-requisites
 #To access mysql terminal
 ```docker exec -it mysql bash```
 ```mysql -u root -p```
+```CREATE USER 'your-username'@'localhost' IDENTIFIED BY 'your-password';```
+```GRANT ALL PRIVILEGES ON * . * TO 'your-username'@'localhost';```
+```FLUSH PRIVILEGES;```
 
 
 #Running the application
 
-mvn spring-boot:run -Drun.jvmArguments='-Dserver.port=7090'
+```mvn spring-boot:run -Drun.jvmArguments='-Dserver.port=7090'```

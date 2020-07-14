@@ -1,5 +1,7 @@
 package com.codeHub.service;
 
+import org.boon.core.Sys;
+
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,6 +16,8 @@ public class JdbcService {
         createTable();
         createRecord();
         getEmpList();
+        getRsDBMetadata();
+        getDBMetadata();
     }
 
     public static Connection connectDbCmd(){
@@ -93,8 +97,7 @@ public class JdbcService {
 
     public static void createRecord() {
 
-        String insertQuery="INSERT INTO employees (first_name, last_name, department, email) \n" +
-                "VALUES (?,?,?,?)";
+        String insertQuery="INSERT INTO employees (first_name, last_name, department, email,profile_photo) VALUES (?,?,?,?,?)";
         try {
             Connection connection = connectDbCmd();
             //create statement object
@@ -103,6 +106,7 @@ public class JdbcService {
             statement.setString(2,"Voila");
             statement.setString(3,"TECH");
             statement.setString(4,"voila@gmail.com");
+            statement.setBinaryStream(5,null);
             //execute query
             int result = statement.executeUpdate(insertQuery);
             if(result!=0)
@@ -113,7 +117,7 @@ public class JdbcService {
         }
     }
 
-    private static void getDBMetadata(){
+    private static void getRsDBMetadata(){
         try{
             String query="SELECT first_name, last_name, department, email FROM employees";
 
@@ -124,6 +128,32 @@ public class JdbcService {
             System.out.println("Total columns: "+rsm.getColumnCount());
             System.out.println("Column Name of 1st column: "+rsm.getColumnName(1));
             System.out.println("Column Type Name of 1st column: "+rsm.getColumnTypeName(1));
+            connection.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    private static void getDBMetadata(){
+        try{
+            String query="SELECT first_name, last_name, department, email FROM employees";
+
+            Connection connection=connectDbCmd();
+            DatabaseMetaData dbmd=connection.getMetaData();
+
+            System.out.println("Driver Name: "+dbmd.getDriverName());
+            System.out.println("Driver Version: "+dbmd.getDriverVersion());
+            System.out.println("UserName: "+dbmd.getUserName());
+            System.out.println("Database Product Name: "+dbmd.getDatabaseProductName());
+            System.out.println("Database Product Version: "+dbmd.getDatabaseProductVersion());
+            //print tables/views
+            String table[]={"TABLE"};
+            String view[]={"VIEW"};
+            ResultSet rs=dbmd.getTables(null,null,null,table);
+            while (rs.next()){
+                System.out.println(rs.getString(1));
+            }
+            connection.close();
         }catch (SQLException e){
             e.printStackTrace();
         }

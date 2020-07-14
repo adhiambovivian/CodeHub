@@ -1,6 +1,9 @@
 package com.codeHub.service;
 
+import org.boon.core.Sys;
+
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
@@ -8,12 +11,24 @@ import java.util.Properties;
 
 public class JdbcService {
     static String propertyPath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/src/main/resources/application.properties";
+    static String filePath="/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
 
     public static void jdbcCmd()
     {
-        createTable();
+        String query="\n" +
+            "CREATE TABLE IF NOT EXISTS employee (\n" +
+            "first_name varchar(25),\n" +
+            "last_name  varchar(25),\n" +
+            "department varchar(15),\n" +
+            "email  varchar(50),\n" +
+            "id INT AUTO_INCREMENT PRIMARY KEY\n"+
+            ")";
+        createTable(query);
         createRecord();
         getEmpList();
+        getRsDBMetadata();
+        getDBMetadata();
+        storeImage();
     }
 
     public static Connection connectDbCmd(){
@@ -44,7 +59,7 @@ public class JdbcService {
 
     public static void getEmpList() {
 
-        String query="SELECT first_name, last_name, department, email FROM employees";
+        String query="SELECT first_name, last_name, department, email FROM employee";
 //        String query="SELECT user FROM user_summary";
         try {
             Connection connection = connectDbCmd();
@@ -67,14 +82,7 @@ public class JdbcService {
         }
     }
 
-    public static void createTable() {
-        String query="\n" +
-                "CREATE TABLE IF NOT EXISTS employees (\n" +
-                "first_name varchar(25),\n" +
-                "last_name  varchar(25),\n" +
-                "department varchar(15),\n" +
-                "email  varchar(50)\n" +
-                ")";
+    public static void createTable(String query) {
         try {
             Connection connection = connectDbCmd();
             //create statement object
@@ -91,10 +99,10 @@ public class JdbcService {
         }
     }
 
+
     public static void createRecord() {
 
-        String insertQuery="INSERT INTO employees (first_name, last_name, department, email) \n" +
-                "VALUES (?,?,?,?)";
+        String insertQuery="INSERT INTO employee (first_name, last_name, department, email) VALUES (?,?,?,?)";
         try {
             Connection connection = connectDbCmd();
             //create statement object
@@ -113,9 +121,9 @@ public class JdbcService {
         }
     }
 
-    private static void getDBMetadata(){
+    private static void getRsDBMetadata(){
         try{
-            String query="SELECT first_name, last_name, department, email FROM employees";
+            String query="SELECT first_name, last_name, department, email FROM employee";
 
             Connection connection=connectDbCmd();
             PreparedStatement ps=connection.prepareStatement(query);
@@ -124,6 +132,32 @@ public class JdbcService {
             System.out.println("Total columns: "+rsm.getColumnCount());
             System.out.println("Column Name of 1st column: "+rsm.getColumnName(1));
             System.out.println("Column Type Name of 1st column: "+rsm.getColumnTypeName(1));
+            connection.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    private static void getDBMetadata(){
+        try{
+            String query="SELECT first_name, last_name, department, email FROM employee";
+
+            Connection connection=connectDbCmd();
+            DatabaseMetaData dbmd=connection.getMetaData();
+
+            System.out.println("Driver Name: "+dbmd.getDriverName());
+            System.out.println("Driver Version: "+dbmd.getDriverVersion());
+            System.out.println("UserName: "+dbmd.getUserName());
+            System.out.println("Database Product Name: "+dbmd.getDatabaseProductName());
+            System.out.println("Database Product Version: "+dbmd.getDatabaseProductVersion());
+            //print tables/views
+            String table[]={"TABLE"};
+            String view[]={"VIEW"};
+            ResultSet rs=dbmd.getTables(null,null,null,table);
+            while (rs.next()){
+                System.out.println(rs.getString(1));
+            }
+            connection.close();
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -131,12 +165,40 @@ public class JdbcService {
 
     public static void storeImage(){
         try {
+            String createTableQ="CREATE TABLE IF NOT EXISTS profile_image \n" +
+                    "   (\n" +
+                    "id INT AUTO_INCREMENT PRIMARY KEY,\n" +
+                    "profile_photo BLOB NOT NULL,\n" +
+                    "employee_id INT,\n" +
+                    "FOREIGN KEY(employee_id)REFERENCES employee(id)\n" +
+                    " \n" +
+                    "   )";
+            createTable(createTableQ);
+
             Connection connection = connectDbCmd();
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO media_images (name, id) values(?,?)");
-            ps.setString(1, "wow");
-            FileInputStream fileInputStream = new FileInputStream("path");
-            ps.setBinaryStream(2, fileInputStream);
+
+            Statement st=connection.createStatement();
+            st.executeUpdate(createTableQ);
+
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO profile_image (profile_photo, employee_id) values(?,?)");
+            FileInputStream fileInputStream = new FileInputStream(filePath+"profile.png");
+            ps.setBinaryStream(1, fileInputStream,fileInputStream.available());
+            ps.setInt(2, 1);
+
             int status = ps.executeUpdate();
+            if(status>0)
+                System.out.println("Successfully add profile pic");
+
+            //retrieve file
+            PreparedStatement preparedStatement=connection.prepareStatement("SELECT profile_photo,employee_id FROM profile_image");
+            ResultSet rs=preparedStatement.executeQuery();
+            if(rs.next()){
+                Blob blob=rs.getBlob(1);
+                byte data[]=blob.getBytes(1,(int)blob.length());
+                FileOutputStream fileOutputStream=new FileOutputStream(filePath+"pic_output.png");
+                fileOutputStream.write(data);
+                fileOutputStream.close();
+            }
             connection.close();
         }catch (SQLException e){
             e.printStackTrace();

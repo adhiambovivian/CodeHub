@@ -3,6 +3,7 @@ package com.codeHub.service;
 import org.boon.core.Sys;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
@@ -187,6 +188,17 @@ public class JdbcService {
             int status = ps.executeUpdate();
             if(status>0)
                 System.out.println("Successfully add profile pic");
+
+            //retrieve file
+            PreparedStatement preparedStatement=connection.prepareStatement("SELECT profile_photo,employee_id FROM profile_image");
+            ResultSet rs=preparedStatement.executeQuery();
+            if(rs.next()){
+                Blob blob=rs.getBlob(1);
+                byte data[]=blob.getBytes(1,(int)blob.length());
+                FileOutputStream fileOutputStream=new FileOutputStream(filePath+"pic_output.png");
+                fileOutputStream.write(data);
+                fileOutputStream.close();
+            }
             connection.close();
         }catch (SQLException e){
             e.printStackTrace();

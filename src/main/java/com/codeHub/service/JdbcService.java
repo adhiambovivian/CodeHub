@@ -2,10 +2,7 @@ package com.codeHub.service;
 
 import org.boon.core.Sys;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.sql.*;
 import java.util.Properties;
 
@@ -192,12 +189,13 @@ public class JdbcService {
             //retrieve file
             PreparedStatement preparedStatement=connection.prepareStatement("SELECT profile_photo,employee_id FROM profile_image");
             ResultSet rs=preparedStatement.executeQuery();
-            if(rs.next()){
+            while(rs.next()){
                 Blob blob=rs.getBlob(1);
                 byte data[]=blob.getBytes(1,(int)blob.length());
                 FileOutputStream fileOutputStream=new FileOutputStream(filePath+"pic_output.png");
                 fileOutputStream.write(data);
                 fileOutputStream.close();
+                fileInputStream.close();
             }
             connection.close();
         }catch (SQLException e){
@@ -206,4 +204,56 @@ public class JdbcService {
             e.printStackTrace();
         }
     }
+
+    public static void storeFile(){
+        try {
+            String createTableQ="CREATE TABLE IF NOT EXISTS employee_file \n" +
+                    "   (\n" +
+                    "id INT AUTO_INCREMENT PRIMARY KEY,\n" +
+                    "file_name CLOB NOT NULL,\n" +
+                    "employee_id INT,\n" +
+                    "FOREIGN KEY(employee_id)REFERENCES employee(id)\n" +
+                    " )";
+            createTable(createTableQ);
+
+            Connection connection = connectDbCmd();
+
+            Statement st=connection.createStatement();
+            st.executeUpdate(createTableQ);
+
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO employee_file (file_name, employee_id) values(?,?)");
+            File file = new File(filePath+"playbook.pdf");
+            FileReader fileReader=new FileReader(file);
+
+            ps.setCharacterStream(1, fileReader,(int)file.length());
+            ps.setInt(2, 1);
+
+            int status = ps.executeUpdate();
+            if(status>0)
+                System.out.println("Successfully add doc");
+
+            //retrieve file
+            PreparedStatement preparedStatement=connection.prepareStatement("SELECT file_name,employee_id FROM employee_file");
+            ResultSet rs=preparedStatement.executeQuery();
+
+            while(rs.next()){
+                Clob blob=rs.getClob(1);
+                Reader reader=blob.getCharacterStream();
+                FileWriter fileWriter=new FileWriter(filePath+"doc_output.pdf");
+                int data=0;
+                while ((data=reader.read())!=-1)
+                fileWriter.write((char)data);
+                fileWriter.close();
+                reader.close();
+            }
+            connection.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+
+
 }

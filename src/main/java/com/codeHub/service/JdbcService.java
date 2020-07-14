@@ -83,6 +83,8 @@ public class JdbcService {
             int result = statement.executeUpdate(query);
             if(result!=0)
                 System.out.println("Created table successfully");
+            else
+                System.out.println("Table exists");
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -111,7 +113,21 @@ public class JdbcService {
         }
     }
 
+    private static void getDBMetadata(){
+        try{
+            String query="SELECT first_name, last_name, department, email FROM employees";
 
+            Connection connection=connectDbCmd();
+            PreparedStatement ps=connection.prepareStatement(query);
+            ResultSet rs=ps.executeQuery();
+            ResultSetMetaData rsm=rs.getMetaData();
+            System.out.println("Total columns: "+rsm.getColumnCount());
+            System.out.println("Column Name of 1st column: "+rsm.getColumnName(1));
+            System.out.println("Column Type Name of 1st column: "+rsm.getColumnTypeName(1));
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 
     public static void storeImage(){
         try {

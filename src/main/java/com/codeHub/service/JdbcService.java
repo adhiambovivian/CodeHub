@@ -12,6 +12,7 @@ public class JdbcService {
     public static void jdbcCmd()
     {
         createTable();
+        createRecord();
         getEmpList();
     }
 
@@ -55,7 +56,11 @@ public class JdbcService {
             while (rs.next()) {
                 System.out.println(rs.getString("first_name"));
             }
-            Statement stmt=connection.createStatement();
+            Statement stmt=connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            ResultSet resultSet=stmt.executeQuery(query);
+            //get data for the 3rd row
+            resultSet.absolute(3);
+            System.out.println(resultSet.getString(1)+" "+resultSet.getString(2));
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -87,17 +92,19 @@ public class JdbcService {
     public static void createRecord() {
 
         String insertQuery="INSERT INTO employees (first_name, last_name, department, email) \n" +
-                "VALUES ('Lorenz', 'Vanthillo', 'IT', 'lvthillo@mail.com')";
+                "VALUES (?,?,?,?)";
         try {
             Connection connection = connectDbCmd();
             //create statement object
-            Statement statement = connection.createStatement();
+            PreparedStatement statement = connection.prepareStatement(insertQuery);
+            statement.setString(1,"Vitu");
+            statement.setString(2,"Voila");
+            statement.setString(3,"TECH");
+            statement.setString(4,"voila@gmail.com");
             //execute query
-            ResultSet insertRs=statement.executeQuery(insertQuery);
-
-            while (insertRs.next()) {
-                //do sth
-            }
+            int result = statement.executeUpdate(insertQuery);
+            if(result!=0)
+                System.out.println("Created record successfully");
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();

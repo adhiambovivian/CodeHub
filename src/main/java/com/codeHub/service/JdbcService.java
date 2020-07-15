@@ -27,6 +27,7 @@ public class JdbcService {
         getDBMetadata();
         storeImage();
         storeFile();
+        executeProcedure();
     }
 
     public static Connection connectDbCmd(){
@@ -254,6 +255,22 @@ public class JdbcService {
         }catch (SQLException e){
             e.printStackTrace();
         }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void executeProcedure(){
+        try {
+            Connection connection = connectDbCmd();
+            CallableStatement callableStatement = connection.prepareCall("{call CREATE_EMP(?,?,?,?)}");
+            callableStatement.setString(1,"John");
+            callableStatement.setString(2,"Kimbo");
+            callableStatement.setString(3,"ENG");
+            callableStatement.setString(4,"john@yahoo.com");
+
+            callableStatement.execute();
+
+        }catch (SQLException e){
             e.printStackTrace();
         }
     }

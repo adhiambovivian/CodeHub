@@ -21,3 +21,14 @@ CREATE TABLE IF NOT EXISTS employee_file (
             employee_id INT UNIQUE,
             FOREIGN KEY(employee_id)REFERENCES employee(id)
              );
+
+CREATE or REPLACE PROCEDURE "CREATE_EMP"
+(first_name IN VARCHAR,
+last_name IN VARCHAR,
+department IN VARCHAR,
+email IN VARCHAR,
+)
+IS
+BEGIN
+INSERT INTO employee (first_name, last_name, department, email) VALUES (first_name, last_name, department, email);
+END;

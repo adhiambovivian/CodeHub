@@ -32,3 +32,15 @@ IS
 BEGIN
 INSERT INTO employee (first_name, last_name, department, email) VALUES (first_name, last_name, department, email);
 END;
+
+CREATE or REPLACE FUNCTION sum4
+(n1 in number,n2 in number)
+return number
+is
+temp number(8);
+begin
+temp :=n1+n2;
+return temp;
+end;
+
+

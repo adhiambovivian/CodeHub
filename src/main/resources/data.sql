@@ -33,14 +33,14 @@ BEGIN
 INSERT INTO employee (first_name, last_name, department, email) VALUES (first_name, last_name, department, email);
 END;
 
-CREATE or REPLACE FUNCTION sum4
-(n1 in number,n2 in number)
-return number
-is
-temp number(8);
-begin
+CREATE or REPLACE FUNCTION sum_function
+(n1 IN INTEGER ,n2 IN INTEGER)
+RETURN INTEGER
+IS
+temp INTEGER (8);
+BEGIN
 temp :=n1+n2;
-return temp;
-end;
+RETURN temp;
+END;
 
 

@@ -20,14 +20,16 @@ public class JdbcService {
             "email  varchar(50),\n" +
             "id INT AUTO_INCREMENT PRIMARY KEY\n"+
             ")";
-        createTable(query);
-        createRecord();
-        getEmpList();
-        getRsDBMetadata();
-        getDBMetadata();
-        storeImage();
-        storeFile();
-        executeProcedure();
+//        createTable(query);
+//        createRecord();
+//        getEmpList();
+//        getRsDBMetadata();
+//        getDBMetadata();
+//        storeImage();
+//        storeFile();
+//        executeProcedure();
+//        executeFunction();
+        manageTransaction();
     }
 
     public static Connection connectDbCmd(){
@@ -269,7 +271,7 @@ public class JdbcService {
             callableStatement.setString(4,"john@yahoo.com");
 
             callableStatement.execute();
-
+            connection.close();
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -286,7 +288,52 @@ public static void executeFunction(){
             callableStatement.execute();
 
             System.out.println(callableStatement.getInt(1));
+            connection.close();
         }catch (SQLException e){
+            e.printStackTrace();
+        }
+}
+
+private static void manageTransaction(){
+    String query="INSERT INTO employee (first_name, last_name, department, email) VALUES (?,?,?,?)";
+        try {
+            Connection connection = connectDbCmd();
+            connection.setAutoCommit(false);
+            PreparedStatement ps=connection.prepareStatement(query);
+            BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(System.in));
+            while(true){
+                System.out.println("Enter first name: ");
+                String fName=bufferedReader.readLine();
+
+                System.out.println("Enter last name: ");
+                String lName=bufferedReader.readLine();
+
+                System.out.println("Enter your department name: ");
+                String dpt=bufferedReader.readLine();
+
+                System.out.println("Enter your email: ");
+                String email=bufferedReader.readLine();
+
+                ps.setString(1,fName);
+                ps.setString(2,lName);
+                ps.setString(3,dpt);
+                ps.setString(4,email);
+
+                System.out.println("commit or rollback ?");
+                String response=bufferedReader.readLine();
+                if(response.equalsIgnoreCase("commit")){
+                    connection.commit();
+                }else if(response.equalsIgnoreCase("rollback")){
+                    connection.rollback();
+                }else{
+                    break;
+                }
+            }
+            System.out.println("Bye");
+            connection.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (IOException e){
             e.printStackTrace();
         }
 }

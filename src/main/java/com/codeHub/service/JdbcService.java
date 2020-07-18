@@ -275,6 +275,20 @@ public class JdbcService {
         }
     }
 
+public static void executeFunction(){
+        try {
+            Connection connection = connectDbCmd();
+            CallableStatement callableStatement = connection.prepareCall("{? = call sum_function(?,?)}");
+            callableStatement.setInt(1, 23);
+            callableStatement.setInt(2, 345);
 
+            callableStatement.registerOutParameter(1, Types.INTEGER);
+            callableStatement.execute();
+
+            System.out.println(callableStatement.getInt(1));
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+}
 
 }

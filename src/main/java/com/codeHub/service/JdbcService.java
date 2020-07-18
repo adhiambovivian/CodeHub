@@ -277,7 +277,7 @@ public class JdbcService {
         }
     }
 
-public static void executeFunction(){
+    public static void executeFunction(){
         try {
             Connection connection = connectDbCmd();
             CallableStatement callableStatement = connection.prepareCall("{? = call sum_function(?,?)}");
@@ -294,8 +294,8 @@ public static void executeFunction(){
         }
 }
 
-private static void manageTransaction(){
-    String query="INSERT INTO employee (first_name, last_name, department, email) VALUES (?,?,?,?)";
+    private static void manageTransaction(){
+        String query="INSERT INTO employee (first_name, last_name, department, email) VALUES (?,?,?,?)";
         try {
             Connection connection = connectDbCmd();
             connection.setAutoCommit(false);
@@ -337,6 +337,24 @@ private static void manageTransaction(){
         }catch (IOException e){
             e.printStackTrace();
         }
+}
+
+    private static void batchProcessStmt(){
+        try {
+            Connection connection = connectDbCmd();
+            connection.setAutoCommit(false);
+            Statement stmt=connection.createStatement();
+            String query="INSERT INTO employee (first_name, last_name, department, email) VALUES (%s,%s,%s,%s)";
+            stmt.addBatch(String.format(query, "dima","linda","IT","dima@uber.com"));
+            stmt.addBatch(String.format(query, "kindra","linda","IT","linda@safaricom.com"));
+
+            stmt.executeBatch();
+            connection.commit();
+            connection.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
 }
 
 }

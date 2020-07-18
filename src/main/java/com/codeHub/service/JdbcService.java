@@ -318,6 +318,7 @@ private static void manageTransaction(){
                 ps.setString(2,lName);
                 ps.setString(3,dpt);
                 ps.setString(4,email);
+                ps.executeUpdate();
 
                 System.out.println("commit or rollback ?");
                 String response=bufferedReader.readLine();

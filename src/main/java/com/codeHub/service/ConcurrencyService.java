@@ -7,7 +7,6 @@ public class ConcurrencyService {
     public void multithreadCmd(){
         Printer p=new Printer();
         p.setName("thread-printer1");
-//        Thread.currentThread().setName("thread-printer1");
         p.start();
         try {
             Thread.sleep(2000);
@@ -16,9 +15,11 @@ public class ConcurrencyService {
             e.printStackTrace();
         }
         Printer p2=new Printer();
+        Thread.currentThread().setName("thread-printer2");
         p2.start();
 
         Printer p3=new Printer();
+        Thread.currentThread().setName("thread-printer3");
         p3.start();
 
         Writer writer=new Writer();

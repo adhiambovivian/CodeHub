@@ -40,6 +40,7 @@ public class ConcurrencyService {
         daemonThread.setDaemon(true);
 
         threadPool();
+        threadGroup();
     }
 
     class Printer extends Thread {
@@ -93,6 +94,20 @@ public class ConcurrencyService {
             while (!executorService.isTerminated()) {
             }
             System.out.println("Finito");
+        }
+
+        public void threadGroup(){
+        Writer runnable=new Writer();
+        ThreadGroup threadGroup=new ThreadGroup("Parent threadGroup");
+        Thread t1=new Thread(threadGroup,runnable,"one");
+        t1.start();
+        Thread t2=new Thread(threadGroup,runnable,"two");
+        t2.start();
+        Thread t3=new Thread(threadGroup,runnable,"three");
+        t3.start();
+        System.out.println("Thread Group Name: "+threadGroup.getName());
+        threadGroup.list();
+
         }
     }
 

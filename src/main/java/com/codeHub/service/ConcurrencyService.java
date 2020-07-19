@@ -42,6 +42,7 @@ public class ConcurrencyService {
         threadPool();
         threadGroup();
         shutDownHook();
+        anonymousRunnable();
     }
 
     class Printer extends Thread {
@@ -85,42 +86,65 @@ public class ConcurrencyService {
             }
         }
     }
-        public void threadPool() {
-            ExecutorService executorService = Executors.newFixedThreadPool(5);
-            for (int i = 0; i <= 10; i++) {
-                Runnable worker = new WorkerThread("" + i);
-                executorService.execute(worker);
-            }
-            executorService.shutdown();
-            while (!executorService.isTerminated()) {
-            }
-            System.out.println("Finito");
-        }
 
-        public void threadGroup(){
-        Writer runnable=new Writer();
-        ThreadGroup threadGroup=new ThreadGroup("Parent threadGroup");
-        Thread t1=new Thread(threadGroup,runnable,"one");
+    public void threadPool() {
+        ExecutorService executorService = Executors.newFixedThreadPool(5);
+        for (int i = 0; i <= 10; i++) {
+            Runnable worker = new WorkerThread("" + i);
+            executorService.execute(worker);
+        }
+        executorService.shutdown();
+        while (!executorService.isTerminated()) {
+        }
+        System.out.println("Finito");
+    }
+
+    public void threadGroup() {
+        Writer runnable = new Writer();
+        ThreadGroup threadGroup = new ThreadGroup("Parent threadGroup");
+        Thread t1 = new Thread(threadGroup, runnable, "one");
         t1.start();
-        Thread t2=new Thread(threadGroup,runnable,"two");
+        Thread t2 = new Thread(threadGroup, runnable, "two");
         t2.start();
-        Thread t3=new Thread(threadGroup,runnable,"three");
+        Thread t3 = new Thread(threadGroup, runnable, "three");
         t3.start();
-        System.out.println("Thread Group Name: "+threadGroup.getName());
+        System.out.println("Thread Group Name: " + threadGroup.getName());
         threadGroup.list();
 
-        }
+    }
 
-        public void shutDownHook(){
-        Runtime runtime=Runtime.getRuntime();
-        runtime.addShutdownHook(new Thread(){
-            public void run(){
+    public void shutDownHook() {
+        Runtime runtime = Runtime.getRuntime();
+        runtime.addShutdownHook(new Thread() {
+            public void run() {
                 System.out.println("Now main sleeping... press ctrl+c to exit");
-                try{Thread.sleep(5000);}catch (Exception e) {}
+                try {
+                    Thread.sleep(5000);
+                } catch (Exception e) {
+                }
                 System.out.println("shut down hook task completed..");
             }
         });
-        }
     }
+//todo:survey-send, panel
+    public void anonymousRunnable() {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i <= 10; i++) {
+                    System.out.println("Anonymous Index********* " + i);
+                    try {
+                        Thread.sleep(5000);
+                    } catch (Exception e) {
+                    }
+
+                }
+            }
+        };
+        Runtime runtime=Runtime.getRuntime();
+        Thread t1=new Thread(runnable);
+        runtime.addShutdownHook(t1);
+    }
+}
 
 

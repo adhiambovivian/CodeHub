@@ -33,7 +33,7 @@ public class JdbcService {
 //        executeFunction();
 //        manageTransaction();
 //        batchProcessStmt();
-        rowSetCmd();
+//        rowSetCmd();
     }
 
     public static TreeMap<String,String> getDBCredential(){

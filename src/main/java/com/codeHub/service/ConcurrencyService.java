@@ -2,6 +2,7 @@ package com.codeHub.service;
 
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -18,6 +19,7 @@ public class ConcurrencyService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         Printer p2 = new Printer();
         p2.setPriority(Thread.MIN_PRIORITY);
         p2.start();
@@ -42,9 +44,55 @@ public class ConcurrencyService {
         threadPool();
         threadGroup();
         manulGC();
+        executePrintTable();
+        runtimeCmd();
         shutDownHook();
         anonymousRunnable();
 
+    }
+    class Table{
+        //synchronized method
+        synchronized public void printTable(int n){
+            for(int i=0;i<=5;i++){
+                System.out.println(i*n);
+                try{
+                    Thread.sleep(300);
+                }catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        //synchronized block
+        //todo:quota check
+        public void printTable2(int n){
+            synchronized (this){//synchronized block
+                for(int i=0;i<=5;i++){
+                System.out.println(i*n);
+                try{
+                    Thread.sleep(300);
+                }catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+          }//end synchronized block
+        }
+    }
+
+    public void executePrintTable(){
+        final Table obj=new Table();//only obj
+        Thread t1=new Thread(){
+            public void run(){
+                obj.printTable2(5);
+            }
+        };
+        Thread t2=new Thread(){
+            public void run(){
+                obj.printTable2(100);
+            }
+        };
+        t1.start();
+        t2.start();
     }
 
     class Printer extends Thread {
@@ -156,6 +204,20 @@ public class ConcurrencyService {
         writer=null;
         System.gc();
     }
+
+    public void runtimeCmd(){
+        try {
+            System.out.println("No. processors: "+Runtime.getRuntime().availableProcessors()+" Total Mem: "+(Runtime.getRuntime().maxMemory()/1E6)+" Free memory: "+(Runtime.getRuntime().freeMemory()/1E6));
+           // Runtime.getRuntime().exec("skype");//open skype
+            Runtime.getRuntime().exec("shutdown -s -t 0"); //shutdowmn -s switch, -t time delay
+            //Runtime.getRuntime().exec("c:\\Windows\\System32\\shutdown -s -t 0");
+            Runtime.getRuntime().exec("shutdown -r -t 0");//restart -r
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
 }
 
 

@@ -91,6 +91,7 @@ public class ConcurrencyService {
                 obj.printTable2(100);
             }
         };
+
         t1.start();
         t2.start();
     }
@@ -103,6 +104,28 @@ public class ConcurrencyService {
         }
     }
 
+    public void executeStaticSync(){
+        Thread t3=new Thread(){
+            public void run(){
+                Table2.printTable3(1000);
+            }
+        };
+        Thread t4=new Thread(){
+            public void run(){
+                Table2.printTable3(200);
+            }
+        };
+        //non-anonymous
+        class MyThread1 extends Thread{
+            public void run(){
+                Table2.printTable3(400);
+            }
+        }
+        MyThread1 non=new MyThread1();
+        non.start();
+        t3.start();
+        t4.start();
+    }
     class Writer implements Runnable {
         public void run() {
             for (int i = 0; i < 5; i++)
@@ -218,6 +241,19 @@ public class ConcurrencyService {
         }
     }
 
+}
+class Table2 {
+    //static synchronization
+    synchronized static void printTable3(int n) {
+        for (int i = 0; i <= 5; i++) {
+            System.out.println(i * n);
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
 
 

@@ -15,6 +15,7 @@ public class ConcurrencyService {
             e.printStackTrace();
         }
         Printer p2=new Printer();
+        p2.setPriority(Thread.MIN_PRIORITY);
         p2.start();
         p2.setName("thread-printer2");
 
@@ -25,6 +26,7 @@ public class ConcurrencyService {
         Writer writer=new Writer();
         Thread thread=new Thread(writer);
         thread.setName("thread-writer");
+        thread.setPriority(Thread.MAX_PRIORITY);
         thread.start();
     }
     class Printer extends Thread{

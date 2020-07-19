@@ -41,13 +41,17 @@ public class ConcurrencyService {
         daemonThread.setName("thread-daemon");
         daemonThread.setDaemon(true);
 
-        threadPool();
-        threadGroup();
-        manulGC();
-        executePrintTable();
-        runtimeCmd();
-        shutDownHook();
-        anonymousRunnable();
+//        threadPool();
+//        threadGroup();
+//        manulGC();
+//        executePrintTable();
+//        executeStaticSync();
+//        runtimeCmd();
+//        shutDownHook();
+//        anonymousRunnable();
+        DeadlockTest deadlockTest=new DeadlockTest();
+        deadlockTest.deadlock1();
+        deadlockTest.deadlock2();
 
     }
     class Table{
@@ -239,6 +243,52 @@ public class ConcurrencyService {
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    class DeadlockTest{
+        final Integer resource1=10;
+        final Integer resource2=2;
+
+        public void deadlock1() {
+            Thread thread = new Thread() {
+                public void run() {
+                    synchronized (resource1) {
+                        System.out.println("Thread 1: locked resource 1");
+                        for(int i=0;i<=5;i++)
+                            System.out.println("Thread 2 output: "+i*resource1*resource2);
+
+                        try {
+                            Thread.sleep(100);
+                        } catch (Exception e) {
+                        }
+                        synchronized (resource2) {
+                            System.out.println("Thread 1: locked resource 2");
+                        }
+                    }
+                }
+            };
+        }
+
+        public void deadlock2() {
+            Thread thread = new Thread() {
+                public void run() {
+                    synchronized (resource2) {
+                        System.out.println("Thread 2: locked resource 2");
+                        for(int i=0;i<=5;i++)
+                            System.out.println("Thread 2 output: "+i*resource1*resource2);
+
+                        try {
+                            Thread.sleep(100);
+                        } catch (Exception e) {
+                        }
+                        synchronized (resource1) {
+                            System.out.println("Thread 2: locked resource 1");
+                        }
+                    }
+                }
+            };
+        }
+
     }
 
 }

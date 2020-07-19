@@ -54,6 +54,7 @@ public class ConcurrencyService {
 //        deadlockTest.deadlock1();
 //        deadlockTest.deadlock2();
         executeComms();
+        executeReentrant();
 
     }
     class Table{
@@ -346,10 +347,17 @@ public class ConcurrencyService {
     }
 
     public void executeReentrant(){
+        final Reentrant re=new Reentrant();
 
+        Thread t1=new Thread(){
+            public void run(){
+                re.m();//calling method of Reentrant class
+            }
+        };
+        t1.start();
+    }
     }
 
-}
 class Table2 {
     //static synchronization
     synchronized static void printTable3(int n) {

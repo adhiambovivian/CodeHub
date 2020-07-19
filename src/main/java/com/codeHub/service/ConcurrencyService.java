@@ -41,6 +41,7 @@ public class ConcurrencyService {
 
         threadPool();
         threadGroup();
+        shutDownHook();
     }
 
     class Printer extends Thread {
@@ -108,6 +109,17 @@ public class ConcurrencyService {
         System.out.println("Thread Group Name: "+threadGroup.getName());
         threadGroup.list();
 
+        }
+
+        public void shutDownHook(){
+        Runtime runtime=Runtime.getRuntime();
+        runtime.addShutdownHook(new Thread(){
+            public void run(){
+                System.out.println("Now main sleeping... press ctrl+c to exit");
+                try{Thread.sleep(5000);}catch (Exception e) {}
+                System.out.println("shut down hook task completed..");
+            }
+        });
         }
     }
 

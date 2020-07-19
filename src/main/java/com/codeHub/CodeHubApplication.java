@@ -3,6 +3,7 @@ package com.codeHub;
 import com.codeHub.models.Blacklist;
 import com.codeHub.service.*;
 import com.stripe.exception.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -197,6 +198,9 @@ public class CodeHubApplication {
 //DateService.dateCmds();
 //	CollectionService.collectionCmd();
 	JdbcService.jdbcCmd();
+ConcurrencyService concurrencyService=new ConcurrencyService();
+concurrencyService.multithreadCmd();
+
 
 	}
 

@@ -34,6 +34,7 @@ public class ConcurrencyService {
         thread.setName("thread-writer");
         thread.setPriority(Thread.MAX_PRIORITY);
         thread.start();
+        thread.interrupt();
 
 
         Writer deamonWriter = new Writer();
@@ -49,9 +50,10 @@ public class ConcurrencyService {
 //        runtimeCmd();
 //        shutDownHook();
 //        anonymousRunnable();
-        DeadlockTest deadlockTest=new DeadlockTest();
-        deadlockTest.deadlock1();
-        deadlockTest.deadlock2();
+//        DeadlockTest deadlockTest=new DeadlockTest();
+//        deadlockTest.deadlock1();
+//        deadlockTest.deadlock2();
+        executeComms();
 
     }
     class Table{
@@ -138,6 +140,10 @@ public class ConcurrencyService {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+            if(Thread.interrupted())
+                System.out.println("code for interrupted thread");
+            else
+                System.out.println("code for normal thread");
             System.out.println("Runnable:Wowowowowow " + Thread.currentThread().getName());
         }
     }
@@ -288,6 +294,58 @@ public class ConcurrencyService {
                 }
             };
         }
+
+    }
+    //inter-thread comms
+    class Customer{
+        int amount = 10000;
+        synchronized void withdraw(int amount){
+            System.out.println("Withdrawing...");
+            if(this.amount<amount){
+                System.out.println("Less balance...waiting for deposit...");
+                try{
+                    wait();
+                }catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+                this.amount-=amount;
+                System.out.println("Withdrawal complete. Thanks.");
+            }
+        }
+
+        synchronized void deposit(int amount){
+            System.out.println("Depositing...");
+            this.amount+=amount;
+            System.out.println("Deposit complete. Thanks.");
+            notify();
+        }
+
+    }
+    public void executeComms(){
+        Customer customer=new Customer();
+        new Thread(){
+            public void run(){
+                customer.withdraw(30000);
+            }
+        }.start();
+        new Thread(){
+            public void run(){
+                customer.deposit(20000);
+            }
+        }.start();
+    }
+
+    class Reentrant {
+        public synchronized void m() {
+            n();
+            System.out.println("this is m() method");
+        }
+        public synchronized void n() {
+            System.out.println("this is n() method");
+        }
+    }
+
+    public void executeReentrant(){
 
     }
 

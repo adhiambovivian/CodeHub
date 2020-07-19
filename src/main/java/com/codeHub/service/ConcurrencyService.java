@@ -15,12 +15,12 @@ public class ConcurrencyService {
             e.printStackTrace();
         }
         Printer p2=new Printer();
-        Thread.currentThread().setName("thread-printer2");
         p2.start();
+        p2.setName("thread-printer2");
 
         Printer p3=new Printer();
-        Thread.currentThread().setName("thread-printer3");
         p3.start();
+        p3.setName("thread-printer3");
 
         Writer writer=new Writer();
         Thread thread=new Thread(writer);

@@ -41,8 +41,10 @@ public class ConcurrencyService {
 
         threadPool();
         threadGroup();
+        manulGC();
         shutDownHook();
         anonymousRunnable();
+
     }
 
     class Printer extends Thread {
@@ -126,7 +128,7 @@ public class ConcurrencyService {
             }
         });
     }
-//todo:survey-send, panel
+//todo:survey-send, panel. use runtime with executors
     public void anonymousRunnable() {
         Runnable runnable = new Runnable() {
             @Override
@@ -139,11 +141,20 @@ public class ConcurrencyService {
                     }
 
                 }
+                System.out.println("Done processing. Exiting...");
             }
         };
         Runtime runtime=Runtime.getRuntime();
         Thread t1=new Thread(runnable);
         runtime.addShutdownHook(t1);
+    }
+
+    public void manulGC(){
+        Printer printer=new Printer();
+        Writer writer=new Writer();
+        printer=null;
+        writer=null;
+        System.gc();
     }
 }
 

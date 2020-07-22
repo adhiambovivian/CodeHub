@@ -201,6 +201,8 @@ public class CodeHubApplication {
 ConcurrencyService concurrencyService=new ConcurrencyService();
 concurrencyService.multithreadCmd();
 
+CryptographyService.crytopgraphyCmd();
+
 
 	}
 

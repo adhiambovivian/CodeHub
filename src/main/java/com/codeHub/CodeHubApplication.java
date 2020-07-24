@@ -81,25 +81,6 @@ public class CodeHubApplication {
 
 		 */
 
-		/**
-		 * Dates
-		 */
-		/*
-		int year = Calendar.getInstance().get(Calendar.YEAR);
-		System.out.println("Cal YEAR::"+year);
-		System.out.println("Java 8:Year:: "+ Year.now().getValue());
-
-		String s="Success-Your survey has been scheduled suceessfuly.";
-				String[] ss=s.split("-");
-				for(String i:ss){
-					System.out.println("####"+i);
-				}
-
-		LocalDateTime date=LocalDateTime.now();
-		System.out.println(date.toString());
-
-		 */
-
 
 
 		/**

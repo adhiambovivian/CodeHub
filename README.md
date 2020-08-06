@@ -39,7 +39,6 @@ GRANT ALL PRIVILEGES ON * . * TO 'your-username'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
-
 #Running the application
 
 ```

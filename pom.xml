@@ -233,6 +233,12 @@
 			<groupId>org.apache.spark</groupId>
 			<artifactId>spark-core_2.12</artifactId>
 			<version>3.0.0</version>
+			<exclusions>
+			<exclusion>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+		</exclusions>
 		</dependency>
 
 

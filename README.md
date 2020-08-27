@@ -1,7 +1,5 @@
 # CodeHub
 
-export PATH=$PATH:/opt/apache-maven/bin
-
 Pre-requisites
 - Java > version 8
 - Rabbitmq
@@ -10,6 +8,10 @@ Pre-requisites
 - solr
 - Mongodb
 - mySQL
+
+# install maven
+
+```export PATH=$PATH:/opt/apache-maven/bin1```
 
 # install rabbitmq
 ```

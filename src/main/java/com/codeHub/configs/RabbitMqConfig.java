@@ -103,10 +103,6 @@ public class RabbitMqConfig {
         return aoContainer;
     }
 
-    @Bean
-    MessageListenerAdapter aoListenerAdapter(AOConsumer aoConsumer) {
-        return new MessageListenerAdapter(aoConsumer, "processAO");
-    }
 //
 //    @Bean
 //    MessageListenerAdapter incentivesListenerAdapter(IncentivesConsumerWorker incentivesConsumer) {

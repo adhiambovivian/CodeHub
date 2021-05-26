@@ -2,7 +2,6 @@ package com.codeHub.configs;
 
 //import com.rabbitmq.client.ConnectionFactory;
 
-import com.codeHub.service.AOConsumer;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;

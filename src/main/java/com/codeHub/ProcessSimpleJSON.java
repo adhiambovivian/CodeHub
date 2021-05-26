@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class ProcessBlacklistSimpleJSON {
+public class ProcessSimpleJSON {
     private String fileName;
 
     public String getFileName() {

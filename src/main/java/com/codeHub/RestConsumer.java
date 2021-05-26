@@ -11,8 +11,7 @@ import org.springframework.web.client.RestTemplate;
 public class RestConsumer {
     public static void sendSurvey() {
 
-        final String url = "http://api.msurvey.co.ke:8083/v1/surveys/{surveyId}/panel";
-        //final String url = "http://api.msurvey.co.ke:8083/v1/surveys";
+        final String url = "url";
         PanelS panelS = new PanelS();
         panelS.setPanelId(2);
         panelS.setTarget(6);

@@ -1,11 +1,9 @@
 package com.codeHub.service;
 
 
-import com.codeHub.models.Blacklist;
-import org.boon.primitive.CharBuf;
+import com.codeHub.models.Person;
 
 import java.io.*;
-import java.lang.reflect.InvocationTargetException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -881,19 +879,19 @@ public static void compressFileDeflater(){
 }
 
 public static void serialization(){
-    Blacklist blacklist=new Blacklist();
-    blacklist.setAccountId(2);
-    blacklist.setBlockedBy(3);
-    blacklist.setCommId("+25363773736");
-    blacklist.setComment("You have been added to dnd. we will not contact you again");
+    Person person =new Person();
+    person.setAccountId(2);
+    person.setBlockedBy(3);
+    person.setCommId("+25363773736");
+    person.setComment("You have been added to dnd. we will not contact you again");
     Date date=new Date();
-    blacklist.setCreateDate(date);
+    person.setCreateDate(date);
 
     try {
         FileOutputStream fileOutputStream = new FileOutputStream(filePath + "objects.txt");
         ObjectOutputStream objectOutputStream=new ObjectOutputStream(fileOutputStream);
 
-        objectOutputStream.writeObject(blacklist);
+        objectOutputStream.writeObject(person);
         objectOutputStream.flush();
         objectOutputStream.close();
 
@@ -905,8 +903,8 @@ public static void serialization(){
 public static void deserialization(){
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath + "objects.txt"));
-            Blacklist blacklist=(Blacklist)objectInputStream.readObject();
-            System.out.println(blacklist.toString());
+            Person person =(Person)objectInputStream.readObject();
+            System.out.println(person.toString());
         }catch (IOException e){
             e.getMessage();
         }catch (ClassNotFoundException e){

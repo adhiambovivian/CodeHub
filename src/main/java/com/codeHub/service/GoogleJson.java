@@ -123,7 +123,7 @@ Person person=new Person("vivian","Adhiambo",22,"3737738");
 Gson gson=new Gson();
 String json=gson.toJson(person);
 try{
-    FileWriter  fileWriter=new FileWriter("blacklist.json");
+    FileWriter  fileWriter=new FileWriter("person.json");
     fileWriter.write(json);
     fileWriter.close();
 }catch (IOException e){

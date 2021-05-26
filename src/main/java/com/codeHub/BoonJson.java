@@ -1,6 +1,6 @@
 package com.codeHub;
 
-import com.codeHub.models.Blacklist;
+import com.codeHub.models.Person;
 import org.boon.json.JsonFactory;
 import org.boon.json.ObjectMapper;
 
@@ -15,19 +15,19 @@ import java.util.Map;
 public class BoonJson {
 public static void parseJson()throws IOException{
     String blacklists="{" +
-            "  \"blacklist\" : [" +
+            "  \"person\" : [" +
             "     { \"commId\" : \"+254729883736\", \"comment\" : \"DND\" }" +
             "    ,{ \"commId\" : \"+25473368282\", \"comment\" : \"Gaming\"}" +
             "    ,{ \"commId\" : \"+25479372929\",  \"comment\" : \"self\" }" +
             "  ]" +
             "}";
     ObjectMapper objectMapper= JsonFactory.create();
-    Blacklists bl=objectMapper.readValue(blacklists,Blacklists.class);
-    Blacklists bl2=objectMapper.fromJson(blacklists,Blacklists.class);
+    PersonLists bl=objectMapper.readValue(blacklists, PersonLists.class);
+    PersonLists bl2=objectMapper.fromJson(blacklists, PersonLists.class);
 
     //parsing json into maps
     Map blacklistMap=objectMapper.readValue(blacklists,Map.class);
-    List<Map> blacklistList=(List<Map>)blacklistMap.get("blacklist");
+    List<Map> blacklistList=(List<Map>)blacklistMap.get("person");
     for(Map map:blacklistList){
         String commId=(String) map.get("commId");
         String comment=(String)map.get("comment");
@@ -35,13 +35,13 @@ public static void parseJson()throws IOException{
         System.out.println("Comment: "+comment);
 
         //Can parse Json from: byte array,char array, File,Reade,InputStream, String
-        Blacklists bl3=objectMapper.readValue(new FileInputStream("data/blacjlist.json"),Blacklists.class);
+        PersonLists bl3=objectMapper.readValue(new FileInputStream("data/blacjlist.json"), PersonLists.class);
     }
 }
 public static void generateJson(){
-    Blacklists bl=new Blacklists();
-    bl.blacklist=new Blacklist[1];
-    bl.blacklist[0]=new Blacklist("Never Again","+254729880726");
+    PersonLists bl=new PersonLists();
+    bl.person =new Person[1];
+    bl.person[0]=new Person("Never Again","+254729880726");
     ObjectMapper objectMapper=JsonFactory.create();
     String json=objectMapper.writeValueAsString(bl); //objectMapper.writeValue(new FileOutputStream("data/output.json"),bl); //Also File,Writer,outpuStream
     System.out.println(json);

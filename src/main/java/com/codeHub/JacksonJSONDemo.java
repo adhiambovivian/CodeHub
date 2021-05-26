@@ -1,6 +1,6 @@
 package com.codeHub;
 
-import com.codeHub.models.Blacklist;
+import com.codeHub.models.Person;
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,9 +22,9 @@ public class JacksonJSONDemo {
         String blacklistJson = "{\"commId\":\"+254729880700\",\"countryId\":1,\"comment\":\"DND\"}";
         try {
             BlackListView blackListView = objectMapper.readValue(blacklistJson, BlackListView.class);
-            System.out.println("Blacklist commId: " + blackListView.getCommId());
-            System.out.println("Blacklist countryId: " + blackListView.getCountryId());
-            System.out.println("Blacklist comment: " + blackListView.getComment());
+            System.out.println("Person commId: " + blackListView.getCommId());
+            System.out.println("Person countryId: " + blackListView.getCountryId());
+            System.out.println("Person comment: " + blackListView.getComment());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -79,21 +79,21 @@ public class JacksonJSONDemo {
     public static void jacksonReadJson_file() throws IOException {
         //Reading json from a file
         ObjectMapper objectMapper = new ObjectMapper();
-        File file = new File("/home/adhiambo/Downloads/blacklist.json");
+        File file = new File("/home/adhiambo/Downloads/person.json");
         BlackListView bl = objectMapper.readValue(file, BlackListView.class);
     }
 
     public static void jacksonReadJson_URL() throws IOException {
         //Reading json from a URL
         ObjectMapper objectMapper = new ObjectMapper();
-        URL url = new URL("file:data/blacklist.json");
+        URL url = new URL("file:data/person.json");
         BlackListView bl = objectMapper.readValue(url, BlackListView.class);
     }
 
     public static void jacksonReadJson_Inputstream() throws IOException {
         //Reading json from a inputStream
         ObjectMapper objectMapper = new ObjectMapper();
-        InputStream inputStream = new FileInputStream("data/blacklist.json");
+        InputStream inputStream = new FileInputStream("data/person.json");
         BlackListView bl = objectMapper.readValue(inputStream, BlackListView.class);
     }
 
@@ -107,11 +107,11 @@ public class JacksonJSONDemo {
 
     public static void generateJson() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        Blacklist blacklist = new Blacklist();
-        blacklist.setCommId("+2547298811");
-        blacklist.setComment("Gaming the system");
-        objectMapper.writeValue(new FileOutputStream("data/output.json"), blacklist);
-        String json = objectMapper.writeValueAsString(blacklist);
+        Person person = new Person();
+        person.setCommId("+2547298811");
+        person.setComment("Gaming the system");
+        objectMapper.writeValue(new FileOutputStream("data/output.json"), person);
+        String json = objectMapper.writeValueAsString(person);
         System.out.println(json);
     }
 

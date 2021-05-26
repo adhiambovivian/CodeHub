@@ -27,7 +27,7 @@ nbdist/
 
 .mvn/
 BlacklistSerialized
-blacklist.json
+person.json
 *mvnw
 *.processed
 simple.json

@@ -1,18 +1,12 @@
 package com.codeHub;
 
-import com.codeHub.models.Blacklist;
 import com.codeHub.service.*;
 import com.stripe.exception.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
-import java.rmi.Naming;
-import java.rmi.Remote;
-import java.util.List;
 
 @SpringBootApplication
 @EnableScheduling
@@ -169,8 +163,8 @@ public class CodeHubApplication {
 /*
 		DNDInterface dnd=(DNDInterface)Naming.lookup("rmi://localhost:8070/lol");
 
-		List<Blacklist> listDnd=dnd.getDndList();
-		for(Blacklist person:listDnd){
+		List<Person> listDnd=dnd.getDndList();
+		for(Person person:listDnd){
 			System.out.println(person.toString());
 		}
 */

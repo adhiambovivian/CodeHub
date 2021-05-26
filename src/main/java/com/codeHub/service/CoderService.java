@@ -1,8 +1,6 @@
 package com.codeHub.service;
 
-import com.codeHub.models.Blacklist;
-import org.boon.core.Sys;
-import org.springframework.beans.factory.annotation.Value;
+import com.codeHub.models.Person;
 
 import java.io.*;
 import java.lang.reflect.Constructor;
@@ -175,8 +173,8 @@ StringBuffer
     }
 
     public static void getClassMethod(){
-        Blacklist blacklist=new Blacklist();
-        Class classVal=blacklist.getClass();
+        Person person =new Person();
+        Class classVal= person.getClass();
         System.out.println("Class det: "+classVal.getName());
     }
 
@@ -186,12 +184,12 @@ StringBuffer
             Class classVal = boolean.class;
             System.out.println(classVal.toString());
 
-            Class classVal2 = Blacklist.class;
+            Class classVal2 = Person.class;
             System.out.println("details: " + classVal2.toString() + " interface check: " + classVal2.isInterface() + " " + classVal2.isArray());
 
-            Blacklist blacklist = (Blacklist) classVal2.newInstance();
-            blacklist.setCommId("+272727727272");
-            System.out.println(blacklist.toString());
+            Person person = (Person) classVal2.newInstance();
+            person.setCommId("+272727727272");
+            System.out.println(person.toString());
         }catch (Exception e){
             e.printStackTrace();
         }

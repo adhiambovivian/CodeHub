@@ -1,6 +1,6 @@
 package com.codeHub.service;
 
-import com.codeHub.models.Blacklist;
+import com.codeHub.models.Person;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -11,12 +11,12 @@ public class RmiService extends UnicastRemoteObject implements DNDInterface {
 
     public RmiService() throws RemoteException{}
 
-    public List<Blacklist> getDndList() {
-        List<Blacklist>dndList=new ArrayList<>();
+    public List<Person> getDndList() {
+        List<Person>dndList=new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            Blacklist blacklist = new Blacklist("coment", "OPTIN", i, "+2547263632233" + i);
-            dndList.add(blacklist);
-            blacklist=null;
+            Person person = new Person("coment", "OPTIN", i, "+2547263632233" + i);
+            dndList.add(person);
+            person =null;
 
         }
         return dndList;

@@ -90,18 +90,7 @@ public class RabbitMqConfig {
 //        incentivesContainer.setAcknowledgeMode(AcknowledgeMode.AUTO);
 //        return incentivesContainer;
 //    }
-    @Bean
-    SimpleMessageListenerContainer aoContainer(ConnectionFactory connectionFactory,
-                                               MessageListenerAdapter aoListenerAdapter) {
-        SimpleMessageListenerContainer aoContainer = new SimpleMessageListenerContainer();
-        aoContainer.setConnectionFactory(connectionFactory);
-        aoContainer.setQueueNames(queueName);
-        aoContainer.setMessageListener(aoListenerAdapter);
-        aoContainer.setConcurrentConsumers(50);
-        aoContainer.setPrefetchCount(12);
-        aoContainer.setAcknowledgeMode(AcknowledgeMode.AUTO);
-        return aoContainer;
-    }
+
 
 //
 //    @Bean

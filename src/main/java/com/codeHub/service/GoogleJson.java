@@ -1,6 +1,7 @@
 package com.codeHub.service;
 
 import com.codeHub.BlackListView;
+import com.codeHub.models.Participant;
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
@@ -84,9 +85,9 @@ public class GoogleJson {
             file=new File("/home/adhiambo/projects/spring/person.json");
             reader =new BufferedReader(new FileReader(file));
             Gson gson=new GsonBuilder().create();
-            Person[] people=gson.fromJson(reader,Person[].class);
-            for(Person p:people) {
-                System.out.println("Object mode: " + p.firstName);
+            Participant[] people=gson.fromJson(reader,Participant[].class);
+            for(Participant p:people) {
+                System.out.println("Object mode: " + p.getFirstName());
             }
         }catch (FileNotFoundException e){
             e.printStackTrace();
@@ -104,7 +105,7 @@ public class GoogleJson {
             reader.beginArray();
             while(reader.hasNext()){
                 //Read data into object model
-                Person person=gson.fromJson(reader,Person.class);
+                Participant person=gson.fromJson(reader,Participant.class);
                 System.out.println("Person:: "+person.toString());
             }
             reader.close();
@@ -118,7 +119,7 @@ public class GoogleJson {
     }
 
     public static void writeFile(){
-Person person=new Person("vivian","Adhiambo",22,"3737738");
+Participant person=new Participant("vivian","Adhiambo",22,"3737738");
 Gson gson=new Gson();
 String json=gson.toJson(person);
 try{

@@ -1,5 +1,6 @@
-package com.codeHub;
+package com.codeHub.utils;
 
+import com.codeHub.Data;
 import com.codeHub.utils.Metadata;
 
 public class Response {

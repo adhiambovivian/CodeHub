@@ -6,6 +6,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
+import com.codeHub.models.Participant;
 
 public class CoderService {
     public static void minor(){
@@ -171,8 +172,8 @@ StringBuffer
     }
 
     public static void getClassMethod(){
-        Person person =new Person();
-        Class classVal= person.getClass();
+        Participant Participant =new Participant();
+        Class classVal= Participant.getClass();
         System.out.println("Class det: "+classVal.getName());
     }
 
@@ -182,12 +183,12 @@ StringBuffer
             Class classVal = boolean.class;
             System.out.println(classVal.toString());
 
-            Class classVal2 = Person.class;
+            Class classVal2 = Participant.class;
             System.out.println("details: " + classVal2.toString() + " interface check: " + classVal2.isInterface() + " " + classVal2.isArray());
 
-            Person person = (Person) classVal2.newInstance();
-            person.setCommId("+272727727272");
-            System.out.println(person.toString());
+            Participant Participant = (Participant) classVal2.newInstance();
+            Participant.setCommId("+272727727272");
+            System.out.println(Participant.toString());
         }catch (Exception e){
             e.printStackTrace();
         }

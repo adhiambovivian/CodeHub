@@ -14,6 +14,7 @@ import java.nio.file.StandardOpenOption;
 import java.security.PermissionCollection;
 import java.util.*;
 import java.util.zip.DeflaterOutputStream;
+import com.codeHub.models.Participant;
 
 public class FileService{
 
@@ -877,9 +878,9 @@ public static void compressFileDeflater(){
 }
 
 public static void serialization(){
-    Person person =new Person();
-    person.setAccountId(2);
-    person.setBlockedBy(3);
+    Participant person =new Participant();
+    person.setAge(30);
+    person.setFirstName("Lucillle");
     person.setCommId("+25363773736");
     person.setComment("You have been added to dnd. we will not contact you again");
     Date date=new Date();
@@ -901,7 +902,7 @@ public static void serialization(){
 public static void deserialization(){
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath + "objects.txt"));
-            Person person =(Person)objectInputStream.readObject();
+            Participant person =(Participant)objectInputStream.readObject();
             System.out.println(person.toString());
         }catch (IOException e){
             e.getMessage();

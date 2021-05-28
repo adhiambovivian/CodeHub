@@ -8,6 +8,7 @@ import java.lang.reflect.Type;
 import com.google.gson.Gson;
         import com.google.gson.GsonBuilder;
         import com.google.gson.reflect.TypeToken;
+        import com.codeHub.models.Participant;
 
 public class JSONConverter
 {
@@ -15,18 +16,18 @@ public class JSONConverter
     {
         Gson objGson = new GsonBuilder().setPrettyPrinting().create();
 
-        List  personList = Stream.of(
-                new Person("Mike", "harvey", 34, "001894536"),
-                new Person("Nick", "young", 75,  "005425676"),
-                new Person("Jack", "slater", 21 ,"009654153"),
-                new Person("gary", "hudson", 55,"00564536"),
-                new Person("Mike", "harvey", 21 ,"003685417"),
-                new Person("gary", "hudson", 25,"00452341"))
+        List  participantList = Stream.of(
+                new Participant("Mike", "harvey", 34, "001894536"),
+                new Participant("Nick", "young", 75,  "005425676"),
+                new Participant("Jack", "slater", 21 ,"009654153"),
+                new Participant("gary", "hudson", 55,"00564536"),
+                new Participant("Mike", "harvey", 21 ,"003685417"),
+                new Participant("gary", "hudson", 25,"00452341"))
                 .collect(Collectors.toList());
 
         //Convert list to json
         System.out.println("1. Convert list of person objects to Json");
-        String json = objGson.toJson(personList);
+        String json = objGson.toJson(participantList);
         System.out.println(json);
 
         //Convert json back to list

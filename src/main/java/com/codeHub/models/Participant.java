@@ -2,6 +2,8 @@ package com.codeHub.models;
 
 import com.codeHub.Meta;
 
+import java.util.Date;
+
 public class Participant {
     private String commId;
     private Meta meta;
@@ -9,6 +11,8 @@ public class Participant {
     private String firstName;
     private String lastName;
     private int age;
+    private String comment;
+    private Date createDate;
 
     public Participant() {
     }
@@ -71,5 +75,21 @@ public class Participant {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }

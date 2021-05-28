@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.codeHub.models.PersonLists;
+import com.codeHub.models.Participant;
 
 public class BoonJson {
 public static void parseJson()throws IOException{
@@ -39,8 +41,8 @@ public static void parseJson()throws IOException{
 }
 public static void generateJson(){
     PersonLists bl=new PersonLists();
-    bl.person =new Person[1];
-    bl.person[0]=new Person("Never Again","+254729880726");
+    //bl.participant =new Participant[1];
+    //bl.participant[0]=new Participant("Never Again","+254729880726");
     ObjectMapper objectMapper=JsonFactory.create();
     String json=objectMapper.writeValueAsString(bl); //objectMapper.writeValue(new FileOutputStream("data/output.json"),bl); //Also File,Writer,outpuStream
     System.out.println(json);

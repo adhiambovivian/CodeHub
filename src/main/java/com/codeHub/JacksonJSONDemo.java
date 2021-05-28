@@ -11,6 +11,7 @@ import java.io.*;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
+import com.codeHub.models.Participant;
 
 public class JacksonJSONDemo {
 
@@ -106,7 +107,7 @@ public class JacksonJSONDemo {
 
     public static void generateJson() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        Person person = new Person();
+        Participant person = new Participant();
         person.setCommId("+2547298811");
         person.setComment("Gaming the system");
         objectMapper.writeValue(new FileOutputStream("data/output.json"), person);

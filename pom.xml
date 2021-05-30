@@ -25,22 +25,10 @@
 
 	<dependencies>
 
-<!--		&lt;!&ndash; https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-tomcat &ndash;&gt;-->
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-starter-tomcat</artifactId>-->
-<!--			<version>2.5.0</version>-->
-<!--		</dependency>-->
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
+<!--			<scope>provided</scope>-->
 		</dependency>
 
 		<dependency>

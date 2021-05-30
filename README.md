@@ -19,7 +19,7 @@ docker run -d --hostname rabbitmq --name rammitmq -p 15672:15672 -p 5672:5672 ra
 ```
 - use default rabbitmq container credentials; guest
 
-#install solr
+# install solr
 ```
 docker run -p 8983:8983 -t solr
 ```
@@ -28,12 +28,12 @@ docker run -p 8983:8983 -t solr
 docker exec -it --user=solr <container-id> bin/solr create_core -c participants
 ```
 
-#Install mysql
+# Install mysql
 ```
 docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=your-password -d mysql:latest
 ```
 
-#To access mysql terminal
+# To access mysql terminal
 ```docker exec -it mysql bash
 mysql -u root -p
 CREATE USER 'your-username'@'localhost' IDENTIFIED BY 'your-password';
@@ -41,7 +41,7 @@ GRANT ALL PRIVILEGES ON * . * TO 'your-username'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
-#Running the application
+# Running the application
 
 ```
 mvn spring-boot:run -Drun.jvmArguments='-Dserver.port=7090'
@@ -52,7 +52,7 @@ mvn spring-boot:run -Drun.jvmArguments='-Dserver.port=7090'
 ./mvnw clean install
 ```
 
-#Using maven wrapper to run spring-boot
+# Using maven wrapper to run spring-boot
 
 ```
 ./mvnw spring-boot:run

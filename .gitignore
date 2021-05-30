@@ -1,5 +1,5 @@
 target/
-!.mvn/wrapper/maven-wrapper.jar
+## !.mvn/wrapper/maven-wrapper.jar
 
 *.class
 
@@ -25,14 +25,13 @@ dist/
 nbdist/
 .nb-gradle/
 
-.mvn/
+##.mvn/
 BlacklistSerialized
 person.json
-*mvnw
+##*mvnw
 *.processed
 simple.json
-mvnw*
+##mvnw*
 
 .DS_Store
 data/
-src/main/resources/application.properties

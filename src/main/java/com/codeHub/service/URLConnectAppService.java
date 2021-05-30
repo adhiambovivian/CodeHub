@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class URLConnectAppService {
     public static void getUsers() {
         try {
-            URL url = new URL("http://api.msurvey.co.ke:8083/v1/users");
+            URL url = new URL("http://api.sth.co.ke:8083/v1/users");
             HttpURLConnection connection=(HttpURLConnection)url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Accept","application/json");
@@ -34,7 +34,7 @@ e.printStackTrace();
     }
     public static void createUser() {
         try {
-            URL url = new URL("http://api.msurvey.co.ke:8083/v1/surveys/1/panel");
+            URL url = new URL("http://api.sth.co.ke:8083/v1/surveys/1/panel");
             HttpURLConnection connection=(HttpURLConnection)url.openConnection();
             connection.setDoOutput(true);
             connection.setRequestMethod("POST");

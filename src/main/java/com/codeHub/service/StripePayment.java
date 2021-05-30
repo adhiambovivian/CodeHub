@@ -13,7 +13,7 @@ public class StripePayment {
     public static void createCharge(String token) throws InvalidRequestException, AuthenticationException, APIConnectionException, CardException, APIException {
 
         //Stripe.apiKey = "sk_test_Fk6wzvHUrxv4IaWLCo29Vxcn";
-        RequestOptions requestOptions = (new RequestOptions.RequestOptionsBuilder()).setApiKey("sk_test_Fk6wzvHUrxv4IaWLCo29Vxcn").build();
+        RequestOptions requestOptions = (new RequestOptions.RequestOptionsBuilder()).setApiKey("").build();
 
         Map<String, Object> chargeParams = new HashMap<String, Object>();
         chargeParams.put("amount", 25000);//convert dollars to cents
@@ -26,7 +26,7 @@ public class StripePayment {
 
     public static String createToken() throws InvalidRequestException, AuthenticationException, APIConnectionException, CardException, APIException {
         {
-            Stripe.apiKey = "pk_test_XEtUDH5L5EHgtwQDDqElcnuy";
+            Stripe.apiKey = "";
 
             Map<String, Object> tokenParams = new HashMap<String, Object>();
             Map<String, Object> cardParams = new HashMap<String, Object>();

@@ -57,5 +57,3 @@ mvn spring-boot:run -Drun.jvmArguments='-Dserver.port=7090'
 ```
 ./mvnw spring-boot:run
 ```
-
-

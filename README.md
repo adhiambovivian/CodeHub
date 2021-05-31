@@ -41,13 +41,13 @@ GRANT ALL PRIVILEGES ON * . * TO 'your-username'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
-# Running the application
+# Running the application using Maven
 
 ```
 mvn spring-boot:run -Drun.jvmArguments='-Dserver.port=7090'
 ```
 
-### Using the maven wrapper to run goal on unix ###
+### Using the maven wrapper to package the app on unix ###
 ```
 ./mvnw clean install
 ```
@@ -59,7 +59,7 @@ mvn spring-boot:run -Drun.jvmArguments='-Dserver.port=7090'
 ```
 
 
-### Using the maven wrapper to run goal on windows ###
+### Using the maven wrapper to package app on windows ###
 ```
 mvnw clean install
 ```
@@ -68,4 +68,16 @@ mvnw clean install
 
 ```
 mvnw spring-boot:run
+```
+
+# Running the application using Gradle
+
+### Using gradle wrapper to run spring-boot ###
+```
+./gradlew bootRun
+```
+
+### Using gradle wrapper to package the app ###
+```
+./gradlew bootJar
 ```

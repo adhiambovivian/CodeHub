@@ -325,7 +325,7 @@
 							<content>/* Copyright (C)$YEAR  Vivian */</content> <!-- or <file>${basedir}/license-header.txt</file>-->
 						</licenseHeader>
 
-<!--						<removeUnusedImports/>-->
+						<removeUnusedImports/>
 						<importOrder>
 <!--							<order>java,javax,org,com,com.diffplug,</order> OR-->
 							<file>${basedir}/codehub.importorder</file>

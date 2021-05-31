@@ -12,7 +12,7 @@ import javax.jms.ConnectionFactory;
 
 @Configuration
 public class JMSConfig {
-
+//todo create queue trader
     private static final Log log = LogFactory.getLog(JMSConfig.class);
 
         @Bean

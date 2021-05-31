@@ -1,8 +1,9 @@
 /* Copyright (C)2021  Vivian */
 package com.codeHub.controller;
 
-import java.util.HashMap;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 
 @RestController("v1/")
 public class TesterController {

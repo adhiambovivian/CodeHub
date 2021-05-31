@@ -7,6 +7,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import org.json.simple.JSONObject;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.*;
+import org.springframework.util.Base64Utils;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.web.client.RestTemplate;
+
 import java.io.*;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
@@ -16,12 +24,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import org.json.simple.JSONObject;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.http.*;
-import org.springframework.util.Base64Utils;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.web.client.RestTemplate;
 
 public class PanelCreation extends Thread {
     public synchronized void generateParticipantsJson(long length) {

@@ -1,10 +1,11 @@
 /* Copyright (C)2021  Vivian */
 package com.codeHub.service;
 
+import org.springframework.stereotype.Component;
+
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import org.springframework.stereotype.Component;
 
 @Component
 public class ConcurrencyService {

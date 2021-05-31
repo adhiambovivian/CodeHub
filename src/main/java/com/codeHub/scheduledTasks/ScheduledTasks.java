@@ -1,12 +1,14 @@
 /* Copyright (C)2021  Vivian */
 package com.codeHub.scheduledTasks;
 
-import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
-import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
+
+import java.util.logging.Logger;
+
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
 
 @Component
 public class ScheduledTasks {

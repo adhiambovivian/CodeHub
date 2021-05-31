@@ -1,9 +1,10 @@
 /* Copyright (C)2021  Vivian */
 package com.codeHub;
 
-import au.com.bytecode.opencsv.CSVReader;
 import java.io.*;
 import java.util.Scanner;
+
+import au.com.bytecode.opencsv.CSVReader;
 
 public class ReadCSV {
     public static void scannerReader() {

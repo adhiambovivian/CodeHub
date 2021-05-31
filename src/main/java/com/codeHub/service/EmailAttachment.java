@@ -4,8 +4,10 @@ package com.codeHub.service;
 import com.sun.mail.gimap.GmailFolder;
 import com.sun.mail.gimap.GmailRawSearchTerm;
 import com.sun.mail.gimap.GmailStore;
+
 import java.io.*;
 import java.util.Properties;
+
 import javax.mail.*;
 import javax.mail.internet.MimeBodyPart;
 

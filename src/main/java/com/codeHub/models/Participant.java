@@ -2,6 +2,7 @@
 package com.codeHub.models;
 
 import com.codeHub.Meta;
+
 import java.util.Date;
 
 public class Participant {

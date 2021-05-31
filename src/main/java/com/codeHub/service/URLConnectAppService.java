@@ -1,12 +1,13 @@
 /* Copyright (C)2021  Vivian */
 package com.codeHub.service;
 
+import org.springframework.stereotype.Component;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
-import org.springframework.stereotype.Component;
 
 @Component
 public class URLConnectAppService {

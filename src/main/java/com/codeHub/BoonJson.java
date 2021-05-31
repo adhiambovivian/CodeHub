@@ -2,6 +2,10 @@
 package com.codeHub;
 
 import com.codeHub.models.PersonLists;
+
+import org.boon.json.JsonFactory;
+import org.boon.json.ObjectMapper;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,8 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.boon.json.JsonFactory;
-import org.boon.json.ObjectMapper;
 
 public class BoonJson {
     public static void parseJson() throws IOException {

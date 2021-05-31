@@ -47,13 +47,25 @@ FLUSH PRIVILEGES;
 mvn spring-boot:run -Drun.jvmArguments='-Dserver.port=7090'
 ```
 
-# Using the maven wrapper to run goal
+### Using the maven wrapper to run goal on unix ###
 ```
 ./mvnw clean install
 ```
 
-# Using maven wrapper to run spring-boot
+### Using maven wrapper to run spring-boot ###
 
 ```
 ./mvnw spring-boot:run
+```
+
+
+### Using the maven wrapper to run goal on windows ###
+```
+mvnw clean install
+```
+
+### Using maven wrapper to run spring-boot on windows ###
+
+```
+mvnw spring-boot:run
 ```

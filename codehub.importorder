@@ -1,0 +1,8 @@
+#Organize Import Order
+6=\#
+5=au
+4=redis
+3=javax
+2=java
+1=org
+0=com

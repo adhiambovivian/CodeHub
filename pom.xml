@@ -54,7 +54,7 @@
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>javax.mail-api</artifactId>
-			<version>1.6.0</version>
+			<version>1.6.2</version>
 		</dependency>
 
 		<dependency>
@@ -94,21 +94,25 @@
 			<artifactId>stripe-java</artifactId>
 			<version>5.9.0</version>
 		</dependency>
-		<!--<dependency>-->
-			<!--<groupId>or g.apache.httpcomponents</groupId>-->
-			<!--<artifactId>httpclient</artifactId>-->
-			<!--<version>4.5.3</version>-->
-		<!--</dependency>-->
+
 		<dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
 			<version>3.1</version>
 		</dependency>
+<!--	Todo://Replace commons with httpcomponents-->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.13</version>
+		</dependency>
+
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
+
 		<dependency>
 			<groupId>au.com.bytecode</groupId>
 			<artifactId>opencsv</artifactId>
@@ -139,23 +143,13 @@
 			<artifactId>commons-lang</artifactId>
 			<version>2.3</version>
 		</dependency>
-		<!--<dependency>-->
-			<!--<groupId>com.rabbitmq</groupId>-->
-			<!--<artifactId>amqp-client</artifactId>-->
-			<!--<version>5.0.0</version>-->
-		<!--</dependency>-->
 
 		<dependency>
 			<groupId>com.rabbitmq.jms</groupId>
 			<artifactId>rabbitmq-jms</artifactId>
 			<version>2.3.0</version>
 		</dependency>
-		<!--<dependency>-->
-			<!--<groupId>com.sun.mail</groupId>-->
-			<!--<artifactId>all</artifactId>-->
-			<!--<version>1.6.0</version>-->
-			<!--<type>pom</type>-->
-		<!--</dependency>-->
+
 		<dependency>
 			<groupId>com.sun.mail</groupId>
 			<artifactId>javax.mail</artifactId>
@@ -195,8 +189,6 @@
 			<artifactId>spring-rabbit-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-
 
 	<dependency>
 			<groupId>redis.clients</groupId>

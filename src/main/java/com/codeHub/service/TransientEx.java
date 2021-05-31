@@ -1,3 +1,4 @@
+/* Copyright (C)2021  Vivian */
 package com.codeHub.service;
 
 import com.codeHub.models.Participant;
@@ -7,7 +8,8 @@ public class TransientEx {
     public static void serializeBlacklist() {
         Participant person = new Participant("Texted the word stop", "SELF", 1, "+254729880726");
         try {
-            ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream("BlacklistSerialized"));
+            ObjectOutputStream o =
+                    new ObjectOutputStream(new FileOutputStream("BlacklistSerialized"));
             o.writeObject(person);
             o.close();
         } catch (FileNotFoundException e) {
@@ -15,16 +17,17 @@ public class TransientEx {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //reading object
+        // reading object
         try {
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream("BlacklistSerialized"));
+            ObjectInputStream in =
+                    new ObjectInputStream(new FileInputStream("BlacklistSerialized"));
             Participant bl = (Participant) in.readObject();
             System.out.println(bl.toString());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }catch (ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

@@ -296,6 +296,7 @@
 							<includes>
 								<include>*.md</include>
 								<include>.gitignore</include>
+								<include>*.java</include>
 							</includes>
 							<!-- define the steps to apply to those files -->
 							<trimTrailingWhitespace/>
@@ -306,12 +307,13 @@
 							</indent>
 						</format>
 					</formats>
+					<!-- define a language-specific format -->
 
 					<java>
 						<!-- apply a specific flavor of google-java-format -->
 						<googleJavaFormat>
-							<version>1.7</version>
-							<style>AOSP</style> <!-- option: GOOGLE-->
+							<version>1.8</version>
+							<style>AOSP</style> <!-- option: GOOGLE, AOSP-->
 						</googleJavaFormat>
 
 <!--						<eclipse>-->
@@ -320,16 +322,18 @@
 <!--						</eclipse>-->
 
 						<licenseHeader>
-							<file>${basedir}/license-header.txt</file>
+							<content>/* Copyright (C)$YEAR  Vivian */</content> <!-- or <file>${basedir}/license-header.txt</file>-->
 						</licenseHeader>
 
 
 
-						<removeUnusedImports/>
-						<importOrder>
-							<file>${basedir}/kk.importorder</file>
-						</importOrder>
+<!--						<removeUnusedImports/>-->
+<!--						<importOrder>-->
+<!--							<file>${basedir}/kk.importorder</file>-->
+<!--						</importOrder>-->
 					</java>
+
+
 				</configuration>
 			</plugin>
 

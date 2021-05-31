@@ -1,11 +1,11 @@
+/* Copyright (C)2021  Vivian */
 package com.codeHub.utils;
 
 import com.codeHub.Data;
-import com.codeHub.utils.Metadata;
 
 public class Response {
-private Data data;
-private Metadata metadata;
+    private Data data;
+    private Metadata metadata;
 
     public Response(Data data, Metadata metadata) {
         this.data = data;
@@ -14,9 +14,6 @@ private Metadata metadata;
 
     @Override
     public String toString() {
-        return "Response{" +
-                "data=" + data +
-                ", metadata=" + metadata +
-                '}';
+        return "Response{" + "data=" + data + ", metadata=" + metadata + '}';
     }
 }

@@ -1,3 +1,4 @@
+/* Copyright (C)2021  Vivian */
 package com.codeHub;
 
 import com.codeHub.models.Participant;
@@ -6,13 +7,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.json.simple.JSONObject;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.http.*;
-import org.springframework.util.Base64Utils;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.web.client.RestTemplate;
-
 import java.io.*;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
@@ -22,6 +16,12 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import org.json.simple.JSONObject;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.*;
+import org.springframework.util.Base64Utils;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 public class PanelCreation extends Thread {
     public synchronized void generateParticipantsJson(long length) {
@@ -29,11 +29,12 @@ public class PanelCreation extends Thread {
 
         System.out.println("Thread " + Thread.currentThread().getName() + " panel size: " + length);
         try {
-            LocalDateTime date=LocalDateTime.now();
-            String fileName = "panel" + length +"_"+date.toString()+ ".json";
+            LocalDateTime date = LocalDateTime.now();
+            String fileName = "panel" + length + "_" + date.toString() + ".json";
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            List<Participant> participantList=new ArrayList<Participant>();
-            BufferedWriter fileWriter = new BufferedWriter(new FileWriter("/home/adhiambo/PANELS/" + fileName));
+            List<Participant> participantList = new ArrayList<Participant>();
+            BufferedWriter fileWriter =
+                    new BufferedWriter(new FileWriter("/home/adhiambo/PANELS/" + fileName));
             for (int i = 0; i <= length; i++) {
                 Faker faker = new Faker();
                 String commId = generateCommId(7, "0124", "7");
@@ -45,17 +46,20 @@ public class PanelCreation extends Thread {
                 Meta meta = new Meta(city, last_name, first_name, age);
                 Participant participant = new Participant(commId, meta);
                 participantList.add(participant);
-                System.out.println("### "+Thread.currentThread().getName()+" Count:: " + i);
+                System.out.println("### " + Thread.currentThread().getName() + " Count:: " + i);
             }
             String json = gson.toJson(participantList);
             fileWriter.write(json);
             fileWriter.close();
-            //launch thread to do this
+            // launch thread to do this
             scanDirectory("/home/adhiambo/PANELS/");
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName() + " Duration:: " + (System.currentTimeMillis() - start));
+            System.out.println(
+                    Thread.currentThread().getStackTrace()[1].getMethodName()
+                            + " Duration:: "
+                            + (System.currentTimeMillis() - start));
         }
     }
 
@@ -70,7 +74,10 @@ public class PanelCreation extends Thread {
         }
         String generatedString = stringBuilder.toString();
         Random random = new SecureRandom();
-        String commId = start + possibleComm.charAt(random.nextInt(possibleComm.length())) + generatedString;
+        String commId =
+                start
+                        + possibleComm.charAt(random.nextInt(possibleComm.length()))
+                        + generatedString;
         return commId;
     }
 
@@ -87,33 +94,50 @@ public class PanelCreation extends Thread {
         try {
             File directory = new File(path);
             for (File file : directory.listFiles()) {
-                System.out.println("Found file " + file.getName() + " Current thread " + Thread.currentThread().getName());
+                System.out.println(
+                        "Found file "
+                                + file.getName()
+                                + " Current thread "
+                                + Thread.currentThread().getName());
                 if (file.getName().endsWith(".json")) {
 
-                    Thread thread = new Thread() {
-                        public void run() {
-                            List<String> panels = new ArrayList<String>();
-                            String[] ids = {"11", "12", "10"};  //initial panel ids that are existing//Retrieve from db
-                            panels.addAll(Arrays.asList(ids));
-                            String generatedPanelId="";
-//                            try{
-//                                generatedPanelId=createPanel();
-//                                if(!generatedPanelId.isEmpty())
-//                                    panels.add(generatedPanelId);
-//                            }catch (Exception e){
-//                                e.printStackTrace();
-//                            }
-                            Random random = new Random();
-                            System.out.println("Processing file " + file.getName() + " Current thread " + Thread.currentThread().getName());
-                            file.renameTo(new File("/home/adhiambo/PANELS/processed/"+file.getName()));
-                            System.out.println("New file path:: "+file.getAbsolutePath());
-                            addParticipantsPanel("/home/adhiambo/PANELS/processed/"+ file.getName(), panels.get(random.nextInt(ids.length)));
-
-                        }
-                    };
+                    Thread thread =
+                            new Thread() {
+                                public void run() {
+                                    List<String> panels = new ArrayList<String>();
+                                    String[] ids = {
+                                        "11", "12", "10"
+                                    }; // initial panel ids that are existing//Retrieve from db
+                                    panels.addAll(Arrays.asList(ids));
+                                    String generatedPanelId = "";
+                                    //                            try{
+                                    //
+                                    // generatedPanelId=createPanel();
+                                    //
+                                    // if(!generatedPanelId.isEmpty())
+                                    //
+                                    // panels.add(generatedPanelId);
+                                    //                            }catch (Exception e){
+                                    //                                e.printStackTrace();
+                                    //                            }
+                                    Random random = new Random();
+                                    System.out.println(
+                                            "Processing file "
+                                                    + file.getName()
+                                                    + " Current thread "
+                                                    + Thread.currentThread().getName());
+                                    file.renameTo(
+                                            new File(
+                                                    "/home/adhiambo/PANELS/processed/"
+                                                            + file.getName()));
+                                    System.out.println("New file path:: " + file.getAbsolutePath());
+                                    addParticipantsPanel(
+                                            "/home/adhiambo/PANELS/processed/" + file.getName(),
+                                            panels.get(random.nextInt(ids.length)));
+                                }
+                            };
                     thread.start();
-                } else
-                    System.out.println("File not found");
+                } else System.out.println("File not found");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -137,12 +161,15 @@ public class PanelCreation extends Thread {
         request.put("country", "KE");
         request.put("name", "panel");
         HttpEntity<String> entity = new HttpEntity<String>(request.toString(), header);
-        ResponseEntity<String> requestResponse = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+        ResponseEntity<String> requestResponse =
+                restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
         System.out.println("####" + requestResponse.getBody().toString());
         if (requestResponse.getStatusCode().is2xxSuccessful()) {
             try {
                 ObjectMapper objectMapper = new ObjectMapper();
-                JsonNode jsonNode = objectMapper.readValue(requestResponse.getBody().toString(), JsonNode.class);
+                JsonNode jsonNode =
+                        objectMapper.readValue(
+                                requestResponse.getBody().toString(), JsonNode.class);
                 JsonNode nestedObj = jsonNode.get("Data");
                 JsonNode jsonNode2 = nestedObj.get("id");
                 panelId = jsonNode2.asText();
@@ -155,7 +182,7 @@ public class PanelCreation extends Thread {
     }
 
     public String addParticipantsPanel(String filename, String panelId) {
-        System.out.println("Panel id " + panelId+" file "+filename);
+        System.out.println("Panel id " + panelId + " file " + filename);
         final String url = "http://api.msurvey.co.ke:8083/v1/panel/{panelId}/participants/file";
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders header = new HttpHeaders();
@@ -170,7 +197,8 @@ public class PanelCreation extends Thread {
         map.add("file", new FileSystemResource(file));
         header.setContentType(MediaType.MULTIPART_FORM_DATA);
         HttpEntity<LinkedMultiValueMap<String, Object>> entity = new HttpEntity<>(map, header);
-        ResponseEntity<String> requestResponse = restTemplate.exchange(url, HttpMethod.POST, entity, String.class, panelId);
+        ResponseEntity<String> requestResponse =
+                restTemplate.exchange(url, HttpMethod.POST, entity, String.class, panelId);
         System.out.println(requestResponse);
         if (requestResponse.getStatusCode().is2xxSuccessful()) {
             System.out.println("created.. " + requestResponse.getBody());
@@ -190,9 +218,8 @@ public class PanelCreation extends Thread {
         }
         executor.shutdown();
         // Wait until all threads are finish
-        while (!executor.isTerminated()) {
+        while (!executor.isTerminated()) {}
 
-        }
         System.out.println("\nFinished all threads");
     }
 
@@ -201,12 +228,11 @@ public class PanelCreation extends Thread {
         @Override
         public void run() {
             List<Integer> panelSize = new ArrayList<Integer>();
-            Integer[] size = {20, 10,50};
+            Integer[] size = {20, 10, 50};
             panelSize.addAll(Arrays.asList(size));
             Random random = new Random();
-            //possibilty of threads accessing one file
+            // possibilty of threads accessing one file
             generateParticipantsJson((panelSize.get(random.nextInt(size.length))));
         }
     }
-
 }

@@ -1,3 +1,4 @@
+/* Copyright (C)2021  Vivian */
 package com.codeHub.configs;
 
 import org.apache.spark.SparkConf;
@@ -8,17 +9,19 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SparkConfiguration {
-    @Value("${spark.app.name}") private String appName;
-    @Value("${spark.master}") private String masterUrl;
+    @Value("${spark.app.name}")
+    private String appName;
+
+    @Value("${spark.master}")
+    private String masterUrl;
 
     @Bean
-    public SparkConf conf(){
+    public SparkConf conf() {
         return new SparkConf().setAppName(appName).setMaster(masterUrl);
     }
 
     @Bean
-    JavaSparkContext sc(){
+    JavaSparkContext sc() {
         return new JavaSparkContext(conf());
     }
 }
-

@@ -1,23 +1,24 @@
+/* Copyright (C)2021  Vivian */
 package com.codeHub.configs;
 
-//import com.rabbitmq.client.ConnectionFactory;
+// import com.rabbitmq.client.ConnectionFactory;
 
-//import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-//import org.springframework.amqp.core.*;
-//import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
-//import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
-//import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
-//import org.springframework.beans.factory.annotation.Value;
-//import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
+// import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+// import org.springframework.amqp.core.*;
+// import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
+// import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
+// import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
+// import org.springframework.beans.factory.annotation.Value;
+// import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+// import org.springframework.context.annotation.Bean;
+// import org.springframework.context.annotation.Configuration;
 //
-//import java.util.HashMap;
-//import java.util.Map;
+// import java.util.HashMap;
+// import java.util.Map;
 //
-//@Configuration
-//@EnableAutoConfiguration
-//public class RabbitMqConfig {
+// @Configuration
+// @EnableAutoConfiguration
+// public class RabbitMqConfig {
 //
 //
 //    private   @Value("${rabbitmq.queue}") String queueName;
@@ -80,8 +81,10 @@ package com.codeHub.configs;
 //
 //    //    @Bean
 ////    SimpleMessageListenerContainer incentivesContainer(ConnectionFactory connectionFactory,
-////                                                       MessageListenerAdapter incentivesListenerAdapter) {
-////        SimpleMessageListenerContainer incentivesContainer = new SimpleMessageListenerContainer();
+////                                                       MessageListenerAdapter
+// incentivesListenerAdapter) {
+////        SimpleMessageListenerContainer incentivesContainer = new
+// SimpleMessageListenerContainer();
 ////        incentivesContainer.setConnectionFactory(connectionFactory);
 ////        incentivesContainer.setQueueNames("incentives");
 ////        incentivesContainer.setMessageListener(incentivesListenerAdapter);
@@ -94,7 +97,8 @@ package com.codeHub.configs;
 //
 ////
 ////    @Bean
-////    MessageListenerAdapter incentivesListenerAdapter(IncentivesConsumerWorker incentivesConsumer) {
+////    MessageListenerAdapter incentivesListenerAdapter(IncentivesConsumerWorker
+// incentivesConsumer) {
 ////        return new MessageListenerAdapter(incentivesConsumer, "processIncentives");
 ////    }
 ////
@@ -103,4 +107,4 @@ package com.codeHub.configs;
 ////        container.start();
 ////    }
 //
-//}
+// }

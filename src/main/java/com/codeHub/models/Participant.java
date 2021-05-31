@@ -1,7 +1,7 @@
+/* Copyright (C)2021  Vivian */
 package com.codeHub.models;
 
 import com.codeHub.Meta;
-
 import java.util.Date;
 
 public class Participant {
@@ -14,8 +14,7 @@ public class Participant {
     private String comment;
     private Date createDate;
 
-    public Participant() {
-    }
+    public Participant() {}
 
     public Participant(String commId, Meta meta) {
         this.commId = commId;
@@ -26,7 +25,7 @@ public class Participant {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-        this.commId=commId;
+        this.commId = commId;
     }
 
     public String getCommId() {

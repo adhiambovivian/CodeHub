@@ -1,11 +1,8 @@
+/* Copyright (C)2021  Vivian */
 package com.codeHub;
 
-
-/**
- * Created by vivian on 2/24/17.
- */
-
-        import java.sql.Date;
+/** Created by vivian on 2/24/17. */
+import java.sql.Date;
 
 public class Data {
     private long id;
@@ -72,7 +69,14 @@ public class Data {
         this.create_date = create_date;
     }
 
-    public Data(long id, String name, long country_id, Boolean active, long owner_account_id, long owner_user_id, Date create_date) {
+    public Data(
+            long id,
+            String name,
+            long country_id,
+            Boolean active,
+            long owner_account_id,
+            long owner_user_id,
+            Date create_date) {
         this.id = id;
         this.name = name;
         this.country_id = country_id;
@@ -82,19 +86,26 @@ public class Data {
         this.create_date = create_date;
     }
 
-    public Data() {
-    }
+    public Data() {}
 
     @Override
     public String toString() {
-        return "Panel{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", country_id=" + country_id +
-                ", active=" + active +
-                ", owner_account_id=" + owner_account_id +
-                ", owner_user_id=" + owner_user_id +
-                ", create_date=" + create_date +
-                '}';
+        return "Panel{"
+                + "id="
+                + id
+                + ", name='"
+                + name
+                + '\''
+                + ", country_id="
+                + country_id
+                + ", active="
+                + active
+                + ", owner_account_id="
+                + owner_account_id
+                + ", owner_user_id="
+                + owner_user_id
+                + ", create_date="
+                + create_date
+                + '}';
     }
 }

@@ -1,3 +1,4 @@
+/* Copyright (C)2021  Vivian */
 package com.codeHub.models;
 
 import java.util.Date;
@@ -5,12 +6,18 @@ import java.util.List;
 
 public class PanelS {
     public enum surveySchedule {
-        IMMEDIATELY, RECURRING, LATER;
+        IMMEDIATELY,
+        RECURRING,
+        LATER;
     }
 
     public enum gender {
-        ALL, MALE, FEMALE, OTHER;
+        ALL,
+        MALE,
+        FEMALE,
+        OTHER;
     }
+
     private long panelId;
     private List<String> age;
     private gender gender;

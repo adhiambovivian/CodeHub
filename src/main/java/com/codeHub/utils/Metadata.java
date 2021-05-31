@@ -1,3 +1,4 @@
+/* Copyright (C)2021  Vivian */
 package com.codeHub.utils;
 
 import java.util.Date;
@@ -14,15 +15,19 @@ public class Metadata {
         this.message = message;
     }
 
-    public Metadata() {
-    }
+    public Metadata() {}
 
     @Override
     public String toString() {
-        return "Metadata{" +
-                "timeStamp=" + timeStamp +
-                ", queryTime='" + queryTime + '\'' +
-                ", message='" + message + '\'' +
-                '}';
+        return "Metadata{"
+                + "timeStamp="
+                + timeStamp
+                + ", queryTime='"
+                + queryTime
+                + '\''
+                + ", message='"
+                + message
+                + '\''
+                + '}';
     }
 }

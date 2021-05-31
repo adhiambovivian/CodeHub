@@ -1,11 +1,14 @@
-//package com.codeHub.configs;
-//
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.security.authentication.encoding.PasswordEncoder;
-//import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+/* Copyright (C)2021  Vivian */
+package com.codeHub.configs;
+
+// import org.springframework.context.annotation.Configuration;
+// import org.springframework.security.authentication.encoding.PasswordEncoder;
+// import
+// org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+// import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+// import
+// org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+// import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //
 //    @Configuration
 //    public class WebSecurityConfig extends WebSecurityConfigurerAdapter {

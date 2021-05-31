@@ -1,17 +1,15 @@
+/* Copyright (C)2021  Vivian */
 package com.codeHub;
 
-//import jdk.nashorn.internal.parser.JSONParser;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
-
-
-import org.json.simple.parser.JSONParser;
-
+// import jdk.nashorn.internal.parser.JSONParser;
 import java.io.*;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class ReadTxtJsonSimpleJSON {
     public static void txtToJson() {
@@ -26,7 +24,7 @@ public class ReadTxtJsonSimpleJSON {
 
             System.out.println("Name: " + name);
             System.out.println("Author: " + author);
-            System.out.println("\nCompany List: " +companyList);
+            System.out.println("\nCompany List: " + companyList);
             Iterator<String> iterator = companyList.iterator();
             while (iterator.hasNext()) {
                 System.out.println(iterator.next());
@@ -42,24 +40,25 @@ public class ReadTxtJsonSimpleJSON {
             e.printStackTrace();
         }
     }
-    public static void writeJson(){
-        JSONObject obj=new JSONObject();
-        obj.put("name","Vivian");
-        obj.put("age",new Integer(34));
-        JSONArray list=new JSONArray();
+
+    public static void writeJson() {
+        JSONObject obj = new JSONObject();
+        obj.put("name", "Vivian");
+        obj.put("age", new Integer(34));
+        JSONArray list = new JSONArray();
         list.add("msg 1");
         list.add("msg 2");
         list.add("msg 3");
 
-        obj.put("messages",list);
-        try{
-            FileWriter file=new FileWriter("/home/adhiambo/simple.json");
-    file.write(obj.toJSONString());
-    file.flush();
-        }catch (IOException e){
+        obj.put("messages", list);
+        try {
+            FileWriter file = new FileWriter("/home/adhiambo/simple.json");
+            file.write(obj.toJSONString());
+            file.flush();
+        } catch (IOException e) {
             e.printStackTrace();
         }
-      System.out.println(obj);
+        System.out.println(obj);
     }
 
     public static void readJson() {
@@ -86,7 +85,7 @@ public class ReadTxtJsonSimpleJSON {
             jsonArray.add(map);
             jsonObject.put("phone numbers", jsonArray);
 
-            //write to file
+            // write to file
             PrintWriter printWriter = new PrintWriter("simple.json");
             printWriter.write(jsonObject.toJSONString());
             printWriter.flush();

@@ -1,15 +1,20 @@
+/* Copyright (C)2021  Vivian */
 package com.codeHub;
 
-//import org.apache.commons.collections.ListUtils;
+// import org.apache.commons.collections.ListUtils;
 
 import java.util.*;
 
 public class JavaGenerics {
     // create an enum
     public enum Numbers {
-
-        ONE, TWO, THREE, FOUR, FIVE
+        ONE,
+        TWO,
+        THREE,
+        FOUR,
+        FIVE
     };
+
     public static void joinList() {
         List<String> listA = new ArrayList<String>();
         listA.add("A");
@@ -19,7 +24,6 @@ public class JavaGenerics {
         listA.addAll(0, listB);
         System.out.println("ListA:: " + listA);
         System.out.println("ListB:: " + listB);
-
     }
 
     public static void joinListApache() {
@@ -29,7 +33,7 @@ public class JavaGenerics {
         List<String> listB = new ArrayList<String>();
         listB.add("B");
 
-        //List<String> listFinal = ListUtils.union(listA, listB);
+        // List<String> listFinal = ListUtils.union(listA, listB);
 
         System.out.println("listA : " + listA);
         System.out.println("listB : " + listB);
@@ -45,14 +49,13 @@ public class JavaGenerics {
         deque.add(40);
         for (Integer number : deque) {
             System.out.println("Deque:" + number);
-
         }
-        //print array length
+        // print array length
         Object[] obj = deque.toArray();
         System.out.println("Array Size: " + obj.length);
 
-        //clone
-        //Deque<Integer> deque1=deque.clone();
+        // clone
+        // Deque<Integer> deque1=deque.clone();
     }
 
     public static void bitSetExample() {
@@ -65,7 +68,7 @@ public class JavaGenerics {
 
         System.out.println("BitSet: " + bitSet);
         System.out.println("BitSet2: " + bitSet1);
-        //cardinality
+        // cardinality
         System.out.println("Cardinality bitset 1: " + bitSet.cardinality());
         System.out.println("Card bitset 2:" + bitSet1.cardinality());
     }
@@ -88,7 +91,11 @@ public class JavaGenerics {
         array = Locale.getAvailableLocales();
         System.out.println("First 13 installed locales: ");
         for (int i = 0; i < 13; i++) {
-            System.out.println("Country " + array[i].getISO3Country() + " Language: " + array[i].getISO3Language());
+            System.out.println(
+                    "Country "
+                            + array[i].getISO3Country()
+                            + " Language: "
+                            + array[i].getISO3Language());
         }
         Calendar cal1 = new GregorianCalendar(2015, 8, 15);
         Calendar cal2 = new GregorianCalendar(2008, 1, 02);
@@ -98,19 +105,20 @@ public class JavaGenerics {
         System.out.println("Properties" + System.getProperties() + "Env: " + System.getenv());
         Calendar calendar2 = Calendar.getInstance();
         System.out.println("Time now:: " + calendar2.getTime());
-        //add 20 days
+        // add 20 days
         calendar2.add(Calendar.DATE, 20);
         System.out.println("Time after 20 days:: " + calendar2.getTime());
-        //subtract 2 months
+        // subtract 2 months
         calendar2.add(Calendar.MONTH, -2);
         System.out.println("Time before 2 months:: " + calendar2.getTime());
         calendar2.add(Calendar.YEAR, -5);
         Currency currency = Currency.getInstance(locale);
-        System.out.println("Currency:: " + currency.getCurrencyCode()+" symbol: "+currency.getSymbol());
+        System.out.println(
+                "Currency:: " + currency.getCurrencyCode() + " symbol: " + currency.getSymbol());
         // create a date
         Date date = new Date(97, 1, 23);
         long diff = date.getTime();
-                // print how many milliseconds have passed since January 1, 1970, 00:00:00 GMT
+        // print how many milliseconds have passed since January 1, 1970, 00:00:00 GMT
         System.out.println("If date is 23-01-1997, " + diff + " have passed.");
         Date date2 = new Date(15, 1, 21);
 
@@ -126,7 +134,7 @@ public class JavaGenerics {
         System.out.println("Initial: " + list);
         Collections.shuffle(list);
         System.out.println("After shuffling: " + list);
-        //create a thread-safe list
+        // create a thread-safe list
         List<String> synList = Collections.synchronizedList(list);
         System.out.println("Synchronized list: " + synList);
 
@@ -147,8 +155,8 @@ public class JavaGenerics {
         // sort the list
         Collections.sort(list, null);
         System.out.println("List sorted in natural order: ");
-        for(int i : linkedList){
-            System.out.println(i+ " ");
+        for (int i : linkedList) {
+            System.out.println(i + " ");
         }
         Map map = Collections.singletonMap("key", "Value");
         System.out.println("Singleton map is: " + map);
@@ -163,13 +171,13 @@ public class JavaGenerics {
         // create singleton list
         list1 = Collections.singletonList("TP");
         System.out.println("List value after: " + list1);
-        HashSet <String> newset = new HashSet <String>();
+        HashSet<String> newset = new HashSet<String>();
         newset.add("Learning");
         newset.add("Easy");
         newset.add("Simply");
-        Iterator iterator=newset.iterator();
-        while (iterator.hasNext()){
-            System.out.println("Val "+iterator.next()+" ");
+        Iterator iterator = newset.iterator();
+        while (iterator.hasNext()) {
+            System.out.println("Val " + iterator.next() + " ");
         }
         Hashtable htable = new Hashtable(3);
 
@@ -180,15 +188,15 @@ public class JavaGenerics {
         htable.put(4, "BEST");
         htable.put(5, "TUTORIAL");
 
-        System.out.println("Initial hash table value: "+htable);
+        System.out.println("Initial hash table value: " + htable);
 
         // remove element at key 3
         htable.remove(3);
 
-        System.out.println("Hash table value after remove: "+htable);
-
+        System.out.println("Hash table value after remove: " + htable);
     }
-    public static void generics(){
+
+    public static void generics() {
 
         // create a new hashtable
         Dictionary d = new Hashtable();
@@ -201,8 +209,7 @@ public class JavaGenerics {
         // return true if this dictionary maps no keys to value.
         boolean b = d.isEmpty();
         System.out.println("Dictionary is empty:" + b);
-        EnumMap<Numbers, String> map =
-                new EnumMap<Numbers, String>(Numbers.class);
+        EnumMap<Numbers, String> map = new EnumMap<Numbers, String>(Numbers.class);
 
         // assosiate values in map
         map.put(Numbers.ONE, "1");

@@ -1,19 +1,18 @@
+/* Copyright (C)2021  Vivian */
 package com.codeHub;
 
-
-        import java.io.FileNotFoundException;
-        import java.io.FileReader;
-        import java.io.IOException;
-        import java.util.Iterator;
-
-        import org.json.simple.JSONArray;
-        import org.json.simple.JSONObject;
-        import org.json.simple.parser.JSONParser;
-        import org.json.simple.parser.ParseException;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Iterator;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class ParseJsonUsingSimpleJson {
 
-    //private static final String filePath = "/home/adhiambo/Downloads/kenya.json";
+    // private static final String filePath = "/home/adhiambo/Downloads/kenya.json";
 
     public void parse() {
 
@@ -29,23 +28,26 @@ public class ParseJsonUsingSimpleJson {
             System.out.println("The first name is: " + firstName);
 
             // get a number from the JSON object
-            long id =  (long) jsonObject.get("id");
+            long id = (long) jsonObject.get("id");
             System.out.println("The id is: " + id);
 
             // get an array from the JSON object
-            JSONArray lang= (JSONArray) jsonObject.get("languages");
+            JSONArray lang = (JSONArray) jsonObject.get("languages");
 
             // take the elements of the json array
-            for(int i=0; i<lang.size(); i++){
-                System.out.println("The " + i + " element of the array: "+lang.get(i));
+            for (int i = 0; i < lang.size(); i++) {
+                System.out.println("The " + i + " element of the array: " + lang.get(i));
             }
             Iterator i = lang.iterator();
 
             // take each value from the json array separately
             while (i.hasNext()) {
                 JSONObject innerObj = (JSONObject) i.next();
-                System.out.println("language "+ innerObj.get("lang") +
-                        " with level " + innerObj.get("knowledge"));
+                System.out.println(
+                        "language "
+                                + innerObj.get("lang")
+                                + " with level "
+                                + innerObj.get("knowledge"));
             }
             // handle a structure into the json object
             JSONObject structure = (JSONObject) jsonObject.get("job");
@@ -60,7 +62,5 @@ public class ParseJsonUsingSimpleJson {
         } catch (NullPointerException ex) {
             ex.printStackTrace();
         }
-
     }
-
 }

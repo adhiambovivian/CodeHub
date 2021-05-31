@@ -49,7 +49,7 @@
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>
-			<version>1.1</version>
+			<version>1.1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.mail</groupId>
@@ -83,7 +83,7 @@
 		<dependency>
 			<groupId>io.fastjson</groupId>
 			<artifactId>boon</artifactId>
-			<version>0.33</version>
+			<version>0.34</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
@@ -122,7 +122,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jms</artifactId>
-			<version>5.0.0.RELEASE</version>
+			<version>5.3.7</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.jms</groupId>

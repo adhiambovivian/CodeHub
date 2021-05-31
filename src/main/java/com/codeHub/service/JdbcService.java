@@ -10,8 +10,8 @@ import java.util.Properties;
 import java.util.TreeMap;
 
 public class JdbcService {
-    static String propertyPath = "/Users/vivian/PERSONAL_PROJECTS/CodeHub/src/main/resources/application.properties";
-    static String filePath = "/Users/vivian/PERSONAL_PROJECTS/CodeHub/data/";
+    static String propertyPath = "~/CodeHub/src/main/resources/application.properties";
+    static String filePath = "~/CodeHub/data/";
     static String url="jdbc:mysql://localhost:3306/";
     public static void jdbcCmd() {
         String query = "\n" +

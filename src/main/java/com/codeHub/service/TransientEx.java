@@ -1,8 +1,6 @@
 package com.codeHub.service;
 
 import com.codeHub.models.Participant;
-
-import javax.mail.Part;
 import java.io.*;
 
 public class TransientEx {

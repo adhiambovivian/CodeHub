@@ -1,31 +1,27 @@
 /* Copyright (C)2021  Vivian */
 package com.codeHub.configs;
 
- import com.rabbitmq.client.ConnectionFactory;
+import org.springframework.amqp.core.*;
+import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
+import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
- import org.springframework.amqp.core.*;
- import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
- import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
- import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
- import org.springframework.beans.factory.annotation.Value;
- import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
- import org.springframework.context.annotation.Bean;
- import org.springframework.context.annotation.Configuration;
+import java.util.HashMap;
+import java.util.Map;
 
- import java.util.HashMap;
- import java.util.Map;
+@Configuration
+@EnableAutoConfiguration
+public class RabbitMqConfig {
 
- @Configuration
- @EnableAutoConfiguration
- public class RabbitMqConfig {
-
-
-    private   @Value("${rabbitmq.queue}") String queueName;
-    private   @Value("${rabbitmq.username}") String username;
-    private   @Value("${rabbitmq.password}") String password;
-    private   @Value("${rabbitmq.virtual-host}") String virtualHost;
-    private   @Value("${rabbitmq.port}") int port;
-    private   @Value("${rabbitmq.host}") String host;
+    private @Value("${rabbitmq.queue}") String queueName;
+    private @Value("${rabbitmq.username}") String username;
+    private @Value("${rabbitmq.password}") String password;
+    private @Value("${rabbitmq.virtual-host}") String virtualHost;
+    private @Value("${rabbitmq.port}") int port;
+    private @Value("${rabbitmq.host}") String host;
 
     @Bean
     Queue incentivesQueue() {
@@ -68,33 +64,34 @@ package com.codeHub.configs;
         cachingConnectionFactory.setPort(port);
         return cachingConnectionFactory;
     }
-//    @Bean
-//    public CachingConnectionFactory cachingConnectionFactory() {
-//        CachingConnectionFactory cachingConnectionFactory = new CachingConnectionFactory(host);
-//        cachingConnectionFactory.setUsername(username);
-//        cachingConnectionFactory.setPassword(password);
-//        cachingConnectionFactory.setVirtualHost(virtualHost);
-//        cachingConnectionFactory.setPort(port);
-//        return cachingConnectionFactory;
-//    }
+    //    @Bean
+    //    public CachingConnectionFactory cachingConnectionFactory() {
+    //        CachingConnectionFactory cachingConnectionFactory = new
+    // CachingConnectionFactory(host);
+    //        cachingConnectionFactory.setUsername(username);
+    //        cachingConnectionFactory.setPassword(password);
+    //        cachingConnectionFactory.setVirtualHost(virtualHost);
+    //        cachingConnectionFactory.setPort(port);
+    //        return cachingConnectionFactory;
+    //    }
 
-//    @Bean
-//    SimpleMessageListenerContainer incentivesContainer(ConnectionFactory connectionFactory,
-//                                                       MessageListenerAdapter incentivesListenerAdapter) {
-//        SimpleMessageListenerContainer incentivesContainer = new SimpleMessageListenerContainer();
-//        incentivesContainer.setConnectionFactory(connectionFactory);
-//        incentivesContainer.setQueueNames("incentives");
-//        incentivesContainer.setMessageListener(incentivesListenerAdapter);
-//        incentivesContainer.setConcurrentConsumers(50);
-//        incentivesContainer.setPrefetchCount(12);
-//        incentivesContainer.setAcknowledgeMode(AcknowledgeMode.AUTO);
-//        return incentivesContainer;
-//    }
-
+    //    @Bean
+    //    SimpleMessageListenerContainer incentivesContainer(ConnectionFactory connectionFactory,
+    //                                                       MessageListenerAdapter
+    // incentivesListenerAdapter) {
+    //        SimpleMessageListenerContainer incentivesContainer = new
+    // SimpleMessageListenerContainer();
+    //        incentivesContainer.setConnectionFactory(connectionFactory);
+    //        incentivesContainer.setQueueNames("incentives");
+    //        incentivesContainer.setMessageListener(incentivesListenerAdapter);
+    //        incentivesContainer.setConcurrentConsumers(50);
+    //        incentivesContainer.setPrefetchCount(12);
+    //        incentivesContainer.setAcknowledgeMode(AcknowledgeMode.AUTO);
+    //        return incentivesContainer;
+    //    }
 
     public void startMessageConsumers() {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
         container.start();
     }
-
- }
+}

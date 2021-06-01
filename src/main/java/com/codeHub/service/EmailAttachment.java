@@ -10,7 +10,6 @@ import java.util.Properties;
 
 import javax.mail.*;
 import javax.mail.internet.MimeBodyPart;
-import javax.mail.search.SearchTerm;
 
 public class EmailAttachment {
 

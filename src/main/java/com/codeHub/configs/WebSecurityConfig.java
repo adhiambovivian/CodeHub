@@ -26,7 +26,7 @@ package com.codeHub.configs;
                     .userDnPatterns("uid={0},ou=people")
                     .groupSearchBase("ou=groups")
                     .contextSource()
-                    .url("ldap://localhost:8389/dc=springframework,dc=org")
+                    .url("ldap://localhost:8389/dc=codehub,dc=org")
                     .and()
                     .passwordCompare()
                     .passwordEncoder( new BCryptPasswordEncoder())

@@ -19,8 +19,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/actuator/*").hasIpAddress("127.0.0.1")
-                .anyRequest()
-                .fullyAuthenticated()
+//                .antMatchers("/actuator/*").permitAll()
+                .anyRequest().fullyAuthenticated()
                 .and()
                 .formLogin();
     }

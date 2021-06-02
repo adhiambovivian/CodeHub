@@ -1,5 +1,5 @@
 /* Copyright (C)2021  Vivian */
-package com.codeHub;
+package com.codeHub.models;
 
 /** Created by vivian on 2/24/17. */
 import java.sql.Date;

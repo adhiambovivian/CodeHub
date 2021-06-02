@@ -1,7 +1,7 @@
 /* Copyright (C)2021  Vivian */
 package com.codeHub.service;
 
-import com.codeHub.BlackListView;
+import com.codeHub.modelViews.BlackListView;
 import com.codeHub.models.Participant;
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;

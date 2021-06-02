@@ -1,7 +1,7 @@
 /* Copyright (C)2021  Vivian */
 package com.codeHub.utils;
 
-import com.codeHub.Data;
+import com.codeHub.models.Data;
 
 public class Response {
     private Data data;

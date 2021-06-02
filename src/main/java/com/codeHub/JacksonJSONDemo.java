@@ -1,6 +1,7 @@
 /* Copyright (C)2021  Vivian */
 package com.codeHub;
 
+import com.codeHub.modelViews.BlackListView;
 import com.codeHub.models.Participant;
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.JsonNode;

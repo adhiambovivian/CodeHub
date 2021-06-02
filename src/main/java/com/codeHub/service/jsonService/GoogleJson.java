@@ -1,5 +1,5 @@
 /* Copyright (C)2021  Vivian */
-package com.codeHub.service;
+package com.codeHub.service.jsonService;
 
 import com.codeHub.modelViews.BlackListView;
 import com.codeHub.models.Participant;

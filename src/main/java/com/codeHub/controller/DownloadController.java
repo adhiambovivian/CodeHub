@@ -16,8 +16,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-@RestController
-@RequestMapping("/v1")
+@RestController("/v1")
+//@RequestMapping("/v1")
 public class DownloadController {
 
     @RequestMapping(path = "/download", method = RequestMethod.GET)

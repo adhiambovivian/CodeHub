@@ -2,13 +2,14 @@
 package com.codeHub.controller;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.MediaType;
 
 import java.util.HashMap;
 
-@RestController("v1/")
+@RestController("/v2/")
 public class TesterController {
 
-    @RequestMapping(method = RequestMethod.GET, path = "test")
+    @RequestMapping(method = RequestMethod.GET, path = "tester", produces=MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Long> testerMethod() {
         HashMap<String, Long> response = new HashMap<>();
         response.put("lol", 100L);

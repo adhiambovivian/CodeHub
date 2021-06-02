@@ -81,3 +81,11 @@ mvnw spring-boot:run
 ```
 ./gradlew bootJar
 ```
+
+
+# Format checks
+````
+./mvnw spotless:check
+
+./mvnw spotless:apply
+```

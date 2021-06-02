@@ -1,6 +1,7 @@
 /* Copyright (C)2021  Vivian */
 package com.codeHub;
 
+import com.codeHub.models.Meta;
 import com.codeHub.models.Participant;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

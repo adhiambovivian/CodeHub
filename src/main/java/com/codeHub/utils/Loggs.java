@@ -1,5 +1,5 @@
 /* Copyright (C)2021  Vivian */
-package com.codeHub;
+package com.codeHub.utils;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;

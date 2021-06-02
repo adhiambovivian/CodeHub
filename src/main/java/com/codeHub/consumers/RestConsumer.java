@@ -1,5 +1,5 @@
 /* Copyright (C)2021  Vivian */
-package com.codeHub;
+package com.codeHub.consumers;
 
 import com.codeHub.models.PanelS;
 

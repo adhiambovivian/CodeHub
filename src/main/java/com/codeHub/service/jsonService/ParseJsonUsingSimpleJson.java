@@ -1,5 +1,5 @@
 /* Copyright (C)2021  Vivian */
-package com.codeHub;
+package com.codeHub.service.jsonService;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

@@ -18,7 +18,10 @@ import java.util.Map;
 public class SparkController {
     @Autowired private SparkService sparkService;
 
-    @RequestMapping(method = RequestMethod.POST, path = "wordcount", produces= MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(
+            method = RequestMethod.POST,
+            path = "wordcount",
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public Map<String, Long> count(@RequestParam(required = true) String words) {
         List<String> wordList = Arrays.asList(words.split("\\|"));
         return sparkService.wordCount(wordList);

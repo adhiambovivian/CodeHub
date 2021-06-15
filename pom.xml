@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.5.0</version>
+		<version>2.5.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -152,7 +152,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jms</artifactId>
-			<version>5.3.7</version>
+			<version>5.3.8</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.jms</groupId>
@@ -190,7 +190,7 @@
 		<dependency>
 			<groupId>com.sun.mail</groupId>
 			<artifactId>gimap</artifactId>
-			<version>1.6.0</version>
+			<version>2.0.1</version>
 		</dependency>
 
 		<dependency>
@@ -215,7 +215,7 @@
 		<dependency>
 			<groupId>org.springframework.amqp</groupId>
 			<artifactId>spring-rabbit</artifactId>
-			<version>2.3.7</version>
+			<version>2.3.8</version>
 		</dependency>
 		<dependency>
 			<groupId>com.rabbitmq</groupId>
@@ -232,13 +232,13 @@
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
-			<version>3.6.0</version>
+			<version>3.6.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.any23</groupId>
 			<artifactId>apache-any23-csvutils</artifactId>
-			<version>2.3</version>
+			<version>2.4</version>
 		</dependency>
 
 <!--		<dependency>-->
@@ -310,12 +310,12 @@
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>jquery</artifactId>
-			<version>3.4.1</version>
+			<version>3.6.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap</artifactId>
-			<version>4.3.1</version>
+			<version>5.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.webjars</groupId>

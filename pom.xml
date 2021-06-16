@@ -386,7 +386,8 @@
 <!--						</eclipse>-->
 
 						<licenseHeader>
-							<content>/* Copyright (C)$YEAR  Vivian */</content> <!-- or <file>${basedir}/license-header.txt</file>-->
+<!--							<content>/* Copyright (C)$YEAR  Vivian */</content> -->
+							<file>${basedir}/license-header.txt</file>
 						</licenseHeader>
 
 						<removeUnusedImports/>

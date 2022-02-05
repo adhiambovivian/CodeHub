@@ -61,13 +61,13 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
-			<version>2.13.0</version>
+			<version>2.13.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.13.0</version>
+			<version>2.13.1</version>
 		</dependency>
 
 		<dependency>
@@ -215,7 +215,7 @@
 		<dependency>
 			<groupId>org.springframework.amqp</groupId>
 			<artifactId>spring-rabbit</artifactId>
-			<version>2.4.0</version>
+			<version>2.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>com.rabbitmq</groupId>
